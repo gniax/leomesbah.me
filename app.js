@@ -32,6 +32,10 @@ const ICONS = {
   flag: svg(`<path d="M5 3v18"/><path d="M5 4h12l-3 4 3 4H5"/>`),
   layers: svg(`<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/>`),
   terminal: svg(`<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/>`),
+  sun: svg(`<circle cx="12" cy="12" r="4"/><path d="M12 2v2.5"/><path d="M12 19.5V22"/><path d="m4.9 4.9 1.8 1.8"/><path d="m17.3 17.3 1.8 1.8"/><path d="M2 12h2.5"/><path d="M19.5 12H22"/><path d="m4.9 19.1 1.8-1.8"/><path d="m17.3 6.7 1.8-1.8"/>`),
+  moon: svg(`<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5Z"/>`),
+  telegram: svg(`<path d="M21.5 3.5 2.9 11.1c-1 .4-.9 1.8.1 2l4.7 1.4 1.8 5.5c.3.8 1.3 1 1.9.4l2.8-2.7 4.9 3.6c.7.5 1.7.1 1.9-.7l3.1-15.1c.2-.9-.7-1.7-1.7-1.3Z"/><path d="m8.1 14.5 8.9-5.7"/>`),
+  star: svg(`<path d="m12 3 2.6 5.4 6 .9-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.2 6-.9L12 3Z"/>`),
   briefcase: svg(`<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>`),
   book: svg(`<path d="M4 4v16a2 2 0 0 0 2 2h14V4H6a2 2 0 0 0-2 2v14"/><path d="M8 7h8"/><path d="M8 11h8"/>`),
   pen: svg(`<path d="m14 4 6 6-10 10H4v-6z"/><path d="m13 5 6 6"/>`),
@@ -68,6 +72,15 @@ function injectRailIcons() {
     wrap.className = "rail-link__icon";
     wrap.innerHTML = ICONS[name];
     link.prepend(wrap);
+  });
+
+  document.querySelectorAll(".rail-link[data-starred='true']").forEach((link) => {
+    const title = link.querySelector(".rail-link__body strong");
+    if (!title || title.querySelector(".rail-link__star")) return;
+    const badge = document.createElement("span");
+    badge.className = "rail-link__star";
+    badge.innerHTML = ICONS.star;
+    title.append(badge);
   });
 }
 
@@ -116,16 +129,33 @@ const THEMES = [
 
 const LEGACY_THEME_KEY = "leomesbah.theme";
 const THEME_KEY = "leomesbah.theme.v2";
-const PICKER_STATE_KEY = "leomesbah.picker";
-const DEFAULT_THEME = "magazine";
+const PICKER_STATE_KEY = "leomesbah.picker.v2";
+const MODE_MEMORY_KEY = "leomesbah.theme.mode-memory.v1";
+const LIGHT_DEFAULT_THEME = "magazine";
+const DARK_DEFAULT_THEME = "warmdeck";
+const GITLAB_CERT_URL = encodeURI("assets/files/certificat_MESBAH Léo_18_04_2025.pdf");
 let themeManagerToggle = null;
 
-function getTheme() {
-  const stored = localStorage.getItem(THEME_KEY);
-  if (stored) return stored;
+function getStoredTheme() {
+  return localStorage.getItem(THEME_KEY);
+}
+
+function getLegacyTheme() {
   const legacy = localStorage.getItem(LEGACY_THEME_KEY);
   if (legacy && legacy !== "warmdeck") return legacy;
-  return DEFAULT_THEME;
+  return null;
+}
+
+function prefersDarkMode() {
+  return typeof window.matchMedia === "function" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function getDefaultTheme() {
+  return prefersDarkMode() ? DARK_DEFAULT_THEME : LIGHT_DEFAULT_THEME;
+}
+
+function getTheme() {
+  return getStoredTheme() || getLegacyTheme() || getDefaultTheme();
 }
 
 function getThemeMeta(id) {
@@ -134,9 +164,9 @@ function getThemeMeta(id) {
 
 function getPickerState() {
   try {
-    return JSON.parse(localStorage.getItem(PICKER_STATE_KEY)) || { minimized: false, mode: null };
+    return JSON.parse(localStorage.getItem(PICKER_STATE_KEY)) || { mode: null };
   } catch {
-    return { minimized: false, mode: null };
+    return { mode: null };
   }
 }
 
@@ -144,22 +174,56 @@ function setPickerState(next) {
   localStorage.setItem(PICKER_STATE_KEY, JSON.stringify(next));
 }
 
-function applyTheme(id) {
+function getModeMemory() {
+  try {
+    return JSON.parse(localStorage.getItem(MODE_MEMORY_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function setModeMemory(next) {
+  localStorage.setItem(MODE_MEMORY_KEY, JSON.stringify(next));
+}
+
+function rememberThemeForMode(id) {
+  const theme = getThemeMeta(id);
+  const memory = getModeMemory();
+  memory[theme.mode] = theme.id;
+  setModeMemory(memory);
+}
+
+function getThemeForMode(mode) {
+  const memory = getModeMemory();
+  const remembered = memory[mode];
+  if (remembered && getThemeMeta(remembered).mode === mode) return remembered;
+  return mode === "dark" ? DARK_DEFAULT_THEME : LIGHT_DEFAULT_THEME;
+}
+
+function applyTheme(id, options = {}) {
+  const { persist = true } = options;
   document.documentElement.dataset.theme = id;
-  localStorage.setItem(THEME_KEY, id);
+  setPickerState({ mode: getThemeMeta(id).mode });
+  if (persist) {
+    localStorage.setItem(THEME_KEY, id);
+    rememberThemeForMode(id);
+  }
   syncThemePicker();
 }
 
 function syncThemePicker() {
   const current = getTheme();
   const match = getThemeMeta(current);
-  const dots = document.querySelectorAll(".theme-picker__dot");
-  dots.forEach((d) => (d.style.background = match.dot));
-  const label = document.querySelector(".theme-picker__label");
-  if (label) label.textContent = match.name.toLowerCase();
+  const activeMode = getPickerState().mode || match.mode;
   document.querySelectorAll(".theme-option").forEach((el) => {
     el.setAttribute("aria-selected", el.dataset.theme === current ? "true" : "false");
   });
+  document.querySelectorAll(".theme-mode").forEach((el) => {
+    el.setAttribute("aria-selected", el.dataset.mode === activeMode ? "true" : "false");
+  });
+  const pickerName = document.querySelector(".theme-picker__current");
+  if (pickerName) pickerName.textContent = match.name;
+  syncThemeModeToggle();
 }
 
 function renderPickerGrid(mode) {
@@ -179,21 +243,21 @@ function mountThemePicker() {
   const picker = document.querySelector(".theme-picker");
   if (!picker) return;
   const panel = picker.querySelector(".theme-picker__panel");
-  const toggle = picker.querySelector(".theme-picker__toggle");
-  toggle.title = "Theme manager (Ctrl+Shift+D)";
 
   const pickerState = getPickerState();
   const currentMode = pickerState.mode || getThemeMeta(getTheme()).mode;
-  const minimized = pickerState.minimized;
-  picker.dataset.minimized = minimized ? "true" : "false";
 
   panel.innerHTML = `
     <div class="theme-picker__head">
+      <div class="theme-picker__meta">
+        <span class="theme-picker__eyebrow">Theme manager</span>
+        <strong class="theme-picker__current">${getThemeMeta(getTheme()).name}</strong>
+      </div>
       <div class="theme-picker__modes" role="tablist">
         <button class="theme-mode" type="button" data-mode="light" ${currentMode === "light" ? 'aria-selected="true"' : ""}>Light</button>
         <button class="theme-mode" type="button" data-mode="dark" ${currentMode === "dark" ? 'aria-selected="true"' : ""}>Dark</button>
       </div>
-      <button class="theme-picker__min" type="button" aria-label="Minimize picker" title="Minimize">–</button>
+      <button class="theme-picker__min" type="button" aria-label="Hide theme manager" title="Hide">×</button>
     </div>
     <div class="theme-picker__grid" role="listbox">
       ${renderPickerGrid(currentMode)}
@@ -201,52 +265,28 @@ function mountThemePicker() {
   `;
 
   function openPanel(open) {
+    picker.dataset.revealed = open ? "true" : "false";
     picker.dataset.open = open ? "true" : "false";
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
     panel.hidden = !open;
   }
 
   themeManagerToggle = (forceOpen = null) => {
-    if (picker.dataset.minimized === "true") {
-      picker.dataset.minimized = "false";
-      setPickerState({
-        minimized: false,
-        mode: picker.querySelector(".theme-mode[aria-selected='true']")?.dataset.mode,
-      });
-    }
-
     const nextOpen = typeof forceOpen === "boolean" ? forceOpen : picker.dataset.open !== "true";
     openPanel(nextOpen);
   };
-
-  toggle.addEventListener("click", () => {
-    if (picker.dataset.minimized === "true") {
-      picker.dataset.minimized = "false";
-      setPickerState({
-        minimized: false,
-        mode: picker.querySelector(".theme-mode[aria-selected='true']")?.dataset.mode,
-      });
-      themeManagerToggle(true);
-      return;
-    }
-    themeManagerToggle();
-  });
 
   picker.querySelectorAll(".theme-mode").forEach((btn) => {
     btn.addEventListener("click", () => {
       const mode = btn.dataset.mode;
       picker.querySelectorAll(".theme-mode").forEach((m) => m.setAttribute("aria-selected", m === btn ? "true" : "false"));
       picker.querySelector(".theme-picker__grid").innerHTML = renderPickerGrid(mode);
-      setPickerState({ minimized: picker.dataset.minimized === "true", mode });
+      setPickerState({ mode });
       syncThemePicker();
     });
   });
 
   picker.querySelector(".theme-picker__min").addEventListener("click", (event) => {
     event.stopPropagation();
-    const nowMin = picker.dataset.minimized !== "true";
-    picker.dataset.minimized = nowMin ? "true" : "false";
-    setPickerState({ minimized: nowMin, mode: picker.querySelector(".theme-mode[aria-selected='true']")?.dataset.mode });
     openPanel(false);
   });
 
@@ -265,7 +305,38 @@ function mountThemePicker() {
   syncThemePicker();
 }
 
-applyTheme(getTheme());
+function syncThemeModeToggle() {
+  const button = document.querySelector("#theme-mode-toggle");
+  if (!button) return;
+  const currentMode = getThemeMeta(getTheme()).mode;
+  const targetMode = currentMode === "dark" ? "light" : "dark";
+  button.innerHTML = `<span class="theme-mode-toggle__icon" aria-hidden="true">${currentMode === "dark" ? ICONS.moon : ICONS.sun}</span>`;
+  button.setAttribute("aria-label", `Switch to ${targetMode} mode`);
+  button.setAttribute("title", `Switch to ${targetMode} mode`);
+}
+
+function mountThemeModeToggle() {
+  const button = document.querySelector("#theme-mode-toggle");
+  if (!button) return;
+  button.addEventListener("click", () => {
+    const currentMode = getThemeMeta(getTheme()).mode;
+    const targetMode = currentMode === "dark" ? "light" : "dark";
+    applyTheme(getThemeForMode(targetMode));
+  });
+  syncThemeModeToggle();
+}
+
+function mountSystemThemeSync() {
+  if (getStoredTheme()) return;
+  const media = typeof window.matchMedia === "function" ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  if (!media?.addEventListener) return;
+  media.addEventListener("change", () => {
+    if (getStoredTheme()) return;
+    applyTheme(getDefaultTheme(), { persist: false });
+  });
+}
+
+document.documentElement.dataset.theme = getTheme();
 
 function handleThemeShortcut(event) {
   if (!event.ctrlKey || !event.shiftKey || event.key.toLowerCase() !== "d") return;
@@ -276,7 +347,10 @@ function handleThemeShortcut(event) {
 function boot() {
   injectRailIcons();
   mountThemePicker();
+  mountThemeModeToggle();
+  mountSystemThemeSync();
   document.addEventListener("keydown", handleThemeShortcut);
+  syncThemePicker();
 }
 
 if (document.readyState !== "loading") {
@@ -299,27 +373,26 @@ const overviewTabs = {
         <section class="space-pane">
           <div class="pane-copy">
             <p>
-              I started early, around age 12, by building Minecraft servers, websites, vote pages
-              and shop flows, then filling the gaps myself.
+              <strong>I started at 12 because I was already obsessed with building things online:
+              public Minecraft servers, websites, vote pages and paid shop flows.</strong> It was
+              real software from the start, with players on it, plugins to ship and live systems to keep up.
             </p>
             <p>
-              That early part still shows up in
+              That phase still shows up in
               <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>
               and
               <button class="inline-project-link" type="button" data-open-project="eltacraft">EltaCraft</button>:
-              plugins, gameplay systems, rankings, shop flows, community tooling and live ops.
+              custom plugins, gameplay systems, rankings, boutiques, moderation tooling and live ops.
             </p>
             <p>
-              Today I work at <strong>KNDS France</strong> and run <strong>Coinvote.cc</strong> on
-              the side, mostly around backend work, automation, realtime logic and products that
-              need to keep running cleanly.
+              I also spent time on design and 4D animation, so I care about presentation as much
+              as the backend. That still shapes how I build products now.
             </p>
-          </div>
-          <div class="tag-row tag-row--about">
-            <span>engine-side code</span>
-            <span>backend systems</span>
-            <span>automation</span>
-            <span>linux + ops</span>
+            <p>
+              The same bias still drives my work across <strong>C#/.NET</strong>, <strong>C/C++</strong>,
+              <strong>Unreal</strong>, <strong>PHP/JS</strong>, <strong>SQL</strong>, <strong>Linux</strong>
+              and automation.
+            </p>
           </div>
         </section>
       `;
@@ -392,6 +465,13 @@ const overviewTabs = {
               </div>
             </article>
             <article class="list-row">
+              <span>2025</span>
+              <div>
+                <strong>GitLab CI/CD · ORSYS</strong>
+                <p>Formation "GitLab CI/CD, maitriser la gestion du cycle de vie de vos developpements logiciels" · 16/04/2025 → 18/04/2025 · <a class="inline-project-link" href="${GITLAB_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.</p>
+              </div>
+            </article>
+            <article class="list-row">
               <span>2020 → 2021</span>
               <div>
                 <strong>ATS — Preparatory class</strong>
@@ -417,6 +497,13 @@ const overviewTabs = {
               <div>
                 <strong>Cisco — CCNA R&S, Intro to Networks</strong>
                 <p>Certified.</p>
+              </div>
+            </article>
+            <article class="list-row">
+              <span>2019</span>
+              <div>
+                <strong>Google Digital Workshop</strong>
+                <p>Digital marketing fundamentals · Google · issued Oct. 2019.</p>
               </div>
             </article>
           </div>
@@ -710,18 +797,25 @@ function renderProjectArchiveRail() {
 
 function renderOverview() {
   return `
-    <article class="space">
+        <article class="space">
       <section class="hero">
         <div class="hero__main">
-          <div class="hero__eyebrow">
-            ${ICONS.sparkle}<span>software engineer · builder</span>
+          <div class="hero__eyebrow hero__eyebrow--hello">
+            ${ICONS.wave}<span>Hello</span>
           </div>
           <h2 class="hero__lead">
-            Games, tools, web products and live systems.
+            Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            Engine-side code, backend systems, automation and ops.
+            I build live systems and products from public Minecraft servers and plugins to tooling,
+            design and 4D animation. <span class="hero__flag">🇫🇷</span>
           </p>
+          <div class="hero__skills" aria-label="Core technical areas">
+            <span>C#/.NET</span>
+            <span>C/C++ + Unreal</span>
+            <span>PHP/JS + SQL</span>
+            <span>Linux + automation</span>
+          </div>
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
               ${ICONS.github}<span>GitHub</span>
@@ -729,33 +823,35 @@ function renderOverview() {
             <a class="action-button action-button--ghost" href="https://www.linkedin.com/in/léo-mesbah" target="_blank" rel="noreferrer">
               ${ICONS.link}<span>LinkedIn</span>
             </a>
+            <a class="action-button action-button--ghost" href="https://t.me/leo_coinvote" target="_blank" rel="noreferrer">
+              ${ICONS.telegram}<span>Telegram @leo_coinvote</span>
+            </a>
             <a class="action-button action-button--ghost" href="mailto:hello@leomesbah.me">
               ${ICONS.mail}<span>Email</span>
             </a>
           </div>
-        </div>
-
-        <aside class="hero__now">
-          <div class="now-card">
-            <div class="now-card__head">
-              <span class="now-card__label">${ICONS.briefcase}<span>current</span></span>
-            </div>
-            <div class="role-row">
-              <span class="role-row__icon">${ICONS.cube}</span>
-              <div>
-                <strong>KNDS France</strong>
-                <p>Software Engineer & AI Lead · 2021 →</p>
+          <div class="hero__now">
+            <div class="now-card">
+              <div class="now-card__head">
+                <span class="now-card__label"><span class="status-dot status-dot--pulse" aria-hidden="true"></span><span>current</span></span>
               </div>
-            </div>
-            <div class="role-row">
-              <span class="role-row__icon">${ICONS.coin}</span>
-              <div>
-                <strong>Coinvote.cc</strong>
-                <p>Founder · SARL · 500k+ users · 2021 →</p>
+              <div class="role-row">
+                <span class="role-row__icon">${ICONS.cube}</span>
+                <div>
+                  <strong>KNDS France</strong>
+                  <p>Software Engineer & AI Lead · C#/.NET, C/C++, Unreal, AI, AR/VR, Linux & network admin.</p>
+                </div>
+              </div>
+              <div class="role-row">
+                <span class="role-row__icon">${ICONS.coin}</span>
+                <div>
+                  <strong>Coinvote.cc</strong>
+                  <p>Founder · Full-stack, backend, realtime, Cloudflare, mobile apps, growth, SEO · 500k+ users.</p>
+                </div>
               </div>
             </div>
           </div>
-        </aside>
+        </div>
       </section>
 
       <nav class="space-tabs" aria-label="My space tabs">
