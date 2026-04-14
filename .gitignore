@@ -1,0 +1,8 @@
+/.git
+
+# Local scratch and earlier layout experiments
+/backup-*/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

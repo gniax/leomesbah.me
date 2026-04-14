@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hytale-Serveur.com archive</title>
+    <link rel="icon" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <img src="assets/images/logo.png" alt="" />
+          <div>
+            <strong>Hytale-Serveur.com</strong>
+            <span>Archive statique reconstruite depuis la sauvegarde source PHP</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="is-active" href="index.html">Top list</a>
+          <a href="server.html">Page serveur</a>
+          <a href="premium.html">Premium</a>
+          <a href="submit.html">Soumettre</a>
+        </nav>
+      </header>
+
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="archive-pill">Sauvegarde source 14-07-2019 23h24</span>
+          <img class="hero-logo" src="assets/images/logomovingonmouse.png" alt="" />
+          <h1>Toplist Hytale, votes, favoris et bannières premium.</h1>
+          <p>
+            Le projet original était un site PHP complet pour référencer des serveurs Hytale:
+            classement, pages serveur, commentaires, favoris, soumission publique, slots premium
+            et back-office.
+          </p>
+          <div class="hero-chips">
+            <span class="chip">Classement public</span>
+            <span class="chip">Votes + favoris</span>
+            <span class="chip">Premium / file d'attente</span>
+            <span class="chip">Pages serveur</span>
+          </div>
+          <div class="search-shell">
+            <span class="eyebrow">Recherche source</span>
+            <div class="search-shell__row">
+              <input type="text" value="Entrez un nom de serveur..." aria-label="Recherche" />
+              <button type="button">Chercher</button>
+            </div>
+            <small class="archive-note">
+              Dans la sauvegarde, la home combinait recherche rapide, toplist et mise en avant des
+              slots premium.
+            </small>
+          </div>
+        </div>
+        <aside class="hero-sidecard">
+          <span class="eyebrow">Ce qu'on retrouve</span>
+          <div class="meta-stack">
+            <div class="meta-line"><span>Home / toplist</span><strong>oui</strong></div>
+            <div class="meta-line"><span>Page serveur détaillée</span><strong>oui</strong></div>
+            <div class="meta-line"><span>Votes / favoris / commentaires</span><strong>oui</strong></div>
+            <div class="meta-line"><span>Slots premium + expiration</span><strong>oui</strong></div>
+            <div class="meta-line"><span>Soumission publique</span><strong>oui</strong></div>
+            <div class="meta-line"><span>Admin / réglages</span><strong>oui</strong></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Classement</span>
+            <h2>Serveurs listés</h2>
+          </div>
+          <p>
+            Le code `Servers.php` trie les entrées avec les serveurs premium en tête, puis le
+            classement par votes et favoris. La file premium et l'expiration sont aussi gérées en
+            base.
+          </p>
+        </div>
+
+        <div class="ranking-list">
+          <article class="ranking-card ranking-card--premium">
+            <div class="ranking-card__top">
+              <div class="card-head">
+                <span class="rank-badge"><img src="assets/images/star.png" alt="" width="18" height="18" /></span>
+                <div>
+                  <strong>Hytale-Serveur</strong>
+                  <p class="meta-line">Slot premium actif · bannière + priorité de visibilité</p>
+                </div>
+              </div>
+              <span class="mini-badge">1003 votes</span>
+            </div>
+            <div class="ranking-card__grid">
+              <div class="ranking-card__banner">
+                <img src="assets/images/banners/default.jpg" alt="" />
+              </div>
+              <div>
+                <p>
+                  Dans le backup SQL, ce serveur apparaît avec bannière, description courte, liens
+                  Discord / site / YouTube et un volume élevé de votes pour la mise en avant.
+                </p>
+                <div class="stat-row">
+                  <span class="stat-pill">IP: hy.hytaleserveur.com</span>
+                  <span class="stat-pill">Discord lié</span>
+                  <span class="stat-pill">Favoris activés</span>
+                </div>
+                <div class="action-row">
+                  <a class="action" href="server.html">Voir la page serveur</a>
+                  <a class="chip" href="premium.html">Voir les slots premium</a>
+                  <a class="chip" href="submit.html">Voir le flow de soumission</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="ranking-card">
+            <div class="ranking-card__top">
+              <div class="card-head">
+                <span class="rank-badge">2</span>
+                <div>
+                  <strong>Serveur standard</strong>
+                  <p class="meta-line">Entrée classique sans premium</p>
+                </div>
+              </div>
+              <span class="mini-badge">57 votes</span>
+            </div>
+            <div class="ranking-card__grid">
+              <div class="ranking-card__banner">
+                <img src="assets/images/indexrippservers.png" alt="" />
+              </div>
+              <div>
+                <p>
+                  Les entrées classiques affichaient nom, rang, IP cliquable, bannière, description
+                  courte, compteurs de votes/favoris et boutons d'action.
+                </p>
+                <div class="tool-row">
+                  <span class="tool-badge"><img src="assets/images/voter.png" alt="" /> Vote</span>
+                  <span class="tool-badge"><img src="assets/images/favoris.png" alt="" /> Favori</span>
+                  <span class="tool-badge"><img src="assets/images/commenter.png" alt="" /> Commentaire</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Monétisation</span>
+            <h2>Slots premium et visibilité</h2>
+          </div>
+          <p>
+            La sauvegarde contient la page d'achat premium, la gestion d'expiration, une file
+            d'attente, les logs de paiements et le repositionnement automatique des slots.
+          </p>
+        </div>
+
+        <div class="slot-grid">
+          <article class="slot-card">
+            <div class="card-head">
+              <strong>Slot 1</strong>
+              <span class="slot-badge slot-badge--active">Actif</span>
+            </div>
+            <p>Bannière visible sur la home avec priorité dans la toplist.</p>
+          </article>
+          <article class="slot-card slot-card--empty">
+            <div class="card-head">
+              <strong>Slot 2</strong>
+              <span class="slot-badge">Libre</span>
+            </div>
+            <p>Quand un slot expire, le code réactive automatiquement le prochain serveur éligible.</p>
+          </article>
+          <article class="slot-card slot-card--empty">
+            <div class="card-head">
+              <strong>Slot 3</strong>
+              <span class="slot-badge">Libre</span>
+            </div>
+            <p>La page premium calcule le coût, la date d'activation et la date d'expiration.</p>
+          </article>
+        </div>
+
+        <div class="source-strip">
+          <span>Source: pages/home.php</span>
+          <span>Source: core/classes/Servers.php</span>
+          <span>Source: pages/purchase_highlight.php</span>
+        </div>
+      </section>
+
+      <p class="footer">Archive statique basée sur les sauvegardes source du projet original, pas sur un cache navigateur.</p>
+    </main>
+  </body>
+</html>

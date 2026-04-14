@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Votez et gagnez - SigmaCraft</title>
+    <link rel="icon" type="image/png" href="assets/images/sigmacraft-favicon.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body class="page page--vote">
+    <div class="site-bg"></div>
+    <div class="site-overlay"></div>
+
+    <header class="hero" style="--hero-image: url('assets/images/sigmacraft-201603-lagfree.jpg')">
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <div class="hero__eyebrow">Votes</div>
+          <div class="hero__brand">
+            <span class="hero__brand-mark"></span>
+            <div>
+              <h1>SigmaCraft</h1>
+              <p class="hero__tagline">Vote chaque jour et gagne des points boutique</p>
+            </div>
+          </div>
+          <p class="hero__lead">Les votes donnent des points boutique et des recompenses serveur aux joueurs reguliers.</p>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav wrap">
+      <a class="nav__link" href="index.html">Accueil</a>
+      <a class="nav__link is-active" href="vote.html">Votez et gagnez</a>
+      <a class="nav__link" href="boutique.html">Boutique</a>
+    </nav>
+
+    <div class="wrap layout">
+      <main class="content" style="grid-column: 1 / -1">
+        <section class="panel">
+          <div class="section-title">Voter pour le serveur</div>
+          <div class="split-grid">
+            <form class="login-box" action="#" method="get">
+              <div class="status-pill status-pill--actif">Vous devez etre connecte sur le serveur pour recevoir votre recompense.</div>
+              <label>
+                <span>Pseudo</span>
+                <input type="text" value="" />
+              </label>
+              <label>
+                <span>Serveur</span>
+                <input type="text" value="Sigmacraft" />
+              </label>
+              <div class="login-box__actions">
+                <a class="button" href="#">Continuer</a>
+              </div>
+            </form>
+            <div class="panel panel--soft">
+              <h3>Informations</h3>
+              <ul class="bullet-list">
+                <li>Les votes donnent des points boutique.</li>
+                <li>Les meilleurs votants recoivent des recompenses serveur.</li>
+                <li>Le vote servait aussi a nourrir l'acquisition du serveur.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">Classement des meilleurs votants</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Place</th>
+                <th>Pseudo</th>
+                <th>Votes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>PQwertYD</td><td>53</td></tr>
+              <tr><td>2</td><td>polettedu76380</td><td>53</td></tr>
+              <tr><td>3</td><td>Chirooh</td><td>50</td></tr>
+              <tr><td>4</td><td>HciR_</td><td>35</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

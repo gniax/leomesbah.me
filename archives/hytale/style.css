@@ -1,0 +1,683 @@
+@font-face {
+  font-family: "Trebuchet Archive";
+  src: url("assets/fonts/TrebuchetMS.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Open Sans Archive";
+  src: url("assets/fonts/OpenSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Open Sans Archive";
+  src: url("assets/fonts/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+:root {
+  --bg: #162030;
+  --bg-deep: #111826;
+  --panel: rgba(26, 38, 56, 0.94);
+  --panel-soft: rgba(31, 46, 69, 0.86);
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(239, 188, 88, 0.34);
+  --text: #f4f1e8;
+  --muted: rgba(244, 241, 232, 0.72);
+  --gold: #efbc58;
+  --gold-soft: rgba(239, 188, 88, 0.16);
+  --green: #a9e19b;
+  --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+  --radius: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: "Open Sans Archive", "Trebuchet Archive", Verdana, sans-serif;
+  background:
+    linear-gradient(rgba(11, 18, 29, 0.56), rgba(11, 18, 29, 0.88)),
+    url("assets/images/indexrippservers.png") center top / cover fixed no-repeat,
+    linear-gradient(180deg, #30486e, #172032);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.page {
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 18px 0 42px;
+}
+
+.topbar,
+.hero-panel,
+.panel {
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(16, 23, 34, 0.96), rgba(16, 23, 34, 0.88)),
+    url("assets/images/navbar.png") center / cover no-repeat;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.brand strong {
+  display: block;
+  font-family: "Trebuchet Archive", Verdana, sans-serif;
+  font-size: 1.18rem;
+  letter-spacing: 0.01em;
+}
+
+.brand span,
+.topbar small,
+.panel p,
+.meta-line,
+.timeline p,
+.field small,
+.archive-note {
+  color: var(--muted);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.nav a {
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.88rem;
+  transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+.nav a:hover,
+.nav a.is-active {
+  color: var(--gold);
+  border-color: var(--line-strong);
+  background: var(--gold-soft);
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 320px;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 22px;
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    linear-gradient(120deg, rgba(16, 23, 34, 0.96), rgba(16, 23, 34, 0.6)),
+    url("assets/images/index.jpg") center top / cover no-repeat;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.archive-pill,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-copy h1,
+.panel h2,
+.section-head h2 {
+  margin: 0;
+  font-family: "Trebuchet Archive", Verdana, sans-serif;
+  font-size: clamp(2rem, 4.8vw, 3.6rem);
+  line-height: 0.95;
+}
+
+.hero-copy p,
+.panel p,
+.ranking-card p,
+.detail-card p,
+.field p,
+.timeline p {
+  margin: 0;
+  line-height: 1.58;
+}
+
+.hero-logo {
+  width: min(180px, 46vw);
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.3));
+}
+
+.hero-chips,
+.action-row,
+.stat-row,
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip,
+.action,
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.action {
+  color: var(--bg-deep);
+  background: linear-gradient(180deg, #f3c667, #dea343);
+  border-color: rgba(255, 224, 153, 0.5);
+  font-weight: 700;
+}
+
+.search-shell,
+.hero-sidecard,
+.ranking-card,
+.slot-card,
+.detail-card,
+.stat-card,
+.timeline,
+.field,
+.preview-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-soft);
+}
+
+.search-shell {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.search-shell__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.search-shell input,
+.select-shell select,
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(10, 15, 25, 0.7);
+  color: var(--text);
+  font: inherit;
+}
+
+.field textarea {
+  min-height: 128px;
+  resize: vertical;
+}
+
+.search-shell button,
+.field button,
+.preview-card button {
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f3c667, #dea343);
+  color: #151c29;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 16px;
+}
+
+.hero-sidecard {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(239, 188, 88, 0.12), transparent), var(--panel);
+}
+
+.meta-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.meta-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 0.9rem;
+}
+
+.meta-line strong {
+  color: var(--text);
+}
+
+.panel {
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-head p {
+  max-width: 62ch;
+}
+
+.ranking-list,
+.slot-grid,
+.detail-grid,
+.stats-grid,
+.timeline-grid,
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.ranking-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.ranking-card--premium {
+  border-color: var(--line-strong);
+  background: linear-gradient(180deg, rgba(239, 188, 88, 0.14), transparent), var(--panel-soft);
+}
+
+.ranking-card__top,
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.rank-badge,
+.slot-badge,
+.mini-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: "Trebuchet Archive", Verdana, sans-serif;
+  font-weight: 700;
+}
+
+.ranking-card--premium .rank-badge,
+.slot-badge--active {
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+
+.ranking-card__grid,
+.server-layout {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+
+.premium-layout {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1.2fr) 320px;
+}
+
+.ranking-card__banner,
+.preview-banner,
+.server-banner {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #0d1622;
+}
+
+.ranking-card__banner img,
+.preview-banner img,
+.server-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ranking-card__summary {
+  display: grid;
+  gap: 10px;
+}
+
+.stat-row {
+  gap: 8px;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.tool-row img {
+  width: 18px;
+  height: 18px;
+}
+
+.tool-badge {
+  gap: 8px;
+  font-size: 0.84rem;
+}
+
+.archive-note {
+  margin-top: 16px;
+  font-size: 0.84rem;
+}
+
+.slot-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.slot-card,
+.detail-card,
+.stat-card,
+.timeline,
+.field,
+.preview-card {
+  padding: 15px;
+}
+
+.slot-card--empty {
+  border-style: dashed;
+}
+
+.slot-card strong,
+.detail-card strong,
+.stat-card strong,
+.timeline strong,
+.field strong,
+.preview-card strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.mini-badge {
+  min-width: 0;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 0.78rem;
+}
+
+.detail-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat-card__value {
+  margin-top: 6px;
+  color: var(--gold);
+  font-family: "Trebuchet Archive", Verdana, sans-serif;
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.chart {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.chart__row {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 78px minmax(0, 1fr) 54px;
+  align-items: center;
+  font-size: 0.84rem;
+}
+
+.chart__bar {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.chart__bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e49f42, #f4ce7d);
+}
+
+.chart__bar--visits span {
+  background: linear-gradient(90deg, #81d6a6, #bde6ce);
+}
+
+.timeline-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.timeline {
+  display: grid;
+  gap: 10px;
+}
+
+.timeline__entry {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timeline__entry:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.form-shell {
+  display: grid;
+  gap: 16px;
+}
+
+.form-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 10px;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field__label img {
+  width: 18px;
+  height: 18px;
+}
+
+.field__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.field__tags span {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.76rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.checkbox-row input {
+  margin-top: 3px;
+}
+
+.preview-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.4fr 0.8fr;
+}
+
+.preview-card {
+  display: grid;
+  gap: 12px;
+}
+
+.preview-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.source-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.source-strip span {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .hero-panel,
+  .server-layout,
+  .premium-layout,
+  .preview-grid,
+  .ranking-card__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid,
+  .stats-grid,
+  .slot-grid,
+  .timeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .section-head,
+  .ranking-card__top,
+  .card-head,
+  .meta-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    justify-content: flex-start;
+  }
+
+  .search-shell__row,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

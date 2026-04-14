@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hytale-Serveur.com submit</title>
+    <link rel="icon" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <img src="assets/images/logo.png" alt="" />
+          <div>
+            <strong>Hytale-Serveur.com</strong>
+            <span>Formulaire public d'ajout de serveur</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Top list</a>
+          <a href="server.html">Page serveur</a>
+          <a href="premium.html">Premium</a>
+          <a class="is-active" href="submit.html">Soumettre</a>
+        </nav>
+      </header>
+
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="archive-pill">Source: pages/submit.php</span>
+          <h1>Ajout public avec bannière, liens et contrôles.</h1>
+          <p>
+            La page de soumission originale vérifie les champs obligatoires, la longueur des textes,
+            le format Discord, le captcha, la limite de serveurs par compte et l'upload d'une
+            bannière en 468 x 80.
+          </p>
+          <div class="hero-chips">
+            <span class="chip">Nom / IP / port</span>
+            <span class="chip">Description longue + courte</span>
+            <span class="chip">Bannière</span>
+            <span class="chip">YouTube / site / Discord</span>
+          </div>
+        </div>
+        <aside class="hero-sidecard">
+          <span class="eyebrow">Règles</span>
+          <div class="meta-stack">
+            <div class="meta-line"><span>Description</span><strong>2560 caractères max</strong></div>
+            <div class="meta-line"><span>Description courte</span><strong>120 caractères max</strong></div>
+            <div class="meta-line"><span>Bannière</span><strong>468 x 80</strong></div>
+            <div class="meta-line"><span>Captcha</span><strong>obligatoire</strong></div>
+            <div class="meta-line"><span>Premium</span><strong>après ajout du serveur</strong></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel form-shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Formulaire</span>
+            <h2>Champs visibles dans le backup</h2>
+          </div>
+          <p>
+            Le code manipule aussi une prévisualisation de bannière, quelques aides au format et
+            des boutons BBCode pour la description longue.
+          </p>
+        </div>
+
+        <div class="preview-grid">
+          <div class="form-grid">
+            <article class="field">
+              <strong>Identité serveur</strong>
+              <label class="field__label">Nom du serveur *</label>
+              <input type="text" value="Hytale-Serveur" />
+              <label class="field__label">Adresse IP *</label>
+              <input type="text" value="hy.hytaleserveur.com" />
+              <label class="field__label">Port *</label>
+              <input type="text" value="25565" />
+            </article>
+
+            <article class="field field--full">
+              <strong>Description longue</strong>
+              <div class="field__tags">
+                <span>[b]</span>
+                <span>[i]</span>
+                <span>[u]</span>
+                <span>[li]</span>
+                <span>[br]</span>
+              </div>
+              <textarea>Semi-RP fantasy, système de combat raffiné, Discord, vidéo de présentation et communauté en préparation.</textarea>
+            </article>
+
+            <article class="field field--full">
+              <strong>Description courte</strong>
+              <textarea>Résumé affiché à côté de la bannière dans la liste des serveurs.</textarea>
+            </article>
+
+            <article class="field">
+              <div class="field__label">
+                <img src="assets/images/youtube.png" alt="" />
+                <span>YouTube</span>
+              </div>
+              <input type="text" value="https://www.youtube.com/watch?v=OSmSNK7Rano" />
+            </article>
+
+            <article class="field">
+              <div class="field__label">
+                <img src="assets/images/website.png" alt="" />
+                <span>Site web</span>
+              </div>
+              <input type="text" value="http://hytale-serveur.roxweb.fr" />
+            </article>
+
+            <article class="field">
+              <div class="field__label">
+                <img src="assets/images/discord.png" alt="" />
+                <span>Discord</span>
+              </div>
+              <input type="text" value="https://discord.gg/BJW5Sgt" />
+            </article>
+          </div>
+
+          <aside class="preview-card">
+            <strong>Prévisualisation de bannière</strong>
+            <div class="preview-banner">
+              <img src="assets/images/banners/default.jpg" alt="" />
+            </div>
+            <p>
+              Dans le code source, l'upload remplace immédiatement le fond de prévisualisation avec
+              un FileReader avant l'envoi réel du formulaire.
+            </p>
+            <ul>
+              <li>JPEG, JPG, PNG, GIF acceptés</li>
+              <li>Vérification de taille côté serveur</li>
+              <li>URL Discord validée</li>
+              <li>Checkbox de confirmation obligatoire</li>
+            </ul>
+            <label class="checkbox-row">
+              <input type="checkbox" checked />
+              <span>Je confirme vouloir ajouter ce serveur et accepter les conditions du site.</span>
+            </label>
+            <button type="button">Ajouter le serveur</button>
+          </aside>
+        </div>
+
+        <div class="source-strip">
+          <span>Validation captcha</span>
+          <span>Contrôle du nombre max de serveurs / compte</span>
+          <span>Resize automatique de la bannière</span>
+        </div>
+      </section>
+
+      <p class="footer">Archive statique basée sur le vrai flow de soumission présent dans le projet PHP.</p>
+    </main>
+  </body>
+</html>
