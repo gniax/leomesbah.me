@@ -1432,6 +1432,14 @@ svg {
   font-family: var(--mono);
 }
 
+.github-activity__note {
+  margin: 8px 0 0;
+  font-size: 0.68rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-style: italic;
+}
+
 /* stats strip */
 
 .stats {

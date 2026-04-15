@@ -427,8 +427,10 @@ const overviewTabs = {
               That's when I understood this was what I wanted to do.
             </p>
             <p>
-              From there I kept exploring — different stacks, different problem types, self-teaching whatever I hadn't figured out yet.
-              <strong>At 21, same drive, new iteration: I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, hit 500k visitors in the first week, incorporated my first company — and it's still running today.</strong>
+              From there I explored as much as I could — web, systems, game engines, automation — teaching myself and trying to genuinely understand how software works at every level.
+            </p>
+            <p style="font-size:1.04rem">
+              That curiosity never stopped. <strong>At 21, same drive, new iteration: I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, hit 500k visitors in the first week, incorporated my first company — and it's still running today.</strong>
             </p>
             <p>
               Over the years I've worked across web backends, automation tools, game engines, design and realtime systems.
@@ -878,6 +880,7 @@ function renderOverview() {
             <div id="github-activity-feed" class="github-activity__feed">
               <span class="github-activity__loading">Loading…</span>
             </div>
+            <p class="github-activity__note">Most of my active contributions are private.</p>
           </div>
         </aside>
       </section>
