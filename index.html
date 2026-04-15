@@ -12,8 +12,23 @@
     <script defer src="app.js"></script>
   </head>
   <body>
+    <nav class="mobile-topbar" id="mobile-topbar" aria-label="Navigation">
+      <div class="mobile-topbar__brand">
+        <img class="mobile-topbar__portrait" src="assets/images/portrait.jpg" alt="" width="768" height="768">
+        <span class="mobile-topbar__name">Léo Mesbah</span>
+      </div>
+      <div class="mobile-topbar__actions">
+        <button class="mobile-topbar__btn" id="mobile-projects-toggle" type="button" aria-label="Browse projects" aria-expanded="false"></button>
+        <button class="mobile-topbar__btn" id="mobile-theme-toggle" type="button" aria-label="Switch color mode"></button>
+      </div>
+    </nav>
+    <div class="rail-overlay" id="rail-overlay" aria-hidden="true"></div>
+
     <main class="shell">
       <aside class="rail">
+        <button class="rail-close" id="rail-close" type="button" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+        </button>
         <section class="identity">
           <img
             class="identity__portrait"

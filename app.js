@@ -307,13 +307,20 @@ function mountThemePicker() {
 }
 
 function syncThemeModeToggle() {
-  const button = document.querySelector("#theme-mode-toggle");
-  if (!button) return;
   const currentMode = getThemeMeta(getTheme()).mode;
   const targetMode = currentMode === "dark" ? "light" : "dark";
-  button.innerHTML = `<span class="theme-mode-toggle__icon" aria-hidden="true">${currentMode === "dark" ? ICONS.moon : ICONS.sun}</span>`;
-  button.setAttribute("aria-label", `Switch to ${targetMode} mode`);
-  button.setAttribute("title", `Switch to ${targetMode} mode`);
+  const icon = `<span class="theme-mode-toggle__icon" aria-hidden="true">${currentMode === "dark" ? ICONS.moon : ICONS.sun}</span>`;
+  const button = document.querySelector("#theme-mode-toggle");
+  if (button) {
+    button.innerHTML = icon;
+    button.setAttribute("aria-label", `Switch to ${targetMode} mode`);
+    button.setAttribute("title", `Switch to ${targetMode} mode`);
+  }
+  const mobileBtn = document.querySelector("#mobile-theme-toggle");
+  if (mobileBtn) {
+    mobileBtn.innerHTML = icon;
+    mobileBtn.setAttribute("aria-label", `Switch to ${targetMode} mode`);
+  }
 }
 
 function mountThemeModeToggle() {
@@ -345,11 +352,49 @@ function handleThemeShortcut(event) {
   if (themeManagerToggle) themeManagerToggle();
 }
 
+function mountMobileNav() {
+  const projectsToggle = document.querySelector("#mobile-projects-toggle");
+  const mobileThemeBtn = document.querySelector("#mobile-theme-toggle");
+  const rail = document.querySelector(".rail");
+  const overlay = document.querySelector("#rail-overlay");
+  const closeBtn = document.querySelector("#rail-close");
+
+  if (projectsToggle) projectsToggle.innerHTML = ICONS.layers;
+
+  function openRail() {
+    rail?.classList.add("is-open");
+    overlay?.classList.add("is-open");
+    projectsToggle?.setAttribute("aria-expanded", "true");
+  }
+  function closeRail() {
+    rail?.classList.remove("is-open");
+    overlay?.classList.remove("is-open");
+    projectsToggle?.setAttribute("aria-expanded", "false");
+  }
+
+  projectsToggle?.addEventListener("click", () => {
+    rail?.classList.contains("is-open") ? closeRail() : openRail();
+  });
+  overlay?.addEventListener("click", closeRail);
+  closeBtn?.addEventListener("click", closeRail);
+
+  rail?.addEventListener("click", (e) => {
+    if (e.target.closest(".rail-link[data-view]") && window.innerWidth <= 960) closeRail();
+  });
+
+  mobileThemeBtn?.addEventListener("click", () => {
+    const currentMode = getThemeMeta(getTheme()).mode;
+    applyTheme(getThemeForMode(currentMode === "dark" ? "light" : "dark"));
+    syncThemeModeToggle();
+  });
+}
+
 function boot() {
   injectRailIcons();
   mountThemePicker();
   mountThemeModeToggle();
   mountSystemThemeSync();
+  mountMobileNav();
   document.addEventListener("keydown", handleThemeShortcut);
   syncThemePicker();
 }
@@ -374,25 +419,20 @@ const overviewTabs = {
         <section class="space-pane">
           <div class="pane-copy">
             <p>
-              <strong>I started at 12 because I was already obsessed with building things online:
-              public Minecraft servers, websites, vote pages and paid shop flows.</strong> It was
-              real software from the start, with players on it, plugins to ship and live systems to keep up.
-            </p>
-            <p>
-              That phase still shows up in
-              <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>
+              <strong>At 12, driven purely by curiosity and passion, I built a website, a paid shop and a live Java server —
+              <button class="inline-project-link" type="button" data-open-project="eltacraft">EltaCraft</button>
               and
-              <button class="inline-project-link" type="button" data-open-project="eltacraft">EltaCraft</button>:
-              custom plugins, gameplay systems, rankings, boutiques, moderation tooling and live ops.
+              <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>.
+              Real players, real transactions, not for school — just because I loved it.</strong>
+              That's when I understood this was what I wanted to do.
             </p>
             <p>
-              I also spent time on design and 4D animation, so I care about presentation as much
-              as the backend. That still shapes how I build products now.
+              From there I kept exploring — different stacks, different problem types, self-teaching whatever I hadn't figured out yet.
+              <strong>At 21, same drive, new iteration: I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, hit 500k visitors in the first week, incorporated my first company — and it's still running today.</strong>
             </p>
             <p>
-              The same bias still drives my work across <strong>C#/.NET</strong>, <strong>C/C++</strong>,
-              <strong>Unreal</strong>, <strong>PHP/JS</strong>, <strong>SQL</strong>, <strong>Linux</strong>
-              and automation.
+              Over the years I've worked across web backends, automation tools, game engines, design and realtime systems.
+              I care about how things look as much as how they work — if it's going online, it should feel right too.
             </p>
           </div>
         </section>
@@ -486,6 +526,13 @@ const overviewTabs = {
               ${row("2025", `GitLab CI/CD — ORSYS`, `GitLab CI/CD training: mastering the development lifecycle of software projects · 16/04/2025 → 18/04/2025 · <a class="inline-project-link" href="${GITLAB_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.`)}
             </div>
           </div>
+
+          <div class="space-section">
+            <p class="eyebrow">Events</p>
+            <div class="list-rows">
+              ${row("2022", `Game Jam — ESIEE Paris`, `Built a playable game from scratch in a team over 48 hours · <a class="inline-project-link" href="https://github.com/gniax" target="_blank" rel="noreferrer">github.com/gniax</a>.`)}
+            </div>
+          </div>
         </section>
       `;
     },
@@ -534,6 +581,7 @@ const projects = {
     title: "Coinvote.cc",
     summary:
       "A crypto voting platform built as a real product: product decisions, backend work, deployment, operations and day-to-day iteration.",
+    tech: ["PHP", "MySQL", "JavaScript", "Linux", "Nginx"],
     meta: ["Product", "Backend", "Ops", "Live system"],
     points: [
       "Current focus, built and operated as a live product rather than a demo.",
@@ -561,6 +609,7 @@ const projects = {
     title: "Bubble Bot",
     summary:
       "A technically dense automation system around Dofus Touch, built across a desktop client, custom protocol layer, server, API, website and account generation tooling.",
+    tech: ["C#", ".NET", "ASP.NET", "JavaScript", "Automation"],
     meta: ["C#", "Automation", "Protocol", "ASP.NET", "CefSharp", "Proxies"],
     points: [
       "Multi-part architecture: desktop application, custom server/protocol, web panel, API and account tooling.",
@@ -582,6 +631,7 @@ const projects = {
     title: "Hytale-Serveur.com",
     summary:
       "A public Hytale server platform built as a full PHP product: listings, server pages, votes, favorites, premium slots, submission flows and admin tooling.",
+    tech: ["PHP", "MySQL", "JavaScript"],
     meta: ["PHP product", "Listings", "Votes + favorites", "Premium queue"],
     points: [
       "Covered the full visibility loop: ranking pages, individual server pages, banner uploads, favorites, comments and account flows.",
@@ -606,6 +656,7 @@ const projects = {
     title: "Vinted Republish",
     summary:
       "A browser extension that saves listings, refills item forms, reuploads photos and speeds up republishing flows.",
+    tech: ["JavaScript", "Automation"],
     meta: ["Extension", "Automation", "Browser tooling"],
     points: [
       "Built to remove repetitive listing work and compress republish workflows.",
@@ -637,6 +688,7 @@ const projects = {
     title: "VELA Tracking",
     summary:
       "A real-time regatta tracking system where I handled TCP communication across the client and server layers.",
+    tech: ["C#", "TCP", "Java"],
     meta: ["Realtime", "TCP", "Tracking", "Team project"],
     points: [
       "Built around realtime communication and state updates during a race simulation.",
@@ -658,6 +710,7 @@ const projects = {
     title: "E.Leclerc SAV",
     summary:
       "A Xamarin mobile app built during a BTS internship to support after-sales service information and customer flows.",
+    tech: ["C#", "Xamarin", "Mobile"],
     meta: ["Mobile", "Xamarin", "Internship"],
     points: [
       "Built during internship context rather than as a side project.",
@@ -679,6 +732,7 @@ const projects = {
     title: "SigmaCraft",
     summary:
       "An early Minecraft server project where I pushed much further into custom gameplay, server-side iteration, plugins, items, armor, mounts and web presence.",
+    tech: ["Java", "PHP", "MySQL", "JavaScript"],
     meta: ["Minecraft", "Plugins", "Gameplay", "Shop", "Web", "Ops"],
     points: [
       "Custom gameplay systems, server balancing and iteration from real players.",
@@ -700,6 +754,7 @@ const projects = {
     title: "EltaCraft",
     summary:
       "One of the first live systems I built around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
+    tech: ["Java", "PHP", "MySQL"],
     meta: ["Minecraft", "Server", "Vote", "Shop", "CraftMyCMS", "Ops"],
     points: [
       "Started self-taught, by building around a live Minecraft server rather than doing isolated exercises.",
@@ -774,6 +829,16 @@ function renderProjectArchiveRail() {
     .join("");
 }
 
+function computeSkillStats() {
+  const counts = {};
+  const all = Object.values(projects);
+  all.forEach(p => (p.tech || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  return Object.entries(counts)
+    .filter(([, c]) => c > 0)
+    .map(([name, count]) => ({ name, pct: Math.round(count / all.length * 100) }))
+    .sort((a, b) => b.pct - a.pct);
+}
+
 function renderOverview() {
   return `
     <article class="space">
@@ -783,21 +848,13 @@ function renderOverview() {
             ${ICONS.wave}<span>software engineer · builder</span>
           </div>
           <h2 class="hero__lead">
-            Hi, I'm Léo.
+            👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I started with public Minecraft servers, plugins and shop flows, then kept building
-            tooling, backend systems and live products that have to stay online. <span class="hero__flag">🇫🇷</span>
+            I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
           </p>
-          <div class="hero__skills" aria-label="Core technical areas">
-            <span>C#/.NET</span>
-            <span>C/C++</span>
-            <span>Unreal</span>
-            <span>PHP/JS</span>
-            <span>SQL</span>
-            <span>Linux</span>
-            <span>Automation</span>
-            <span>AI</span>
+          <div class="hero__skills" aria-label="Stack across projects">
+            ${computeSkillStats().map(s => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
           </div>
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
@@ -816,23 +873,10 @@ function renderOverview() {
         </div>
 
         <aside class="hero__now">
-          <div class="now-card">
-            <div class="now-card__head">
-              <span class="now-card__label"><span class="status-dot status-dot--pulse" aria-hidden="true"></span><span>current</span></span>
-            </div>
-            <div class="role-row">
-              <span class="role-row__icon">${ICONS.cube}</span>
-              <div>
-                <strong>KNDS France</strong>
-                <p>Software Engineer & AI Lead · C#/.NET, C/C++, Unreal, AI, AR/VR, Linux & network admin.</p>
-              </div>
-            </div>
-            <div class="role-row">
-              <span class="role-row__icon">${ICONS.coin}</span>
-              <div>
-                <strong>Coinvote.cc</strong>
-                <p>Founder · Full-stack, backend, realtime, Cloudflare, mobile apps, growth, SEO · 500k+ users.</p>
-              </div>
+          <div class="github-activity">
+            <p class="github-activity__label">${ICONS.github}<span>recent commits</span></p>
+            <div id="github-activity-feed" class="github-activity__feed">
+              <span class="github-activity__loading">Loading…</span>
             </div>
           </div>
         </aside>
@@ -925,9 +969,43 @@ function renderArchiveEmbed(src, title) {
   `;
 }
 
+function timeAgo(dateStr) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  const hours = Math.floor(mins / 60);
+  const days = Math.floor(hours / 24);
+  if (days > 30) return `${Math.floor(days / 30)}mo ago`;
+  if (days > 0) return `${days}d ago`;
+  if (hours > 0) return `${hours}h ago`;
+  return `${mins}m ago`;
+}
+
+async function fetchGithubActivity() {
+  const container = document.querySelector("#github-activity-feed");
+  if (!container) return;
+  try {
+    const res = await fetch("https://api.github.com/users/gniax/repos?sort=updated&per_page=6&type=public");
+    if (!res.ok) throw new Error();
+    const repos = await res.json();
+    if (!repos.length) {
+      container.innerHTML = `<span class="github-activity__empty">—</span>`;
+      return;
+    }
+    container.innerHTML = repos.slice(0, 4).map(r => `
+      <a class="github-activity__item" href="${r.html_url}" target="_blank" rel="noreferrer">
+        <span class="github-activity__repo">${r.name}</span>
+        <span class="github-activity__msg">${r.description ? r.description.slice(0, 50) : (r.language || '—')}</span>
+        <span class="github-activity__time">${timeAgo(r.updated_at)}</span>
+      </a>`).join("");
+  } catch {
+    container.innerHTML = `<span class="github-activity__empty">—</span>`;
+  }
+}
+
 function render() {
   if (state.view === "overview") {
     mainView.innerHTML = renderOverview();
+    fetchGithubActivity();
   } else {
     mainView.innerHTML = renderProject(projects[state.view]);
   }
