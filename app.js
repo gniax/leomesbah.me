@@ -2,6 +2,7 @@ const mainView = document.querySelector("#main-view");
 const archiveList = document.querySelector("#project-archive-list");
 const archiveFilters = document.querySelector("#project-filters");
 const archiveCount = document.querySelector("#project-archive-count");
+const designModal = document.querySelector("#design-modal");
 
 /* ---------- icon system ---------- */
 
@@ -71,6 +72,7 @@ const TAB_ICON = {
   about: "user",
   experience: "briefcase",
   education: "book",
+  designs: "sparkle",
   writing: "pen",
 };
 
@@ -364,6 +366,14 @@ function handleThemeShortcut(event) {
   if (themeManagerToggle) themeManagerToggle();
 }
 
+function handleGlobalKeydown(event) {
+  if (event.key === "Escape" && state.designIndex !== null) {
+    event.preventDefault();
+    state.designIndex = null;
+    renderDesignModal();
+  }
+}
+
 function mountMobileNav() {
   const projectsToggle = document.querySelector("#mobile-projects-toggle");
   const mobileThemeBtn = document.querySelector("#mobile-theme-toggle");
@@ -408,6 +418,7 @@ function boot() {
   mountSystemThemeSync();
   mountMobileNav();
   document.addEventListener("keydown", handleThemeShortcut);
+  document.addEventListener("keydown", handleGlobalKeydown);
   syncThemePicker();
   fetchArticlesIndex();
 }
@@ -422,6 +433,7 @@ const state = {
   view: "overview",
   overviewTab: "about",
   archiveFilter: "all",
+  designIndex: null,
 };
 
 const overviewTabs = {
@@ -432,21 +444,21 @@ const overviewTabs = {
         <section class="space-pane">
           <div class="pane-copy">
             <p>
-              <strong>At 12, driven purely by curiosity and passion, I built a website, a paid shop and a live Java server —
+              <strong>At 12, I built a website, a paid shop, and a live Java server —
               <button class="inline-project-link" type="button" data-open-project="eltacraft">EltaCraft</button>
               and
-              <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>.
-              Real players, real transactions, not for school — just because I loved it.</strong>
-              That's when I understood this was what I wanted to do.
+              <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>
+              — not for school, but out of curiosity and a genuine love for building things. Real players, real transactions.
+              It was my first experience creating something people actually used, and it made me realize I wanted to keep doing this.</strong>
             </p>
             <p>
-              From there I explored as much as I could — web, systems, game engines, automation — teaching myself and trying to genuinely understand how software works at every level.
+              From there, I kept exploring — web, systems, game engines, automation — mostly teaching myself and trying to understand how software works at every level.
             </p>
             <p style="font-size:1.04rem">
-              That curiosity never stopped. <strong>At 21, same drive, new iteration: I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, hit 500k visitors in the first week, incorporated my first company — and it's still running today.</strong>
+              That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and later became the foundation of my first company, which I still run today.</strong>
             </p>
             <p>
-              Over the years I've worked across web backends, automation tools, game engines, design and realtime systems.
+              Over the years, I've worked across backend systems, automation tools, game engines, design, and real-time software.
               I care about how things look as much as how they work — if it's going online, it should feel right too.
             </p>
           </div>
@@ -562,6 +574,12 @@ const overviewTabs = {
       `;
     },
   },
+  designs: {
+    label: "Designs",
+    render() {
+      return renderDesigns();
+    },
+  },
   writing: {
     label: "Articles",
     render() {
@@ -591,6 +609,57 @@ const overviewTabs = {
   },
 };
 
+const DESIGN_GALLERY = [
+  {
+    year: "2016",
+    kind: "Forum / web",
+    title: "SigmaCraft thread",
+    summary: "Community thread screenshot from the SigmaCraft era, when the project lived both in-game and on the web.",
+    src: "assets/images/history/sigmacraft-thread-1.png",
+    alt: "SigmaCraft forum thread screenshot",
+  },
+  {
+    year: "2016",
+    kind: "Gameplay capture",
+    title: "SigmaCraft gameplay",
+    summary: "A capture from the same period, kept here as a visual reference from the server side of the project.",
+    src: "assets/images/history/sigmacraft-201603-lagfree.jpg",
+    alt: "SigmaCraft gameplay screenshot",
+  },
+  {
+    year: "2019",
+    kind: "Desktop UI",
+    title: "Bubble Bot",
+    summary: "Desktop client UI for the Bubble Bot stack, where the automation logic was exposed to the user.",
+    src: "assets/images/projects/bubblebot.png",
+    alt: "Bubble Bot desktop interface",
+  },
+  {
+    year: "2019",
+    kind: "Web screenshot",
+    title: "Hytale-Serveur.com",
+    summary: "A live screenshot from the Hytale server listing platform and its public-facing website.",
+    src: "assets/images/projects/hytale-serveur.png",
+    alt: "Hytale-Serveur.com screenshot",
+  },
+  {
+    year: "2019",
+    kind: "Mobile UI",
+    title: "Leclerc SAV",
+    summary: "Xamarin-based mobile service app for after-sales flows at Leclerc.",
+    src: "assets/images/projects/leclerc-sav.png",
+    alt: "Leclerc service app screenshot",
+  },
+  {
+    year: "2020",
+    kind: "Realtime UI",
+    title: "VELA Tracking",
+    summary: "Tracking dashboard from the regatta system, included here as an interface snapshot.",
+    src: "assets/images/projects/vela-tracking.png",
+    alt: "VELA tracking dashboard screenshot",
+  },
+];
+
 const ARCHIVE_FILTERS = [
   { id: "all", label: "All" },
   { id: "games", label: "Games" },
@@ -599,7 +668,15 @@ const ARCHIVE_FILTERS = [
   { id: "software", label: "Software" },
   { id: "tools", label: "Tools" },
 ];
-const HERO_SKILLS = ["PHP", "C#", "JavaScript", "C++", ".NET", "Linux"];
+const HERO_SKILL_LIMIT = 6;
+const HERO_SKILL_BOOSTS = {
+  PHP: 5.2,
+  "C#": 5.1,
+  JavaScript: 4.9,
+  "C++": 1.6,
+  ".NET": 2.3,
+  Linux: 3.2,
+};
 const projects = {
   coinvote: {
     featured: true,
@@ -675,10 +752,10 @@ const projects = {
       "Browse the mirrored site below, rebuilt locally from the Dockerized PHP source and SQL dump.",
     ],
     links: [
-      { label: "Browse site", url: "archives/hytale-generated/index.html" },
+      { label: "Browse site", url: "archives/hytale/index.html" },
     ],
     media() {
-      return renderArchiveEmbed("archives/hytale-generated/index.html", "Hytale-Serveur");
+      return renderArchiveEmbed("archives/hytale/index.html", "Hytale-Serveur");
     },
   },
   vinted: {
@@ -1122,13 +1199,88 @@ function renderProjectArchiveRail() {
     .join("");
 }
 
+function renderDesignMedia(item, className = "", interactive = false) {
+  const classAttr = className ? ` class="${className}"` : "";
+  if (item.type === "video") {
+    const poster = item.poster ? ` poster="${item.poster}"` : "";
+    const playback = interactive ? "controls playsinline" : "muted loop playsinline preload=\"metadata\"";
+    return `<video${classAttr} ${playback}${poster} src="${item.src}"></video>`;
+  }
+  return `<img${classAttr} src="${item.src}" alt="${item.alt}" loading="lazy" />`;
+}
+
+function renderDesigns() {
+  return `
+    <section class="space-pane designs-page">
+      <div class="designs-head">
+        <p class="eyebrow">Visual archive</p>
+        <h2>Designs</h2>
+        <p class="muted-note">Screenshots, interfaces, and experiments from projects over the years. Click any tile to open it larger.</p>
+      </div>
+      <div class="design-grid">
+        ${DESIGN_GALLERY.map((item, index) => `
+          <button class="design-card" type="button" data-open-design="${index}" aria-label="Open ${item.title}">
+            <span class="design-card__media">
+              ${renderDesignMedia(item, "design-card__asset")}
+              <span class="design-card__open" aria-hidden="true">${ICONS.sparkle}<span>View larger</span></span>
+            </span>
+            <span class="design-card__copy">
+              <span class="design-card__meta">${item.year} · ${item.kind}</span>
+              <strong>${item.title}</strong>
+              <small>${item.summary}</small>
+            </span>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderDesignModal() {
+  if (!designModal) return;
+  const item = Number.isInteger(state.designIndex) ? DESIGN_GALLERY[state.designIndex] : null;
+  if (!item) {
+    designModal.hidden = true;
+    designModal.setAttribute("aria-hidden", "true");
+    designModal.innerHTML = "";
+    return;
+  }
+
+  designModal.hidden = false;
+  designModal.setAttribute("aria-hidden", "false");
+  designModal.innerHTML = `
+    <div class="design-modal__backdrop" data-close-design-modal></div>
+    <div class="design-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="design-modal-title">
+      <button class="design-modal__close" type="button" data-close-design-modal aria-label="Close preview">×</button>
+      <div class="design-modal__media">
+        ${renderDesignMedia(item, "design-modal__asset", true)}
+      </div>
+      <div class="design-modal__copy">
+        <p class="eyebrow">${item.year} · ${item.kind}</p>
+        <h2 id="design-modal-title">${item.title}</h2>
+        <p>${item.summary}</p>
+      </div>
+    </div>
+  `;
+}
+
 function computeSkillStats() {
   const counts = {};
   const all = Object.values(projects);
-  all.forEach(p => (p.tech || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
-  return HERO_SKILLS
-    .map((name) => ({ name, count: counts[name] || 0 }))
-    .filter((skill) => skill.count > 0);
+  all.forEach((project) => {
+    (project.tech || []).forEach((tech) => {
+      counts[tech] = (counts[tech] || 0) + 1;
+    });
+  });
+
+  return Object.entries(counts)
+    .map(([name, count]) => {
+      const pct = Math.round((count / all.length) * 100);
+      const score = count + (HERO_SKILL_BOOSTS[name] || 0);
+      return { name, count, pct, score };
+    })
+    .sort((a, b) => b.score - a.score || b.count - a.count || a.name.localeCompare(b.name))
+    .slice(0, HERO_SKILL_LIMIT);
 }
 
 function renderOverview() {
@@ -1146,8 +1298,9 @@ function renderOverview() {
             I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
           </p>
           <div class="hero__skills" aria-label="Stack across projects">
-            ${computeSkillStats().map((s) => `<span>${s.name}</span>`).join("")}
+            ${computeSkillStats().map((s) => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
           </div>
+          <p class="hero__skills-note">* Calculated from the stack used across my projects.</p>
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
               ${ICONS.github}<span>GitHub</span>
@@ -1367,11 +1520,16 @@ function render() {
     mainView.innerHTML = renderProject(projects[state.view]);
   }
 
+  if (state.view !== "overview") {
+    state.designIndex = null;
+  }
+
   document.querySelectorAll(".rail-link[data-view]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.view === state.view);
   });
 
   renderProjectArchiveRail();
+  renderDesignModal();
   mainView.scrollTop = 0;
 }
 
@@ -1380,6 +1538,23 @@ document.addEventListener("click", (event) => {
   if (archiveFilterTarget) {
     state.archiveFilter = archiveFilterTarget.dataset.archiveFilter;
     renderProjectArchiveRail();
+    return;
+  }
+
+  const designCloseTarget = event.target.closest("[data-close-design-modal]");
+  if (designCloseTarget) {
+    state.designIndex = null;
+    renderDesignModal();
+    return;
+  }
+
+  const designTarget = event.target.closest("[data-open-design]");
+  if (designTarget) {
+    const nextIndex = Number(designTarget.dataset.openDesign);
+    if (Number.isInteger(nextIndex) && DESIGN_GALLERY[nextIndex]) {
+      state.designIndex = nextIndex;
+      renderDesignModal();
+    }
     return;
   }
 
@@ -1394,6 +1569,7 @@ document.addEventListener("click", (event) => {
   if (overviewTarget) {
     state.overviewTab = overviewTarget.dataset.switchTab;
     state.view = "overview";
+    state.designIndex = null;
     render();
     return;
   }

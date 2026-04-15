@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="80" viewBox="0 0 468 80" role="img" aria-label="PVP banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a1111"/>
+      <stop offset="100%" stop-color="#141b2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9c7c"/>
+      <stop offset="100%" stop-color="#ffd36c"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width=".8"/>
+    </pattern>
+  </defs>
+  <rect width="468" height="80" rx="12" fill="url(#bg)"/>
+  <rect width="468" height="80" rx="12" fill="url(#grid)"/>
+  <circle cx="54" cy="40" r="24" fill="none" stroke="url(#accent)" stroke-width="2.5" opacity=".9"/>
+  <path d="M45 25l5 5-6 15 5 5-2 2-14-14 2-2 5 2 8-13z" fill="#ff9c7c" opacity=".2"/>
+  <path d="M63 25l-5 5 6 15-5 5 2 2 14-14-2-2-5 2-8-13z" fill="#ffd36c" opacity=".2"/>
+  <path d="M16 61L50 36l22 10 24-13 32 11 34-8 42 15 48-10 56 10v10H16z" fill="#080d18" fill-opacity=".65"/>
+  <path d="M16 58L50 40l22 9 24-11 32 9 34-7 42 13 48-8 56 8v6H16z" fill="#ff9c7c" fill-opacity=".18"/>
+  <rect x="92" y="16" width="128" height="18" rx="9" fill="#ff9c7c" fill-opacity=".12"/>
+  <text x="102" y="29" fill="#fff0ea" font-family="Arial, sans-serif" font-size="11" letter-spacing="2.2">PVP</text>
+  <text x="94" y="54" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="700">Competitive combat and arenas</text>
+  <text x="95" y="68" fill="#dfd9d9" font-family="Arial, sans-serif" font-size="11">Factions, sieges and quick matches</text>
+</svg>

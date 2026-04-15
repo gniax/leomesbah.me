@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="80" viewBox="0 0 468 80" role="img" aria-label="Community banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3028"/>
+      <stop offset="100%" stop-color="#10263d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8fdc8c"/>
+      <stop offset="100%" stop-color="#7cc8ff"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width=".8"/>
+    </pattern>
+  </defs>
+  <rect width="468" height="80" rx="12" fill="url(#bg)"/>
+  <rect width="468" height="80" rx="12" fill="url(#grid)"/>
+  <circle cx="54" cy="40" r="24" fill="none" stroke="url(#accent)" stroke-width="2.5" opacity=".9"/>
+  <circle cx="46" cy="34" r="4" fill="#8fdc8c" opacity=".2"/>
+  <circle cx="62" cy="34" r="4" fill="#7cc8ff" opacity=".2"/>
+  <circle cx="54" cy="48" r="4" fill="#ffffff" opacity=".16"/>
+  <path d="M16 61L46 39l23 9 28-13 31 11 33-8 41 14 46-9 64 11v8H16z" fill="#07131a" fill-opacity=".66"/>
+  <path d="M16 58L46 42l23 8 28-10 31 9 33-6 41 12 46-7 64 7v6H16z" fill="#8fdc8c" fill-opacity=".17"/>
+  <rect x="92" y="16" width="128" height="18" rx="9" fill="#8fdc8c" fill-opacity=".12"/>
+  <text x="102" y="29" fill="#ecfff0" font-family="Arial, sans-serif" font-size="11" letter-spacing="2.2">COMMUNITY</text>
+  <text x="94" y="54" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="700">Events, hubs and active players</text>
+  <text x="95" y="68" fill="#c5d6d4" font-family="Arial, sans-serif" font-size="11">A cte, encadrement serieux et accueil lisible</text>
+</svg>

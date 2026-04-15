@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="80" viewBox="0 0 468 80" role="img" aria-label="Creative banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#31183f"/>
+      <stop offset="100%" stop-color="#0f2533"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e2a0ff"/>
+      <stop offset="100%" stop-color="#7cd2ff"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width=".8"/>
+    </pattern>
+  </defs>
+  <rect width="468" height="80" rx="12" fill="url(#bg)"/>
+  <rect width="468" height="80" rx="12" fill="url(#grid)"/>
+  <circle cx="54" cy="40" r="24" fill="none" stroke="url(#accent)" stroke-width="2.5" opacity=".9"/>
+  <path d="M42 52h24l-12-22z" fill="#e2a0ff" opacity=".18"/>
+  <rect x="48" y="29" width="12" height="12" fill="#7cd2ff" opacity=".18"/>
+  <path d="M16 61L46 40l23 10 29-13 31 11 35-8 40 15 47-10 61 10v10H16z" fill="#07101a" fill-opacity=".64"/>
+  <path d="M16 58L46 42l23 8 29-11 31 9 35-6 40 13 47-8 61 8v6H16z" fill="#e2a0ff" fill-opacity=".17"/>
+  <rect x="92" y="16" width="128" height="18" rx="9" fill="#e2a0ff" fill-opacity=".12"/>
+  <text x="102" y="29" fill="#fbf1ff" font-family="Arial, sans-serif" font-size="11" letter-spacing="2.2">CREATIVE</text>
+  <text x="94" y="54" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="700">Builds, showcases and custom projects</text>
+  <text x="95" y="68" fill="#d7d4e3" font-family="Arial, sans-serif" font-size="11">Parcelles, presentation et projets communautaires</text>
+</svg>

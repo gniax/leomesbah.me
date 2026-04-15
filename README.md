@@ -15,7 +15,7 @@ This repo is intentionally simple: a static front-end with a small amount of cli
 - A compact portfolio homepage with project navigation on the left
 - Detailed project views rendered client-side
 - A theme picker with light and dark variants
-- Restored archive pages for older projects such as Hytale, SigmaCraft and EltaCraft
+- Restored local mirrors for older projects such as Hytale, SigmaCraft and EltaCraft
 
 ## Local use
 
@@ -30,4 +30,5 @@ python3 -m http.server
 ## Notes
 
 - The `archives/` folder contains static reconstructions meant for browsing, not the original live applications.
+- The Hytale mirror lives in `archives/hytale/` as a static cache of the site.
 - Backup idea folders are excluded from version control on purpose.
