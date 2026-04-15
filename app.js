@@ -30,6 +30,7 @@ const ICONS = {
   clock: svg(`<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`),
   sparkle: svg(`<path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m6 6 2 2"/><path d="m16 16 2 2"/><path d="m6 18 2-2"/><path d="m16 8 2-2"/>`),
   wave: svg(`<path d="M3 13c2.2-3.6 4.2-5.4 6.1-5.4 1.2 0 1.9.8 2.3 2.1l.7 2.3c.4 1.3 1.2 1.9 2.4 1.9 1.7 0 3.5-1.4 5.4-4.1"/><path d="M4.2 16.1c2-.8 3.9-1.2 5.6-1.2 1.5 0 2.6.4 3.4 1.2.8.8 1.7 1.2 2.9 1.2 1.5 0 2.9-.7 4.2-2.1"/>`),
+  arrowLeft: svg(`<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>`),
   flag: svg(`<path d="M5 3v18"/><path d="M5 4h12l-3 4 3 4H5"/>`),
   layers: svg(`<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/>`),
   terminal: svg(`<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/>`),
@@ -54,6 +55,16 @@ const PROJECT_ICON = {
   leclerc: "phone",
   sigmacraft: "gaming",
   eltacraft: "pick",
+  "dofus-validator": "terminal",
+  scinsta: "phone",
+  magcubic: "cube",
+  "edu-bushido": "cube",
+  "edu-fitmeal": "phone",
+  "edu-cardboard": "layers",
+  "edu-qt": "terminal",
+  "edu-opengl": "terminal",
+  "drone-ball": "gaming",
+  enumsharp: "terminal",
 };
 
 const TAB_ICON = {
@@ -398,6 +409,7 @@ function boot() {
   mountMobileNav();
   document.addEventListener("keydown", handleThemeShortcut);
   syncThemePicker();
+  fetchArticlesIndex();
 }
 
 if (document.readyState !== "loading") {
@@ -543,7 +555,7 @@ const overviewTabs = {
           <div class="space-section">
             <p class="eyebrow">Events</p>
             <div class="list-rows">
-              ${row("2022", `Game Jam — ESIEE Paris`, `Built a playable game from scratch in a team over 48 hours · <a class="inline-project-link" href="https://github.com/gniax/Drone-Ball" target="_blank" rel="noreferrer">Source</a>.`)}
+              ${row("2022", `Game Jam — ESIEE Paris`, `Built a playable game from scratch in a team over 48 hours · <a class="inline-project-link" href="https://github.com/gniax/drone-ball" target="_blank" rel="noreferrer">Source</a>.`)}
             </div>
           </div>
         </section>
@@ -553,11 +565,18 @@ const overviewTabs = {
   writing: {
     label: "Articles",
     render() {
+      if (articlesIndex === null) {
+        fetchArticlesIndex();
+        return `<section class="space-pane"><p class="muted-note">Loading…</p></section>`;
+      }
+      if (articlesIndex.length === 0) {
+        return `<section class="space-pane"><p class="muted-note">Nothing published yet.</p></section>`;
+      }
       return `
         <section class="space-pane">
           <div class="list-rows">
-            ${Object.entries(articles).map(([slug, a]) => `
-              <article class="list-row list-row--link" role="button" tabindex="0" data-open-article="${slug}">
+            ${articlesIndex.map(a => `
+              <article class="list-row list-row--link" role="button" tabindex="0" data-open-article="${a.slug}">
                 <span>${a.date}</span>
                 <div>
                   <strong>${a.title}</strong>
@@ -572,20 +591,21 @@ const overviewTabs = {
   },
 };
 
-const PROJECT_CATEGORY_LABELS = {
-  product: "Product",
-  automation: "Automation",
-  web: "Web platform",
-  tooling: "Tooling",
-  realtime: "Realtime",
-  mobile: "Mobile",
-  minecraft: "Minecraft",
-};
-
+const ARCHIVE_FILTERS = [
+  { id: "all", label: "All" },
+  { id: "games", label: "Games" },
+  { id: "mobile", label: "Mobile" },
+  { id: "web", label: "Web" },
+  { id: "software", label: "Software" },
+  { id: "tools", label: "Tools" },
+];
+const HERO_SKILLS = ["PHP", "C#", "JavaScript", "C++", ".NET", "Linux"];
 const projects = {
   coinvote: {
     featured: true,
+    logo: "assets/images/logos/coinvote.svg",
     category: "product",
+    filters: ["web", "mobile"],
     sortYear: new Date().getFullYear(),
     railNote: "live product, backend, ops",
     period: "current",
@@ -613,7 +633,9 @@ const projects = {
   },
   bubblebot: {
     featured: true,
-    category: "automation",
+    logo: "assets/images/logos/bubblebot.svg",
+    category: "systems",
+    filters: ["web", "software"],
     sortYear: 2019,
     railNote: "desktop client, protocol, automation",
     period: "2019 →",
@@ -634,40 +656,44 @@ const projects = {
     },
   },
   hytale: {
-    featured: true,
+    featured: false,
+    logo: "assets/images/logos/hytale.png",
     category: "web",
+    filters: ["web"],
     sortYear: 2019,
     railNote: "rankings, premium slots, vote flows",
-    period: "2019 →",
+    period: "2019",
     kind: "Web platform",
     title: "Hytale-Serveur.com",
     summary:
-      "A public Hytale server platform built as a full PHP product: listings, server pages, votes, favorites, premium slots, submission flows and admin tooling.",
+      "A public Hytale server listing platform built in PHP: rankings, server pages, votes, favorites, premium slots, submission flows and full admin tooling.",
     tech: ["PHP", "MySQL", "JavaScript"],
     meta: ["PHP product", "Listings", "Votes + favorites", "Premium queue"],
     points: [
-      "Covered the full visibility loop: ranking pages, individual server pages, banner uploads, favorites, comments and account flows.",
-      "Included monetization logic with premium slots, expiration handling and queue management, not just a static directory.",
-      "The local archive below is rebuilt from the original source backups and assets, not from a browser cache snapshot.",
+      "Full visibility loop: ranking pages, individual server pages, banner uploads, favorites, comments and account flows.",
+      "Monetization logic with premium slots, expiration handling and queue management.",
+      "Browse the mirrored site below, rebuilt locally from the Dockerized PHP source and SQL dump.",
     ],
     links: [
-      { label: "Browse archive", url: "archives/hytale/index.html" },
-      { label: "Open live site", url: "https://www.hytale-serveur.com/" },
+      { label: "Browse site", url: "archives/hytale-generated/index.html" },
     ],
     media() {
-      return renderArchiveEmbed("archives/hytale/index.html", "Hytale-Serveur local archive");
+      return renderArchiveEmbed("archives/hytale-generated/index.html", "Hytale-Serveur");
     },
   },
   vinted: {
-    featured: true,
-    category: "tooling",
-    sortYear: 2023,
-    railNote: "extension, saved data, reupload flow",
+    featured: false,
+    logo: "assets/images/logos/vinted.svg",
+    category: "systems",
+    filters: ["tools"],
+    sortYear: 2026,
+    sortMonth: 2,
+    railNote: "extension, autofill, republishing",
     period: "recent",
     kind: "Browser tooling",
-    title: "Vinted Republish",
+    title: "vinted-republish-extension",
     summary:
-      "A browser extension that saves listings, refills item forms, reuploads photos and speeds up republishing flows.",
+      "Browser extension that saves Vinted listings, auto-fills new item forms, reuploads photos, and speeds up republishing.",
     tech: ["JavaScript", "Automation"],
     meta: ["Extension", "Automation", "Browser tooling"],
     points: [
@@ -675,7 +701,7 @@ const projects = {
       "Handled saved data, form refill, image reupload and browser-side automation.",
       "Closer to practical tooling than a public-facing product.",
     ],
-    links: [{ label: "View source", url: "https://github.com/gniax/vinted-republish" }],
+    links: [{ label: "View source", url: "https://github.com/gniax/vinted-republish-extension" }],
     media() {
       return `
         <div class="project-abstract project-abstract--vinted">
@@ -691,21 +717,24 @@ const projects = {
     },
   },
   vela: {
-    featured: true,
-    category: "realtime",
+    featured: false,
+    logo: "assets/images/logos/vela.png",
+    category: "systems",
+    filters: ["web"],
     sortYear: 2020,
-    railNote: "TCP, realtime race tracking",
+    sortMonth: 5,
+    railNote: "C++, Qt, PHP, JS, RPI & XBEE",
     period: "2020",
     kind: "Realtime systems",
-    title: "VELA Tracking",
+    title: "VELA-Tracking",
     summary:
-      "A real-time regatta tracking system where I handled TCP communication across the client and server layers.",
-    tech: ["C#", "TCP", "Java"],
-    meta: ["Realtime", "TCP", "Tracking", "Team project"],
+      "Real-time regatta tracking system built with C++, Qt, PHP, JavaScript, RPI & XBEE.",
+    tech: ["C++", "Qt", "PHP", "JavaScript"],
+    meta: ["Realtime", "Tracking", "C++", "Qt"],
     points: [
-      "Built around realtime communication and state updates during a race simulation.",
-      "Main technical focus was TCP across client and server layers.",
-      "Good example of systems work outside the web stack.",
+      "Realtime tracking across the full stack.",
+      "Covered desktop, web and embedded communication layers.",
+      "One of the clearest systems projects in the portfolio.",
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/VELA-Tracking" }],
     media() {
@@ -715,28 +744,31 @@ const projects = {
   leclerc: {
     featured: false,
     category: "mobile",
+    filters: ["mobile"],
     sortYear: 2019,
-    railNote: "xamarin app for SAV flows",
+    railNote: "Xamarin Forms, iOS & Android",
     period: "2019",
     kind: "Mobile application",
-    title: "E.Leclerc SAV",
+    title: "leclerc-service-app",
     summary:
-      "A Xamarin mobile app built during a BTS internship to support after-sales service information and customer flows.",
+      "SAV Leclerc application for iOS & Android made with Xamarin Forms in C#.",
     tech: ["C#", "Xamarin", "Mobile"],
     meta: ["Mobile", "Xamarin", "Internship"],
     points: [
-      "Built during internship context rather than as a side project.",
-      "Focused on customer-facing support flows in a retail environment.",
-      "Useful as a mobile application reference point in the project list.",
+      "Cross-platform mobile application.",
+      "Built with Xamarin Forms in C# for iOS and Android.",
+      "Retail service flows and customer support context.",
     ],
-    links: [{ label: "View source", url: "https://github.com/gniax/SAV-Leclerc-Application" }],
+    links: [{ label: "View source", url: "https://github.com/gniax/leclerc-service-app" }],
     media() {
-      return `<img class="project-media__image" src="assets/images/projects/leclerc-sav.png" alt="E.Leclerc SAV application" width="768" height="768" />`;
+      return `<img class="project-media__image" src="assets/images/projects/leclerc-sav.png" alt="Leclerc service app" width="768" height="768" />`;
     },
   },
   sigmacraft: {
-    featured: false,
-    category: "minecraft",
+    featured: true,
+    logo: "assets/images/logos/sigmacraft.svg",
+    category: "legacy",
+    filters: ["web"],
     sortYear: 2016,
     railNote: "plugins, gameplay, web, ops",
     period: "2014 → 2016",
@@ -745,20 +777,22 @@ const projects = {
     summary:
       "An early Minecraft server project where I pushed much further into custom gameplay, server-side iteration, plugins, items, armor, mounts and web presence.",
     tech: ["Java", "PHP", "MySQL", "JavaScript"],
-    meta: ["Minecraft", "Plugins", "Gameplay", "Shop", "Web", "Ops"],
+    meta: ["Server", "Plugins", "Gameplay", "Shop", "Web", "Ops"],
     points: [
       "Custom gameplay systems, server balancing and iteration from real players.",
       "Included custom items, armor, mounts, votes, boutique logic and public-facing web pages.",
-      "Embedded below as a browseable static archive rebuilt from the local source material.",
+      "Browse the original site below — rebuilt from local source material.",
     ],
-    links: [{ label: "Browse archive", url: "archives/sigmacraft/index.html" }],
+    links: [{ label: "Browse site", url: "archives/sigmacraft/index.html" }],
     media() {
-      return renderArchiveEmbed("archives/sigmacraft/index.html", "SigmaCraft local archive");
+      return renderArchiveEmbed("archives/sigmacraft/index.html", "SigmaCraft");
     },
   },
   eltacraft: {
     featured: false,
-    category: "minecraft",
+    logo: "assets/images/logos/eltacraft.svg",
+    category: "legacy",
+    filters: ["web"],
     sortYear: 2014,
     railNote: "server, vote, shop, web",
     period: "2012 → 2014",
@@ -767,39 +801,274 @@ const projects = {
     summary:
       "One of the first live systems I built around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
     tech: ["Java", "PHP", "MySQL"],
-    meta: ["Minecraft", "Server", "Vote", "Shop", "CraftMyCMS", "Ops"],
+    meta: ["Server", "Vote", "Shop", "CraftMyCMS", "Ops"],
     points: [
       "Started self-taught, by building around a live Minecraft server rather than doing isolated exercises.",
       "Connected web pages, vote flows, Starpass shop logic, server management and community/admin work.",
-      "Embedded below as a browseable static archive based on the recovered local material.",
+      "Browse the original site below — rebuilt from local source material.",
     ],
-    links: [{ label: "Browse archive", url: "archives/eltacraft/index.html" }],
+    links: [{ label: "Browse site", url: "archives/eltacraft/index.html" }],
     media() {
-      return renderArchiveEmbed("archives/eltacraft/index.html", "EltaCraft local archive");
+      return renderArchiveEmbed("archives/eltacraft/index.html", "EltaCraft");
     },
+  },
+  "dofus-validator": {
+    featured: false,
+    category: "systems",
+    filters: ["tools"],
+    sortYear: 2022,
+    sortMonth: 12,
+    railNote: "Node.js automation",
+    period: "2022",
+    kind: "Tooling",
+    title: "dofus-giftcode-automation",
+    summary: "Node.js tool for automating Dofus gift code redemption across multiple accounts.",
+    tech: ["JavaScript", "Node.js"],
+    meta: ["Node.js", "Tooling", "API"],
+    points: [
+      "Automates Dofus gift code redemption across multiple accounts.",
+      "Built as a Node.js tool rather than a one-off script.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/dofus-giftcode-automation" }],
+    media() { return ""; },
+  },
+  scinsta: {
+    featured: false,
+    category: "systems",
+    filters: ["mobile", "tools"],
+    sortYear: 2026,
+    sortMonth: 1,
+    railNote: "Instagram tweak, no Reels",
+    period: "2026",
+    kind: "iOS tweak",
+    title: "SCInsta-NoReels",
+    summary: "Custom SCInsta fork focused on removing Reels and simplifying Instagram navigation.",
+    tech: ["Objective-C", "iOS"],
+    meta: ["iOS", "Tweak", "Instagram"],
+    points: [
+      "Removes Reels entirely from Instagram.",
+      "Keeps the UI leaner and navigation simpler.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/SCInsta-NoReels" }],
+    media() { return ""; },
+  },
+  magcubic: {
+    featured: false,
+    category: "systems",
+    filters: ["software", "tools"],
+    sortYear: 2025,
+    sortMonth: 12,
+    railNote: "Magisk, HDMI state, IR override",
+    period: "2025",
+    kind: "Hardware / firmware",
+    title: "magcubic-hy300-root",
+    summary: "Rooting and firmware customization for the Magcubic HY300 Pro with Magisk, HDMI state detection, and IR override.",
+    tech: ["Android", "Magisk"],
+    meta: ["Android", "Root", "Firmware", "Hardware"],
+    points: [
+      "Firmware rooting and customization work for the HY300 Pro.",
+      "Includes Magisk support, HDMI state detection and IR override.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/magcubic-hy300-root" }],
+    media() { return ""; },
+  },
+  enumsharp: {
+    featured: false,
+    category: "systems",
+    filters: ["software", "tools"],
+    sortYear: 2020,
+    sortMonth: 1,
+    railNote: "C# WPF, enum merge",
+    period: "2020",
+    kind: "Tooling",
+    title: "enum-merge",
+    summary: "C# WPF utility for merging and synchronizing enum definitions across source files.",
+    tech: ["C#", ".NET", "WPF"],
+    meta: ["C#", "WPF", "Tooling"],
+    points: [
+      "Merges and synchronizes enum definitions across files.",
+      "Built in C# with a WPF interface.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/enum-merge" }],
+    media() { return ""; },
+  },
+  "drone-ball": {
+    featured: false,
+    logo: "assets/images/logos/drone-ball.png",
+    category: "games",
+    filters: ["games"],
+    sortYear: 2022,
+    railNote: "Unity, game jam, drones",
+    period: "2022",
+    kind: "Game Jam",
+    title: "drone-ball",
+    summary: "Split-screen Rocket League-like with drones and low-gravity movement, built in Unity during a game jam.",
+    tech: ["C#", "Unity"],
+    meta: ["Unity", "C#", "Game Jam", "Team"],
+    points: [
+      "Split-screen, low-gravity drone gameplay.",
+      "Built in Unity during a game jam.",
+    ],
+    links: [{ label: "Source", url: "https://github.com/gniax/drone-ball" }],
+    media() { return ""; },
+  },
+  "edu-bushido": {
+    featured: false,
+    category: "games",
+    filters: ["games"],
+    sortYear: 2024,
+    sortMonth: 11,
+    railNote: "UE4, VR escape game",
+    period: "2024",
+    kind: "Education",
+    title: "bushido-quest",
+    summary: "VR escape game built with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
+    tech: ["Unreal Engine", "C++"],
+    meta: ["UE4", "C++", "ESIEE"],
+    points: [
+      "VR escape game built with Unreal Engine 4.",
+      "Interaction-driven progression and reward-driven level design.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/bushido-quest" }],
+    media() { return ""; },
+  },
+  "edu-fitmeal": {
+    featured: false,
+    logo: "assets/images/logos/fitmeal.png",
+    category: "mobile",
+    filters: ["mobile"],
+    sortYear: 2023,
+    sortMonth: 6,
+    railNote: "React Native, meal tracking",
+    period: "2023",
+    kind: "Education",
+    title: "fitmeal-mobile",
+    summary: "Mobile app built with React Native and Expo for calorie tracking and meal planning.",
+    tech: ["JavaScript", "React Native", "Expo"],
+    meta: ["React Native", "Expo", "Mobile", "ESIEE"],
+    points: [
+      "React Native and Expo mobile app.",
+      "Calorie tracking and meal planning flows.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/fitmeal-mobile" }],
+    media() { return ""; },
+  },
+  "edu-cardboard": {
+    featured: false,
+    archived: true,
+    category: "games",
+    filters: ["games"],
+    sortYear: 2024,
+    railNote: "VR/AR, Unity, Google Cardboard, FIB",
+    period: "2024",
+    kind: "Education",
+    title: "EDU_VAR_GoogleCardboard",
+    summary: "EDU - MIRI Course | VAR - 5th Year, FIB UPC - Unity & Google Cardboard",
+    tech: ["C#", "Unity", "VR"],
+    meta: ["VR", "Unity", "Google Cardboard", "FIB"],
+    points: [
+      "MIRI / VAR course project at FIB UPC Barcelona.",
+      "Unity and Google Cardboard VR work.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/EDU_VAR_GoogleCardboard" }],
+    media() { return ""; },
+  },
+  "edu-qt": {
+    featured: false,
+    archived: true,
+    category: "systems",
+    filters: ["software"],
+    sortYear: 2019,
+    railNote: "Qt calculator, BTS SNIR",
+    period: "2019",
+    kind: "Education",
+    title: "EDU_QtCalculator",
+    summary: "EDU - Basic Calculator in Qt (C++) - 2nd Year, BTS SNIR, Lycée Léonce Vieljeux",
+    tech: ["C++", "Qt"],
+    meta: ["C++", "Qt", "BTS"],
+    points: [
+      "Basic calculator in Qt (C++).",
+      "BTS SNIR, Lycée Léonce Vieljeux.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/EDU_QtCalculator" }],
+    media() { return ""; },
+  },
+  "edu-opengl": {
+    featured: false,
+    archived: true,
+    category: "systems",
+    filters: ["software"],
+    sortYear: 2023,
+    railNote: "OpenGL, ESIEE Paris",
+    period: "2023",
+    kind: "Education",
+    title: "EDU_ComputerGraphics",
+    summary: "EDU - OpenGL Course, 4th Year Engineering, ESIEE Paris",
+    tech: ["C", "OpenGL"],
+    meta: ["OpenGL", "C", "ESIEE"],
+    points: [
+      "OpenGL course project.",
+      "4th year Engineering, ESIEE Paris.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/EDU_ComputerGraphics" }],
+    media() { return ""; },
   },
 };
 
-function getArchiveEntries() {
-  return Object.entries(projects).filter(([, project]) => !project.featured);
+function getProjectFilterIds(project) {
+  if (Array.isArray(project.filters) && project.filters.length) return project.filters;
+  if (project.category) return [project.category];
+  return [];
+}
+
+function getArchiveEntries(includeFeatured = false) {
+  return Object.entries(projects).filter(([, project]) => includeFeatured || !project.featured);
 }
 
 function getArchiveCategoryOptions() {
-  const categories = [...new Set(getArchiveEntries().map(([, project]) => project.category))];
-  return [
-    { id: "all", label: "All" },
-    ...categories.map((id) => ({ id, label: PROJECT_CATEGORY_LABELS[id] || id })),
-  ];
+  const entries = getArchiveEntries(true);
+  const counts = new Map();
+  for (const [, project] of entries) {
+    for (const filterId of getProjectFilterIds(project)) {
+      counts.set(filterId, (counts.get(filterId) || 0) + 1);
+    }
+  }
+
+  return ARCHIVE_FILTERS
+    .map((filter) => ({
+      ...filter,
+      count: filter.id === "all" ? entries.length : counts.get(filter.id) || 0,
+    }))
+    .filter((filter) => filter.id === "all" || filter.count > 0);
+}
+
+function normalizeArchiveFilter() {
+  if (ARCHIVE_FILTERS.some((filter) => filter.id === state.archiveFilter)) return;
+  state.archiveFilter = "all";
 }
 
 function sortArchiveEntries(entries) {
-  return [...entries].sort(([, a], [, b]) => b.sortYear - a.sortYear);
+  return [...entries].sort(([, a], [, b]) => {
+    const archivedRank = Number(Boolean(a.archived)) - Number(Boolean(b.archived));
+    if (archivedRank !== 0) return archivedRank;
+    const aKey =
+      (a.sortYear ?? 0) * 10000 +
+      (a.sortMonth ?? 1) * 100 +
+      (a.sortDay ?? 1);
+    const bKey =
+      (b.sortYear ?? 0) * 10000 +
+      (b.sortMonth ?? 1) * 100 +
+      (b.sortDay ?? 1);
+    if (bKey !== aKey) return bKey - aKey;
+    return a.title.localeCompare(b.title);
+  });
 }
 
 function getVisibleArchiveEntries() {
-  const filtered = getArchiveEntries().filter(([, project]) => {
+  normalizeArchiveFilter();
+  const filtered = getArchiveEntries(state.archiveFilter !== "all").filter(([, project]) => {
     if (state.archiveFilter === "all") return true;
-    return project.category === state.archiveFilter;
+    return getProjectFilterIds(project).includes(state.archiveFilter);
   });
 
   return sortArchiveEntries(filtered);
@@ -808,8 +1077,14 @@ function getVisibleArchiveEntries() {
 function renderProjectArchiveRail() {
   if (!archiveList || !archiveFilters || !archiveCount) return;
 
+  normalizeArchiveFilter();
   const entries = getVisibleArchiveEntries();
-  archiveCount.textContent = `${entries.length} project${entries.length > 1 ? "s" : ""}`;
+  if (state.archiveFilter === "all") {
+    const totalCount = getArchiveEntries(true).length;
+    archiveCount.textContent = `${totalCount} project${totalCount > 1 ? "s" : ""}`;
+  } else {
+    archiveCount.textContent = `${entries.length} project${entries.length > 1 ? "s" : ""}`;
+  }
 
   archiveFilters.innerHTML = getArchiveCategoryOptions()
     .map(
@@ -818,8 +1093,12 @@ function renderProjectArchiveRail() {
           class="rail-filter${state.archiveFilter === filter.id ? " is-active" : ""}"
           type="button"
           data-archive-filter="${filter.id}"
+          aria-pressed="${state.archiveFilter === filter.id ? "true" : "false"}"
+          aria-label="${filter.label}: ${filter.count} project${filter.count > 1 ? "s" : ""}"
+          title="${filter.label}"
         >
-          ${filter.label}
+          <span>${filter.label}</span>
+          <small>${filter.count}</small>
         </button>
       `,
     )
@@ -829,10 +1108,12 @@ function renderProjectArchiveRail() {
     .map(
       ([id, project]) => `
         <button class="rail-link rail-link--archive${state.view === id ? " is-active" : ""}" type="button" data-view="${id}">
-          <span class="rail-link__icon">${ICONS[PROJECT_ICON[id]] || ""}</span>
+          ${project.logo
+            ? `<img class="rail-link__logo-thumb" src="${project.logo}" alt="">`
+            : `<span class="rail-link__icon">${ICONS[PROJECT_ICON[id]] || ""}</span>`}
           <span class="rail-link__meta">${project.period}</span>
           <span class="rail-link__body">
-            <strong>${project.title}</strong>
+            <strong>${project.title}${project.archived ? ` <span class="project-badge project-badge--archive">Archive</span>` : ""}</strong>
             <small>${project.railNote}</small>
           </span>
         </button>
@@ -845,10 +1126,9 @@ function computeSkillStats() {
   const counts = {};
   const all = Object.values(projects);
   all.forEach(p => (p.tech || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
-  return Object.entries(counts)
-    .filter(([, c]) => c > 0)
-    .map(([name, count]) => ({ name, pct: Math.round(count / all.length * 100) }))
-    .sort((a, b) => b.pct - a.pct);
+  return HERO_SKILLS
+    .map((name) => ({ name, count: counts[name] || 0 }))
+    .filter((skill) => skill.count > 0);
 }
 
 function renderOverview() {
@@ -866,7 +1146,7 @@ function renderOverview() {
             I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
           </p>
           <div class="hero__skills" aria-label="Stack across projects">
-            ${computeSkillStats().map(s => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
+            ${computeSkillStats().map((s) => `<span>${s.name}</span>`).join("")}
           </div>
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
@@ -920,9 +1200,11 @@ function renderProject(project) {
     <article class="project-page">
       <header class="project-head">
         <div class="project-head__title">
-          <span class="project-head__icon">${iconName ? ICONS[iconName] : ""}</span>
+          ${project.logo
+            ? `<img class="project-head__logo" src="${project.logo}" alt="${project.title} logo">`
+            : `<span class="project-head__icon">${iconName ? ICONS[iconName] : ""}</span>`}
           <div>
-            <p class="eyebrow">${project.kind}</p>
+            <p class="eyebrow">${project.kind}${project.archived ? ` <span class="project-badge project-badge--archive">Archive</span>` : ""}</p>
             <h2>${project.title}</h2>
           </div>
         </div>
@@ -974,8 +1256,16 @@ function renderArchiveEmbed(src, title) {
   return `
     <div class="project-embed">
       <div class="project-embed__bar">
-        <span>source-backed archive</span>
-        <a href="${src}" target="_blank" rel="noreferrer">open full page</a>
+        <div class="project-embed__bar-left">
+          <button class="project-embed__back" type="button" data-embed-back>
+            ${ICONS.arrowLeft}<span>leomesbah.me</span>
+          </button>
+          <span class="project-embed__bar-sep">/</span>
+          <span class="project-embed__bar-url">${title}</span>
+        </div>
+        <a class="project-embed__open" href="${src}" target="_blank" rel="noreferrer">
+          ${ICONS.link}<span>Open</span>
+        </a>
       </div>
       <iframe class="project-embed__frame" src="${src}" title="${title}" loading="lazy"></iframe>
     </div>
@@ -1015,31 +1305,38 @@ async function fetchGithubActivity() {
   }
 }
 
-const articles = {
-  "coinvote-scale": {
-    date: "Apr 2025",
-    title: "What I learned shipping Coinvote.cc",
-    summary: "Launching a side project to 500k users in a week — what breaks, what holds, and what you carry forward.",
-    body: [
-      `I launched Coinvote.cc in 2021 without a roadmap. The concept was simple: a platform where crypto communities could vote for their favourite projects. I built it fast, put it online, and moved on to other things. What I didn't expect was 500k visitors in the first week.`,
-      `<strong>When the load hits</strong>`,
-      `The first days were rough. The backend wasn't built for that kind of traffic. I spent most of the launch week patching bottlenecks — query optimisation, caching layers, Cloudflare rules tightened on the fly. It held up, but only just. The lesson: build for 10x the traffic you expect, even on a side project. Especially on a side project — you won't have time to fix it once the wave arrives.`,
-      `<strong>Running it alone</strong>`,
-      `Building solo means every decision is yours. No code review, no second opinion, no one to blame but yourself. That's freeing and uncomfortable at the same time. I learned to ship fast, watch closely, and patch before things snowball. The discipline you develop when you're the only one on call at 2am is real.`,
-      `<strong>Choosing boring technology</strong>`,
-      `The stack is PHP/MySQL/Nginx on Linux. Nothing glamorous. I added mobile apps (iOS/Android) later, Cloudflare for ops, and a few internal Python scripts. The boring choices are still running three years later with minimal maintenance. Novelty has a cost — stability has a value. That tradeoff shapes every technical decision I make now.`,
-      `<strong>What it changed</strong>`,
-      `Coinvote.cc isn't just a project — it's the thing that showed me what building for real actually means. Traffic, users, complaints, edge cases, infrastructure costs. All of it. I incorporated my first company off the back of it. The gap between a side project and a live product is mostly psychological. Once you've crossed it, everything else feels smaller.`,
-    ],
-  },
-};
+/* ---------- articles (loaded from articles/ folder) ---------- */
+
+let articlesIndex = null; // null = not yet fetched
+const articlesBodyCache = {};
+
+async function fetchArticlesIndex() {
+  if (articlesIndex !== null) return;
+  try {
+    const res = await fetch("articles/index.json");
+    articlesIndex = await res.json();
+  } catch {
+    articlesIndex = [];
+  }
+  if (state.overviewTab === "writing" && state.view === "overview") render();
+}
+
+async function fetchArticleBody(slug) {
+  if (articlesBodyCache[slug] !== undefined) return;
+  try {
+    const res = await fetch(`articles/${slug}.json`);
+    articlesBodyCache[slug] = await res.json();
+  } catch {
+    articlesBodyCache[slug] = null;
+  }
+}
 
 function renderArticle(article) {
   return `
     <article class="article-page">
       <header class="article-head">
         <button class="article-back" type="button" data-switch-tab="writing">
-          ${ICONS.pick}<span>Articles</span>
+          ${ICONS.arrowLeft}<span>Back to articles</span>
         </button>
         <p class="eyebrow">Note · ${article.date}</p>
         <h2>${article.title}</h2>
@@ -1058,7 +1355,14 @@ function render() {
     fetchGithubActivity();
   } else if (state.view.startsWith("article-")) {
     const slug = state.view.slice("article-".length);
-    mainView.innerHTML = renderArticle(articles[slug]);
+    if (articlesBodyCache[slug]) {
+      mainView.innerHTML = renderArticle(articlesBodyCache[slug]);
+    } else {
+      mainView.innerHTML = `<article class="article-page"><p class="muted-note" style="padding:32px">Loading…</p></article>`;
+      fetchArticleBody(slug).then(() => {
+        if (state.view === "article-" + slug) mainView.innerHTML = renderArticle(articlesBodyCache[slug]);
+      });
+    }
   } else {
     mainView.innerHTML = renderProject(projects[state.view]);
   }
@@ -1106,6 +1410,12 @@ document.addEventListener("click", (event) => {
     state.view = "article-" + articleTarget.dataset.openArticle;
     state.overviewTab = "writing";
     render();
+    return;
+  }
+
+  const embedBack = event.target.closest("[data-embed-back]");
+  if (embedBack) {
+    document.querySelector("#main-view")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
 

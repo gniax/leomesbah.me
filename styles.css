@@ -121,7 +121,7 @@ img {
 
 .shell {
   display: grid;
-  grid-template-columns: 272px minmax(0, 1fr);
+  grid-template-columns: 284px minmax(0, 1fr);
   gap: 14px;
   min-height: 100vh;
   padding: 14px;
@@ -131,7 +131,8 @@ img {
   position: sticky;
   top: 14px;
   height: calc(100vh - 28px);
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 22px 18px 26px;
   border: var(--border-w) solid var(--rule);
   border-radius: var(--radius);
@@ -152,7 +153,8 @@ img {
   margin: 0 auto;
   padding: 22px 22px 48px;
   height: calc(100vh - 28px);
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* identity */
@@ -265,18 +267,26 @@ img {
 .rail-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
+  gap: 5px;
+  margin-bottom: 8px;
 }
 
 .rail-filter {
-  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 0;
+  padding: 4px 8px;
   border: var(--border-w) solid var(--rule);
   border-radius: 999px;
-  background: transparent;
+  background: var(--surface);
   color: var(--muted);
   cursor: pointer;
-  transition: color 140ms ease, border-color 140ms ease, background-color 140ms ease;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
 }
 
 .rail-filter:hover,
@@ -291,6 +301,35 @@ img {
   color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-soft);
+}
+
+.rail-filter span {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rail-filter small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25em;
+  height: 1.25em;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  line-height: 1;
+}
+
+.rail-filter.is-active small {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .rail-archive-list {
@@ -406,9 +445,9 @@ img {
 
 .rail-link--archive {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr);
-  gap: 10px;
-  align-items: baseline;
+  grid-template-columns: 22px 52px minmax(0, 1fr);
+  gap: 6px;
+  align-items: center;
   padding: 7px 10px;
   border-radius: var(--radius-sm);
 }
@@ -417,6 +456,8 @@ img {
   color: var(--faint);
   font-family: var(--mono);
   font-size: 0.7rem;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .rail-link__body {
@@ -429,6 +470,7 @@ img {
   font-weight: 600;
   font-size: 0.88rem;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .rail-link__body small {
@@ -437,6 +479,35 @@ img {
   font-size: 0.76rem;
   line-height: 1.35;
   margin-top: 1px;
+  overflow-wrap: anywhere;
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border: var(--border-w) solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.project-badge--archive {
+  margin-left: 6px;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.project-head .project-badge {
+  margin-left: 0;
 }
 
 .rail-link--featured .rail-link__body small {
@@ -983,17 +1054,75 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-bottom: var(--border-w) solid var(--rule);
-  background: var(--bg-alt, var(--bg));
+  background: var(--surface);
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
 }
 
-.project-embed__bar a {
+.project-embed__bar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.project-embed__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 4px;
   color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 120ms;
+}
+
+.project-embed__back:hover {
+  background: var(--accent-soft);
+}
+
+.project-embed__back svg {
+  width: 11px;
+  height: 11px;
+}
+
+.project-embed__bar-sep {
+  color: var(--faint);
+}
+
+.project-embed__bar-url {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-embed__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
   border-bottom: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 120ms;
+}
+
+.project-embed__open:hover {
+  color: var(--accent);
+}
+
+.project-embed__open svg {
+  width: 11px;
+  height: 11px;
 }
 
 .project-embed__frame {
@@ -1051,7 +1180,8 @@ svg {
 }
 
 .rail-link--archive {
-  grid-template-columns: 22px 62px minmax(0, 1fr);
+  grid-template-columns: 22px 52px minmax(0, 1fr);
+  gap: 6px;
   align-items: center;
 }
 
@@ -1061,6 +1191,14 @@ svg {
   height: 22px;
   background: transparent;
   color: var(--faint);
+}
+
+.rail-link__logo-thumb {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .rail-link:hover .rail-link__icon,
@@ -1255,9 +1393,12 @@ svg {
 .hero__skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  align-content: flex-start;
+  gap: 5px 6px;
   margin: 0;
   max-width: 60ch;
+  max-height: 70px;
+  overflow: hidden;
 }
 
 .hero__skills span {
@@ -1273,12 +1414,6 @@ svg {
   font-size: 0.68rem;
   line-height: 1;
   letter-spacing: 0.03em;
-}
-
-.hero__skills span em {
-  font-style: normal;
-  color: var(--faint);
-  font-size: 0.9em;
 }
 
 .hero__now {
@@ -1681,6 +1816,15 @@ svg {
   height: 20px;
 }
 
+.project-head__logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 .project-period {
   display: inline-flex;
   align-items: center;
@@ -1986,6 +2130,7 @@ svg {
     height: 100%;
     z-index: 99;
     overflow-y: auto;
+    overflow-x: hidden;
     border-radius: 0;
     border-right: var(--border-w) solid var(--rule);
     border-top: 0;
@@ -2031,7 +2176,8 @@ svg {
 
   #main-view {
     height: auto;
-    overflow: visible;
+    overflow-y: visible;
+    overflow-x: hidden;
     padding: 28px 22px 56px;
   }
 
