@@ -29,6 +29,7 @@ const ICONS = {
   link: svg(`<path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>`),
   clock: svg(`<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`),
   sparkle: svg(`<path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m6 6 2 2"/><path d="m16 16 2 2"/><path d="m6 18 2-2"/><path d="m16 8 2-2"/>`),
+  wave: svg(`<path d="M3 13c2.2-3.6 4.2-5.4 6.1-5.4 1.2 0 1.9.8 2.3 2.1l.7 2.3c.4 1.3 1.2 1.9 2.4 1.9 1.7 0 3.5-1.4 5.4-4.1"/><path d="M4.2 16.1c2-.8 3.9-1.2 5.6-1.2 1.5 0 2.6.4 3.4 1.2.8.8 1.7 1.2 2.9 1.2 1.5 0 2.9-.7 4.2-2.1"/>`),
   flag: svg(`<path d="M5 3v18"/><path d="M5 4h12l-3 4 3 4H5"/>`),
   layers: svg(`<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/>`),
   terminal: svg(`<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/>`),
@@ -447,65 +448,43 @@ const overviewTabs = {
   education: {
     label: "Education",
     render() {
+      const row = (year, title, body) => `
+        <article class="list-row">
+          <span>${year}</span>
+          <div>
+            <strong>${title}</strong>
+            <p>${body}</p>
+          </div>
+        </article>
+      `;
+
       return `
         <section class="space-pane">
-          <div class="list-rows">
-            <article class="list-row">
-              <span>2021 → 2024</span>
-              <div>
-                <strong>ESIEE Paris — Engineer's degree</strong>
-                <p>IT 3D Development. C#, engineering-track.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2023 → 2024</span>
-              <div>
-                <strong>FIB Barcelona — Master MIRI</strong>
-                <p>Innovation & Research in Informatics: VR/AR, networks (FINE), security (IAS), OS, processor architecture.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2025</span>
-              <div>
-                <strong>GitLab CI/CD · ORSYS</strong>
-                <p>Formation "GitLab CI/CD, maitriser la gestion du cycle de vie de vos developpements logiciels" · 16/04/2025 → 18/04/2025 · <a class="inline-project-link" href="${GITLAB_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2020 → 2021</span>
-              <div>
-                <strong>ATS — Preparatory class</strong>
-                <p>Post-BTS scientific preparatory year.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2018 → 2020</span>
-              <div>
-                <strong>BTS Digital Systems</strong>
-                <p>Computer science, networks and applied systems.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2020</span>
-              <div>
-                <strong>Microsoft — Azure Fundamentals</strong>
-                <p>Certified.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2019</span>
-              <div>
-                <strong>Cisco — CCNA R&S, Intro to Networks</strong>
-                <p>Certified.</p>
-              </div>
-            </article>
-            <article class="list-row">
-              <span>2019</span>
-              <div>
-                <strong>Google Digital Workshop</strong>
-                <p>Digital marketing fundamentals · Google · issued Oct. 2019.</p>
-              </div>
-            </article>
+          <div class="space-section">
+            <p class="eyebrow">Degrees</p>
+            <div class="list-rows">
+              ${row("2021 → 2024", "ESIEE Paris — Engineering degree", "Computer science and 3D development, engineering track.")}
+              ${row("2023 → 2024", "FIB Barcelona — Master's degree", "Innovation & Research in Informatics: VR/AR, networks (FINE), security (IAS), operating systems and processor architecture.")}
+              ${row("2020 → 2021", "ATS — Scientific preparatory year", "Post-diploma scientific preparatory year.")}
+              ${row("2018 → 2020", "Advanced Technician Diploma in Digital Systems", "Computer science, networks and applied systems.")}
+              ${row("2018", "French Scientific Baccalaureate — Mathematics specialty", "General secondary diploma with a strong math focus.")}
+            </div>
+          </div>
+
+          <div class="space-section">
+            <p class="eyebrow">Certifications</p>
+            <div class="list-rows">
+              ${row("2020", "Microsoft — Azure Fundamentals", "Certified.")}
+              ${row("2019", "Cisco — CCNA R&S, Introduction to Networks", "Certified.")}
+              ${row("2019", "Google Digital Workshop — Digital marketing fundamentals", "Google · issued Oct. 2019.")}
+            </div>
+          </div>
+
+          <div class="space-section">
+            <p class="eyebrow">Training</p>
+            <div class="list-rows">
+              ${row("2025", `GitLab CI/CD — ORSYS`, `GitLab CI/CD training: mastering the development lifecycle of software projects · 16/04/2025 → 18/04/2025 · <a class="inline-project-link" href="${GITLAB_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.`)}
+            </div>
           </div>
         </section>
       `;
@@ -797,24 +776,28 @@ function renderProjectArchiveRail() {
 
 function renderOverview() {
   return `
-        <article class="space">
+    <article class="space">
       <section class="hero">
         <div class="hero__main">
           <div class="hero__eyebrow hero__eyebrow--hello">
-            ${ICONS.wave}<span>Hello</span>
+            ${ICONS.wave}<span>software engineer · builder</span>
           </div>
           <h2 class="hero__lead">
             Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I build live systems and products from public Minecraft servers and plugins to tooling,
-            design and 4D animation. <span class="hero__flag">🇫🇷</span>
+            I started with public Minecraft servers, plugins and shop flows, then kept building
+            tooling, backend systems and live products that have to stay online. <span class="hero__flag">🇫🇷</span>
           </p>
           <div class="hero__skills" aria-label="Core technical areas">
             <span>C#/.NET</span>
-            <span>C/C++ + Unreal</span>
-            <span>PHP/JS + SQL</span>
-            <span>Linux + automation</span>
+            <span>C/C++</span>
+            <span>Unreal</span>
+            <span>PHP/JS</span>
+            <span>SQL</span>
+            <span>Linux</span>
+            <span>Automation</span>
+            <span>AI</span>
           </div>
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
@@ -824,34 +807,35 @@ function renderOverview() {
               ${ICONS.link}<span>LinkedIn</span>
             </a>
             <a class="action-button action-button--ghost" href="https://t.me/leo_coinvote" target="_blank" rel="noreferrer">
-              ${ICONS.telegram}<span>Telegram @leo_coinvote</span>
+              ${ICONS.telegram}<span>Telegram</span>
             </a>
             <a class="action-button action-button--ghost" href="mailto:hello@leomesbah.me">
               ${ICONS.mail}<span>Email</span>
             </a>
           </div>
-          <div class="hero__now">
-            <div class="now-card">
-              <div class="now-card__head">
-                <span class="now-card__label"><span class="status-dot status-dot--pulse" aria-hidden="true"></span><span>current</span></span>
+        </div>
+
+        <aside class="hero__now">
+          <div class="now-card">
+            <div class="now-card__head">
+              <span class="now-card__label"><span class="status-dot status-dot--pulse" aria-hidden="true"></span><span>current</span></span>
+            </div>
+            <div class="role-row">
+              <span class="role-row__icon">${ICONS.cube}</span>
+              <div>
+                <strong>KNDS France</strong>
+                <p>Software Engineer & AI Lead · C#/.NET, C/C++, Unreal, AI, AR/VR, Linux & network admin.</p>
               </div>
-              <div class="role-row">
-                <span class="role-row__icon">${ICONS.cube}</span>
-                <div>
-                  <strong>KNDS France</strong>
-                  <p>Software Engineer & AI Lead · C#/.NET, C/C++, Unreal, AI, AR/VR, Linux & network admin.</p>
-                </div>
-              </div>
-              <div class="role-row">
-                <span class="role-row__icon">${ICONS.coin}</span>
-                <div>
-                  <strong>Coinvote.cc</strong>
-                  <p>Founder · Full-stack, backend, realtime, Cloudflare, mobile apps, growth, SEO · 500k+ users.</p>
-                </div>
+            </div>
+            <div class="role-row">
+              <span class="role-row__icon">${ICONS.coin}</span>
+              <div>
+                <strong>Coinvote.cc</strong>
+                <p>Founder · Full-stack, backend, realtime, Cloudflare, mobile apps, growth, SEO · 500k+ users.</p>
               </div>
             </div>
           </div>
-        </div>
+        </aside>
       </section>
 
       <nav class="space-tabs" aria-label="My space tabs">
