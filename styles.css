@@ -343,7 +343,7 @@ img {
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--accent);
-  vertical-align: text-bottom;
+  vertical-align: middle;
   flex-shrink: 0;
 }
 
@@ -678,6 +678,73 @@ img {
   align-items: baseline;
 }
 
+.list-row--link {
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.list-row--link:hover strong {
+  color: var(--accent);
+}
+
+/* article page */
+
+.article-page {
+  display: grid;
+  gap: 28px;
+  max-width: 72ch;
+}
+
+.article-head {
+  display: grid;
+  gap: 10px;
+}
+
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: fit-content;
+  margin-bottom: 4px;
+  transition: color 120ms ease;
+}
+
+.article-back:hover {
+  color: var(--accent);
+}
+
+.article-back svg {
+  width: 13px;
+  height: 13px;
+}
+
+.article-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.article-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.article-body {
+  border-top: var(--border-w) solid var(--rule-soft);
+  padding-top: 24px;
+}
+
 .list-row span {
   color: var(--accent);
   font-family: var(--mono);
@@ -696,6 +763,21 @@ img {
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.5;
+}
+
+.exp-bullets {
+  margin: 6px 0 0 0;
+  padding-left: 1.1em;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exp-bullets li {
+  padding-left: 2px;
 }
 
 /* tags */
@@ -2292,7 +2374,47 @@ svg {
   letter-spacing: 0.2em;
 }
 
-/* 11. glass — soft gradient + blur */
+/* 11. magazine-dark — editorial dark, ink + cream, no red */
+[data-theme="magazine-dark"] {
+  --bg: #0e0e10;
+  --bg-alt: #090909;
+  --surface: #141416;
+  --panel: #141416;
+  --text: #f0ede6;
+  --muted: #8a8782;
+  --faint: #4d4b47;
+  --rule: rgba(240, 237, 230, 0.07);
+  --rule-soft: rgba(240, 237, 230, 0.04);
+  --rule-strong: rgba(240, 237, 230, 0.13);
+  --accent: #d4a72a;
+  --accent-2: #7ea8c4;
+  --accent-soft: rgba(212, 167, 42, 0.12);
+  --selection: rgba(212, 167, 42, 0.28);
+  --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --serif: var(--display);
+  --body-bg: var(--bg);
+  --rail-bg: var(--bg);
+  --panel-bg: var(--surface);
+  --radius: 0;
+  --radius-sm: 0;
+  --tab-underline-w: 3px;
+}
+
+[data-theme="magazine-dark"] .project-head h2,
+[data-theme="magazine-dark"] .space-card__lead {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+[data-theme="magazine-dark"] .rail-label,
+[data-theme="magazine-dark"] .eyebrow {
+  color: var(--accent);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+/* 12. glass — soft gradient + blur */
 [data-theme="glass"] {
   --bg: #0b0f1a;
   --bg-alt: #0e1322;

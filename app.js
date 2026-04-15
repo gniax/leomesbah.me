@@ -108,6 +108,7 @@ const THEMES = [
   { id: "cyber", name: "Cyber", dot: "#00e0ff", mode: "dark" },
   { id: "plum", name: "Plum", dot: "#e879f9", mode: "dark" },
   { id: "sepia-dark", name: "Sepia dark", dot: "#c48a3d", mode: "dark" },
+  { id: "magazine-dark", name: "Magazine dark", dot: "#d4a72a", mode: "dark" },
 
   /* ---- light ---- */
   { id: "editorial", name: "Editorial paper", dot: "#a8441a", mode: "light" },
@@ -450,36 +451,46 @@ const overviewTabs = {
             <article class="list-row">
               <span>2021 → now</span>
               <div>
-                <strong>KNDS France</strong>
-                <p>Software Engineer & AI Lead. C#/.NET/Unity, C/C++, Unreal (C++/Blueprints), full-stack (PHP/JS), AI, AR/VR, Linux & network admin.</p>
+                <strong>KNDS France Training</strong>
+                <ul class="exp-bullets">
+                  <li>AI Lead — software tooling, AI integration, AR/VR projects</li>
+                  <li>AR/VR development with Unity and Unreal Engine</li>
+                  <li>Web platform and network infrastructure</li>
+                  <li>Systems programming in C/C++ — RS-422/232 serial communication</li>
+                </ul>
               </div>
             </article>
             <article class="list-row">
               <span>2021 → now</span>
               <div>
                 <strong>Coinvote.cc · SARL</strong>
-                <p>Founder. Full-stack (PHP/JS/Python/C#/C++), backend & APIs, realtime processing, Linux ops, Cloudflare, scaling, mobile apps (iOS/Android), growth, SEO. 500k+ users.</p>
+                <ul class="exp-bullets">
+                  <li>Founder and sole engineer — built and scaled to 500k+ users</li>
+                  <li>Full-stack: backend (PHP), mobile app, infrastructure (Cloudflare, Nginx)</li>
+                  <li>Design, marketing, community management and client relations</li>
+                  <li>Company operations, billing and accounting</li>
+                </ul>
               </div>
             </article>
             <article class="list-row">
               <span>2020</span>
               <div>
                 <strong>Appen · Independent</strong>
-                <p>Ads evaluation and transcription — SEA quality, voice-assistant training data.</p>
+                <p>Search and ads quality evaluation — AI training data for major search and voice platforms.</p>
               </div>
             </article>
             <article class="list-row">
               <span>2020</span>
               <div>
                 <strong>Datavio.ai · Independent</strong>
-                <p>Web search evaluator — AI-driven search quality and ranking.</p>
+                <p>Search quality evaluation — AI-driven ranking and relevance annotation.</p>
               </div>
             </article>
             <article class="list-row">
               <span>2019</span>
               <div>
-                <strong>E.Leclerc Royan · Internship</strong>
-                <p>Mobile application developer (Xamarin, C#) and hardware/software repair for clients.</p>
+                <strong>E.Leclerc · Internship</strong>
+                <p>Built a Xamarin/C# mobile application for after-sales customer flows at a large retail chain.</p>
               </div>
             </article>
           </div>
@@ -532,7 +543,7 @@ const overviewTabs = {
           <div class="space-section">
             <p class="eyebrow">Events</p>
             <div class="list-rows">
-              ${row("2022", `Game Jam — ESIEE Paris`, `Built a playable game from scratch in a team over 48 hours · <a class="inline-project-link" href="https://github.com/gniax" target="_blank" rel="noreferrer">github.com/gniax</a>.`)}
+              ${row("2022", `Game Jam — ESIEE Paris`, `Built a playable game from scratch in a team over 48 hours · <a class="inline-project-link" href="https://github.com/gniax/Drone-Ball" target="_blank" rel="noreferrer">Source</a>.`)}
             </div>
           </div>
         </section>
@@ -544,17 +555,16 @@ const overviewTabs = {
     render() {
       return `
         <section class="space-pane">
-          <div class="pane-copy">
-            <p>Reserved for future Medium posts and longer writeups.</p>
-          </div>
           <div class="list-rows">
-            <article class="list-row">
-              <span>soon</span>
-              <div>
-                <strong>Build notes</strong>
-                <p>Longer breakdowns for systems, products and reverse-engineering adjacent work.</p>
-              </div>
-            </article>
+            ${Object.entries(articles).map(([slug, a]) => `
+              <article class="list-row list-row--link" role="button" tabindex="0" data-open-article="${slug}">
+                <span>${a.date}</span>
+                <div>
+                  <strong>${a.title}</strong>
+                  <p>${a.summary}</p>
+                </div>
+              </article>
+            `).join("")}
           </div>
         </section>
       `;
@@ -1005,10 +1015,50 @@ async function fetchGithubActivity() {
   }
 }
 
+const articles = {
+  "coinvote-scale": {
+    date: "Apr 2025",
+    title: "What I learned shipping Coinvote.cc",
+    summary: "Launching a side project to 500k users in a week — what breaks, what holds, and what you carry forward.",
+    body: [
+      `I launched Coinvote.cc in 2021 without a roadmap. The concept was simple: a platform where crypto communities could vote for their favourite projects. I built it fast, put it online, and moved on to other things. What I didn't expect was 500k visitors in the first week.`,
+      `<strong>When the load hits</strong>`,
+      `The first days were rough. The backend wasn't built for that kind of traffic. I spent most of the launch week patching bottlenecks — query optimisation, caching layers, Cloudflare rules tightened on the fly. It held up, but only just. The lesson: build for 10x the traffic you expect, even on a side project. Especially on a side project — you won't have time to fix it once the wave arrives.`,
+      `<strong>Running it alone</strong>`,
+      `Building solo means every decision is yours. No code review, no second opinion, no one to blame but yourself. That's freeing and uncomfortable at the same time. I learned to ship fast, watch closely, and patch before things snowball. The discipline you develop when you're the only one on call at 2am is real.`,
+      `<strong>Choosing boring technology</strong>`,
+      `The stack is PHP/MySQL/Nginx on Linux. Nothing glamorous. I added mobile apps (iOS/Android) later, Cloudflare for ops, and a few internal Python scripts. The boring choices are still running three years later with minimal maintenance. Novelty has a cost — stability has a value. That tradeoff shapes every technical decision I make now.`,
+      `<strong>What it changed</strong>`,
+      `Coinvote.cc isn't just a project — it's the thing that showed me what building for real actually means. Traffic, users, complaints, edge cases, infrastructure costs. All of it. I incorporated my first company off the back of it. The gap between a side project and a live product is mostly psychological. Once you've crossed it, everything else feels smaller.`,
+    ],
+  },
+};
+
+function renderArticle(article) {
+  return `
+    <article class="article-page">
+      <header class="article-head">
+        <button class="article-back" type="button" data-switch-tab="writing">
+          ${ICONS.pick}<span>Articles</span>
+        </button>
+        <p class="eyebrow">Note · ${article.date}</p>
+        <h2>${article.title}</h2>
+        <p class="article-summary">${article.summary}</p>
+      </header>
+      <div class="article-body pane-copy">
+        ${article.body.map(p => `<p>${p}</p>`).join("")}
+      </div>
+    </article>
+  `;
+}
+
 function render() {
   if (state.view === "overview") {
     mainView.innerHTML = renderOverview();
     fetchGithubActivity();
+  } else if (state.view.startsWith("article-")) {
+    const slug = state.view.slice("article-".length);
+    mainView.innerHTML = renderArticle(articles[slug]);
   } else {
     mainView.innerHTML = renderProject(projects[state.view]);
   }
@@ -1047,6 +1097,14 @@ document.addEventListener("click", (event) => {
   const projectTarget = event.target.closest("[data-open-project]");
   if (projectTarget) {
     state.view = projectTarget.dataset.openProject;
+    render();
+    return;
+  }
+
+  const articleTarget = event.target.closest("[data-open-article]");
+  if (articleTarget) {
+    state.view = "article-" + articleTarget.dataset.openArticle;
+    state.overviewTab = "writing";
     render();
   }
 });
