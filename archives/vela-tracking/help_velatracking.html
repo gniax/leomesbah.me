@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Presentation du projet VELA Tracking">
+  <title>Qu'est-ce que VELA Tracking ?</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo-vela.png" alt="Logo VELA Tracking">
+        <div>
+          <strong>VELA Tracking</strong>
+          <span>Suivi de regate et visualisation de course</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="course_differe.html">Course differee</a>
+        <a href="classement.html">Classement</a>
+        <a class="active" href="help_velatracking.html">A propos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell" style="padding:32px 0 20px;">
+    <section class="hero-card page">
+      <div class="eyebrow">A propos du projet</div>
+      <h1>Qu'est-ce que VELA Tracking ?</h1>
+      <p class="lead">
+        VELA Tracking est un projet de BTS SN-IR pense pour visualiser une regate en temps reel et en differe.
+        La version affichee ici reprend le contenu du projet d'origine dans une mise en page plus nette, comme une IHM Raspberry de demonstration.
+      </p>
+
+      <div class="two-col" style="margin-top:24px;">
+        <div class="panel">
+          <h2>Objectif</h2>
+          <ul class="list">
+            <li><span class="dot"></span><span>Rassembler les positions des bateaux et des balises dans une IHM lisible.</span></li>
+            <li><span class="dot"></span><span>Afficher la vitesse, la trace et les donnees de course sans chargement inutile.</span></li>
+            <li><span class="dot"></span><span>Mettre en avant la logique Wi-Fi du projet, tout en laissant XBee de cote pour cette version.</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Contexte technique</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>Coordonnees</strong>
+              <span>Recuperation des coordonnees GPS pour alimenter la course.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>Wi-Fi</strong>
+              <span>Transmission locale vers le serveur de course et l'interface de visualisation.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>XBee</strong>
+              <span>Communication radio XBee au coeur de la chaine embarquee.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:18px;">
+        <div class="panel">
+          <h2>Organisation de l'equipe</h2>
+          <p class="lead">
+            Le tableau suivant resume la repartition des taches telle qu'elle apparait dans le projet initial.
+          </p>
+          <img src="images/task-table.png" alt="Tableau de repartition des taches" style="width:100%;border-radius:18px;border:1px solid rgba(255,255,255,0.08);">
+        </div>
+        <div class="panel">
+          <h2>Ce qu'on retient</h2>
+          <p class="lead">
+            L'ensemble sert a montrer un site lisible, une page de course nette et une IHM Qt active.
+          </p>
+          <div class="legend">
+            <span>Visualisation nette</span>
+            <span>Donnees locales</span>
+            <span>Sans XBee</span>
+          </div>
+          <div class="cta-row" style="margin-top:18px;">
+            <a class="btn primary" href="course_differe.html">Voir la page course</a>
+            <a class="btn" href="classement.html">Voir le classement</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

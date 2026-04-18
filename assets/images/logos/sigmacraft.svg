@@ -1,19 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="bg" x1="68" y1="60" x2="444" y2="452" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#052E20"/>
-      <stop offset="1" stop-color="#0F172A"/>
-    </linearGradient>
-    <linearGradient id="sig" x1="160" y1="154" x2="352" y2="358" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFF2C1"/>
-      <stop offset="1" stop-color="#D97706"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e2d4a"/>
+      <stop offset="100%" stop-color="#0d1623"/>
     </linearGradient>
   </defs>
-  <rect x="40" y="40" width="432" height="432" rx="112" fill="url(#bg)"/>
-  <rect x="40" y="40" width="432" height="432" rx="112" stroke="#173B2A" stroke-width="16"/>
-  <path d="M162 160H348L270 256L348 352H162" stroke="url(#sig)" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M162 160H348L270 256L348 352H162" stroke="#FFF4D2" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".52"/>
-  <rect x="376" y="140" width="32" height="32" rx="8" fill="#34D399"/>
-  <rect x="100" y="340" width="28" height="28" rx="8" fill="#FBBF24"/>
-  <rect x="128" y="112" width="16" height="16" rx="5" fill="#86EFAC" fill-opacity=".6"/>
+  <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+  <text x="32" y="47" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="bold"
+        fill="#ffffff">Σ</text>
 </svg>

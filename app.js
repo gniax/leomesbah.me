@@ -32,6 +32,7 @@ const ICONS = {
   sparkle: svg(`<path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m6 6 2 2"/><path d="m16 16 2 2"/><path d="m6 18 2-2"/><path d="m16 8 2-2"/>`),
   wave: svg(`<path d="M3 13c2.2-3.6 4.2-5.4 6.1-5.4 1.2 0 1.9.8 2.3 2.1l.7 2.3c.4 1.3 1.2 1.9 2.4 1.9 1.7 0 3.5-1.4 5.4-4.1"/><path d="M4.2 16.1c2-.8 3.9-1.2 5.6-1.2 1.5 0 2.6.4 3.4 1.2.8.8 1.7 1.2 2.9 1.2 1.5 0 2.9-.7 4.2-2.1"/>`),
   arrowLeft: svg(`<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>`),
+  arrowRight: svg(`<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>`),
   flag: svg(`<path d="M5 3v18"/><path d="M5 4h12l-3 4 3 4H5"/>`),
   layers: svg(`<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/>`),
   terminal: svg(`<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/>`),
@@ -79,6 +80,7 @@ const TAB_ICON = {
 function injectRailIcons() {
   document.querySelectorAll(".rail-link[data-view]").forEach((link) => {
     if (link.querySelector(".rail-link__icon")) return;
+    if (link.querySelector(".rail-link__logo-thumb")) return;
     const view = link.dataset.view;
     const name = PROJECT_ICON[view];
     if (!name) return;
@@ -455,7 +457,7 @@ const overviewTabs = {
               From there, I kept exploring — web, systems, game engines, automation — mostly teaching myself and trying to understand how software works at every level.
             </p>
             <p style="font-size:1.04rem">
-              That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and later became the foundation of my first company, which I still run today.</strong>
+              That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and later became the foundation of Coinvote LLC, which I still run today.</strong>
             </p>
             <p>
               Over the years, I've worked across backend systems, automation tools, game engines, design, and real-time software.
@@ -487,7 +489,7 @@ const overviewTabs = {
             <article class="list-row">
               <span>2021 → now</span>
               <div>
-                <strong>Coinvote.cc · SARL</strong>
+                <strong>Coinvote.cc LLC</strong>
                 <ul class="exp-bullets">
                   <li>Founder and sole engineer — built and scaled to 500k+ users</li>
                   <li>Full-stack: backend (PHP), mobile app, infrastructure (Cloudflare, Nginx)</li>
@@ -654,8 +656,8 @@ const DESIGN_GALLERY = [
     year: "2020",
     kind: "Realtime UI",
     title: "VELA Tracking",
-    summary: "Tracking dashboard from the regatta system, included here as an interface snapshot.",
-    src: "assets/images/projects/vela-tracking.png",
+    summary: "Regatta tracking interface from the VELA stack, shown here as a clean project snapshot.",
+    src: "assets/images/projects/vela-tracking/qt-app.png",
     alt: "VELA tracking dashboard screenshot",
   },
 ];
@@ -669,62 +671,63 @@ const ARCHIVE_FILTERS = [
   { id: "tools", label: "Tools" },
 ];
 const HERO_SKILL_LIMIT = 6;
+const HERO_SKILL_SECONDARY_LIMIT = 7;
 const HERO_SKILL_BOOSTS = {
-  PHP: 5.2,
-  "C#": 5.1,
-  JavaScript: 4.9,
-  "C++": 1.6,
-  ".NET": 2.3,
-  Linux: 3.2,
+  PHP: 5.2, "C#": 5.1, JavaScript: 4.9, "C++": 1.6, ".NET": 2.3, Linux: 3.2,
 };
+const HERO_SKILLS_SECONDARY_EXCLUDE = new Set([
+  "React Native", "Java", "Expo", "Nginx", "Objective-C", "Xamarin",
+  "Magisk", "Android", "iOS", "WPF", "ASP.NET", "MySQL", "Automation",
+]);
 const projects = {
   coinvote: {
     featured: true,
-    logo: "assets/images/logos/coinvote.svg",
+    logo: "assets/images/logos/coinvote_logo.png",
     category: "product",
     filters: ["web", "mobile"],
     sortYear: new Date().getFullYear(),
     railNote: "live product, backend, ops",
     period: "current",
-    kind: "Current product",
+    kind: "Live product · LLC",
     title: "Coinvote.cc",
     summary:
-      "A crypto voting platform built as a real product: product decisions, backend work, deployment, operations and day-to-day iteration.",
-    tech: ["PHP", "MySQL", "JavaScript", "Linux", "Nginx"],
-    meta: ["Product", "Backend", "Ops", "Live system"],
+      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, built and operated entirely solo.",
+    tech: ["PHP", "MySQL", "JavaScript", "Linux", "Nginx", "Mobile"],
+    meta: ["Linux sysadmin", "iOS & Android", "REST API", "Automation", "Ad system", "VPS"],
     points: [
-      "Current focus, built and operated as a live product rather than a demo.",
-      "Covers the full loop: product decisions, backend, deployment and maintenance.",
-      "Represents the clearest picture of what I am building now.",
+      "Full-stack solo build: PHP 8.3 backend, Nginx, Cloudflare, VPS administration — no team, no agency.",
+      "Crypto data ingestion, anti-bot voting protection, automated coin listing pipeline.",
+      "Monetisation system built in-house: ad placements, sponsored listings, billing and client management.",
     ],
     links: [{ label: "Open site", url: "https://coinvote.cc" }],
     media() {
-      return `
-        <div class="project-abstract project-abstract--coinvote">
-          <div class="coinvote-mark" aria-hidden="true"></div>
-          <strong>Coinvote.cc</strong>
-          <p>PHP 8.3, MySQL, Nginx, live product operations.</p>
-        </div>
-      `;
+      const mediaKit = Array.from({ length: 14 }, (_, i) => `assets/files/coinvote/media_kit/${i + 1}.png`);
+      const salesDeck = [...Array.from({ length: 14 }, (_, i) => `assets/files/coinvote/sales_deck/${i + 1}.png`), "assets/files/coinvote/sales_deck/16.png"];
+      return renderTabs("coinvote-media", [
+        { label: "Video", content: `<video class="project-media__video" src="assets/files/coinvote/v2.mp4" controls playsinline preload="metadata"></video>` },
+        { label: "Analytics", content: `<img src="assets/files/coinvote/analytics-1.png" alt="Google Analytics — Coinvote.cc user acquisition, Mar 2021 – Apr 2026" style="width:100%;border-radius:6px;">` },
+        { label: "Media Kit", content: renderSlider("coinvote-mediakit", mediaKit) },
+        { label: "Sales Deck", content: renderSlider("coinvote-salesdeck", salesDeck) },
+      ]);
     },
   },
   bubblebot: {
     featured: true,
-    logo: "assets/images/logos/bubblebot.svg",
+    logo: "assets/images/logos/bubblebot.png",
     category: "systems",
     filters: ["web", "software"],
     sortYear: 2019,
     railNote: "desktop client, protocol, automation",
     period: "2019 →",
-    kind: "Automation product",
+    kind: "SaaS · Automation",
     title: "Bubble Bot",
     summary:
-      "A technically dense automation system around Dofus Touch, built across a desktop client, custom protocol layer, server, API, website and account generation tooling.",
+      "A SaaS built around reverse engineering Dofus Touch — sold as a license-based automation bot, with a desktop client, custom protocol layer, server, API, website and account generation tooling.",
     tech: ["C#", ".NET", "ASP.NET", "JavaScript", "Automation"],
-    meta: ["C#", "Automation", "Protocol", "ASP.NET", "CefSharp", "Proxies"],
+    meta: ["SaaS", "Reverse engineering", "C#", "Protocol", "CefSharp", "Proxies"],
     points: [
-      "Multi-part architecture: desktop application, custom server/protocol, web panel, API and account tooling.",
-      "Included reverse-engineering-adjacent work, middleman automation flows and operational tooling around game actions.",
+      "Core work was reverse engineering the game's protocol to intercept and replay actions reliably.",
+      "Distributed as a licensed SaaS — users paid for access to the bot and its automation flows.",
       "Account generation stack used Chromium offscreen automation, proxies, anti-captcha integration and email handling.",
     ],
     links: [],
@@ -780,17 +783,7 @@ const projects = {
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/vinted-republish-extension" }],
     media() {
-      return `
-        <div class="project-abstract project-abstract--vinted">
-          <div class="abstract-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <strong>Republish faster</strong>
-          <p>Saved data, form refill, image upload, browser automation.</p>
-        </div>
-      `;
+      return `<img class="project-media__image" src="assets/images/projects/vinted-1.png" alt="Vinted republish extension" />`;
     },
   },
   vela: {
@@ -805,21 +798,34 @@ const projects = {
     kind: "Realtime systems",
     title: "VELA-Tracking",
     summary:
-      "Real-time regatta tracking system built with C++, Qt, PHP, JavaScript, RPI & XBEE.",
+      "Regatta tracking system built with C++, Qt, PHP and JavaScript, driven by GPS coordinates and XBee links, with a Raspberry Pi demo UI and course data handling.",
     tech: ["C++", "Qt", "PHP", "JavaScript"],
     meta: ["Realtime", "Tracking", "C++", "Qt"],
     points: [
-      "Realtime tracking across the full stack.",
-      "Covered desktop, web and embedded communication layers.",
-      "One of the clearest systems projects in the portfolio.",
+      "Qt desktop view for the race table and boat positions.",
+      "Web pages for the race follow-up, ranking and project context.",
+      "Raspberry Pi demo UI shown on a small tablet-style screen, with the Wi-Fi flow kept for presentation.",
     ],
-    links: [{ label: "View source", url: "https://github.com/gniax/VELA-Tracking" }],
+    links: [
+      { label: "Browse site", url: "archives/vela-tracking/index.html" },
+      { label: "View source", url: "https://github.com/gniax/VELA-Tracking" },
+    ],
     media() {
-      return `<img class="project-media__image" src="assets/images/projects/vela-tracking.png" alt="VELA Tracking application" width="1366" height="768" />`;
+      return renderTabs("vela-media", [
+        {
+          label: "RPI IHM Demo",
+          content: `<div class="project-media project-media--bleed"><video class="project-media__video" src="assets/files/vela-tracking/vela-window.webm" controls playsinline preload="metadata"></video></div>`,
+        },
+        {
+          label: "Browse site",
+          content: renderArchiveEmbed("archives/vela-tracking/index.html", "VELA Tracking"),
+        },
+      ]);
     },
   },
   leclerc: {
     featured: false,
+    logo: "assets/images/logos/leclerc.svg",
     category: "mobile",
     filters: ["mobile"],
     sortYear: 2019,
@@ -845,24 +851,47 @@ const projects = {
     featured: true,
     logo: "assets/images/logos/sigmacraft.svg",
     category: "legacy",
-    filters: ["web"],
+    filters: ["web", "games"],
     sortYear: 2016,
     railNote: "plugins, gameplay, web, ops",
     period: "2014 → 2016",
-    kind: "Early work",
+    kind: "Early work · age 14",
     title: "SigmaCraft",
     summary:
-      "An early Minecraft server project where I pushed much further into custom gameplay, server-side iteration, plugins, items, armor, mounts and web presence.",
+      "Built at 14 in 2014 — this is where I actually learned to code. A Minecraft server that grew into a real project: custom Java plugins, a live PHP website, shop logic, and a player base I had to keep happy.",
     tech: ["Java", "PHP", "MySQL", "JavaScript"],
     meta: ["Server", "Plugins", "Gameplay", "Shop", "Web", "Ops"],
     points: [
-      "Custom gameplay systems, server balancing and iteration from real players.",
-      "Included custom items, armor, mounts, votes, boutique logic and public-facing web pages.",
-      "Browse the original site below — rebuilt from local source material.",
+      "My first real codebase — learned Java, PHP and MySQL entirely through this project, with no formal guidance.",
+      "Wrote custom plugins from scratch: armor sets, unique items, mountable entities, vote rewards and boutique logic.",
+      "Ran the server ops end-to-end: hosting, config, community management and web presence.",
     ],
     links: [{ label: "Browse site", url: "archives/sigmacraft/index.html" }],
     media() {
-      return renderArchiveEmbed("archives/sigmacraft/index.html", "SigmaCraft");
+      const armor = renderPluginCard(
+        "SigmaArmor",
+        "Custom armor sets with vanilla resource pack overrides — equip listeners, damage handling and per-set stats.",
+        ["SigmaArmorPlugin.java", "ArmorFactory.java", "ArmorSet.java", "ArmorEquipListener.java", "ArmorDamageListener.java"],
+        `public void onEnable() {\n  saveDefaultConfig();\n  this.armorFactory = new ArmorFactory(this);\n  getCommand("sigmaarmor")\n    .setExecutor(new SigmaArmorCommand(this));\n  registerEvents(\n    new ArmorEquipListener(this),\n    new ArmorDamageListener(this)\n  );\n}`
+      );
+      const item = renderPluginCard(
+        "SigmaItem",
+        "Custom item system — unique IDs, special effects on use, emerald drop overrides and admin give commands.",
+        ["SigmaItemPlugin.java", "ItemFactory.java", "ItemId.java", "EpeeEvent.java", "EmeraldDropListener.java"],
+        `public void onEnable() {\n  this.itemFactory = new ItemFactory(this);\n  getCommand("sigmaitem")\n    .setExecutor(new SigmaItemCommand(this));\n  registerEvents(\n    new EpeeEvent(this),\n    new EmeraldDropListener(this)\n  );\n}`
+      );
+      const monture = renderPluginCard(
+        "SigmaMonture",
+        "Mount system — players summon rideable entities (spider, pig, horse) via command, with lifecycle and despawn handling.",
+        ["Main.java", "MountService.java", "SigmaMonter.java", "MountLifecycleListener.java"],
+        `public void onEnable() {\n  this.mountService = new MountService(this);\n  SigmaMonter cmd = new SigmaMonter(\n    this, mountService);\n  getCommand("monter")\n    .setExecutor(cmd);\n  registerEvents(\n    new MountLifecycleListener(\n      this, mountService));\n}`
+      );
+      return renderTabs("sigmacraft-media", [
+        { label: "Browse site", content: renderArchiveEmbed("archives/sigmacraft/index.html", "SigmaCraft") },
+        { label: "SigmaArmor", content: armor },
+        { label: "SigmaItem", content: item },
+        { label: "SigmaMonture", content: monture },
+      ]);
     },
   },
   eltacraft: {
@@ -891,6 +920,7 @@ const projects = {
   },
   "dofus-validator": {
     featured: false,
+    logo: "assets/images/logos/dofus.png",
     category: "systems",
     filters: ["tools"],
     sortYear: 2022,
@@ -907,10 +937,13 @@ const projects = {
       "Built as a Node.js tool rather than a one-off script.",
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/dofus-giftcode-automation" }],
-    media() { return ""; },
+    media() {
+      return `<img class="project-media__image" src="assets/images/projects/dofus-cli.svg" alt="Dofus GiftCode Automation CLI" />`;
+    },
   },
   scinsta: {
     featured: false,
+    logo: "assets/images/logos/instagram.svg",
     category: "systems",
     filters: ["mobile", "tools"],
     sortYear: 2026,
@@ -931,6 +964,7 @@ const projects = {
   },
   magcubic: {
     featured: false,
+    logo: "assets/images/logos/ubuntu-terminal.svg",
     category: "systems",
     filters: ["software", "tools"],
     sortYear: 2025,
@@ -991,6 +1025,7 @@ const projects = {
   },
   "edu-bushido": {
     featured: false,
+    logo: "assets/images/logos/bushidoQuest.png",
     category: "games",
     filters: ["games"],
     sortYear: 2024,
@@ -1007,7 +1042,15 @@ const projects = {
       "Interaction-driven progression and reward-driven level design.",
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/bushido-quest" }],
-    media() { return ""; },
+    media() {
+      const vid = (src) => `<video class="project-media__video" src="${src}" controls playsinline preload="metadata"></video>`;
+      return renderTabs("bushido-media", [
+        { label: "Overview", content: `<img class="project-media__image" src="assets/images/projects/bushido.png" alt="Bushido Quest" />` },
+        { label: "Step 1", content: vid("assets/files/bushido/step_1.mp4") },
+        { label: "Step 2", content: vid("assets/files/bushido/step_2.mp4") },
+        { label: "Step 3", content: vid("assets/files/bushido/step_3.mp4") },
+      ]);
+    },
   },
   "edu-fitmeal": {
     featured: false,
@@ -1021,14 +1064,16 @@ const projects = {
     kind: "Education",
     title: "fitmeal-mobile",
     summary: "Mobile app built with React Native and Expo for calorie tracking and meal planning.",
-    tech: ["JavaScript", "React Native", "Expo"],
+    tech: ["JavaScript", "React Native", "Expo", "Mobile"],
     meta: ["React Native", "Expo", "Mobile", "ESIEE"],
     points: [
       "React Native and Expo mobile app.",
       "Calorie tracking and meal planning flows.",
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/fitmeal-mobile" }],
-    media() { return ""; },
+    media() {
+      return `<video class="project-media__video" src="assets/files/fitmeal.mp4" controls playsinline preload="metadata"></video>`;
+    },
   },
   "edu-cardboard": {
     featured: false,
@@ -1124,10 +1169,16 @@ function normalizeArchiveFilter() {
   state.archiveFilter = "all";
 }
 
+function hasMedia(project) {
+  try { return Boolean(project.media()); } catch { return false; }
+}
+
 function sortArchiveEntries(entries) {
   return [...entries].sort(([, a], [, b]) => {
     const archivedRank = Number(Boolean(a.archived)) - Number(Boolean(b.archived));
     if (archivedRank !== 0) return archivedRank;
+    const mediaRank = Number(hasMedia(a)) - Number(hasMedia(b));
+    if (mediaRank !== 0) return -mediaRank;
     const aKey =
       (a.sortYear ?? 0) * 10000 +
       (a.sortMonth ?? 1) * 100 +
@@ -1184,13 +1235,13 @@ function renderProjectArchiveRail() {
   archiveList.innerHTML = entries
     .map(
       ([id, project]) => `
-        <button class="rail-link rail-link--archive${state.view === id ? " is-active" : ""}" type="button" data-view="${id}">
+        <button class="rail-link rail-link--archive${state.view === id ? " is-active" : ""}" type="button" data-view="${id}" title="${project.title}${!hasMedia(project) ? " · GitHub only" : ""}">
           ${project.logo
             ? `<img class="rail-link__logo-thumb" src="${project.logo}" alt="">`
             : `<span class="rail-link__icon">${ICONS[PROJECT_ICON[id]] || ""}</span>`}
           <span class="rail-link__meta">${project.period}</span>
           <span class="rail-link__body">
-            <strong>${project.title}${project.archived ? ` <span class="project-badge project-badge--archive">Archive</span>` : ""}</strong>
+            <strong>${project.title}${project.archived ? ` <span class="project-badge project-badge--archive">Archive</span>` : ""}${!hasMedia(project) ? ` <span class="rail-link__code-only" title="GitHub only">${ICONS.github}</span>` : ""}</strong>
             <small>${project.railNote}</small>
           </span>
         </button>
@@ -1264,23 +1315,34 @@ function renderDesignModal() {
   `;
 }
 
+
 function computeSkillStats() {
   const counts = {};
   const all = Object.values(projects);
-  all.forEach((project) => {
-    (project.tech || []).forEach((tech) => {
-      counts[tech] = (counts[tech] || 0) + 1;
-    });
-  });
-
+  all.forEach(p => (p.tech || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
   return Object.entries(counts)
     .map(([name, count]) => {
       const pct = Math.round((count / all.length) * 100);
       const score = count + (HERO_SKILL_BOOSTS[name] || 0);
-      return { name, count, pct, score };
+      return { name, pct, score };
     })
-    .sort((a, b) => b.score - a.score || b.count - a.count || a.name.localeCompare(b.name))
+    .sort((a, b) => b.score - a.score || b.pct - a.pct || a.name.localeCompare(b.name))
     .slice(0, HERO_SKILL_LIMIT);
+}
+
+function computeSecondarySkills() {
+  const primary = new Set(computeSkillStats().map(s => s.name));
+  const counts = {};
+  const all = Object.values(projects);
+  all.forEach(p => (p.tech || []).forEach(t => {
+    if (!primary.has(t) && !HERO_SKILLS_SECONDARY_EXCLUDE.has(t)) {
+      counts[t] = (counts[t] || 0) + 1;
+    }
+  }));
+  return Object.entries(counts)
+    .map(([name, count]) => ({ name, pct: Math.round((count / all.length) * 100) }))
+    .sort((a, b) => b.pct - a.pct || a.name.localeCompare(b.name))
+    .slice(0, HERO_SKILL_SECONDARY_LIMIT);
 }
 
 function renderOverview() {
@@ -1295,12 +1357,22 @@ function renderOverview() {
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
+            I can't stop building things. Never really wanted to. <span class="hero__flag">🇫🇷</span>
           </p>
-          <div class="hero__skills" aria-label="Stack across projects">
-            ${computeSkillStats().map((s) => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
-          </div>
-          <p class="hero__skills-note">* Calculated from the stack used across my projects.</p>
+          ${(() => {
+            const primary = computeSkillStats();
+            const secondary = computeSecondarySkills();
+            return `
+              <div class="hero__skills" aria-label="Stack across projects">
+                ${primary.map(s => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
+                ${secondary.length ? `
+                  <button class="hero__skills-more" type="button" data-toggle-skills>+${secondary.length} more</button>
+                  ${secondary.map(s => `<span class="hero__skill-extra">${s.name}<em>${s.pct}%</em></span>`).join("")}
+                ` : ""}
+              </div>
+              <p class="hero__skills-note">* Calculated from the stack used across my projects.</p>
+            `;
+          })()}
           <div class="hero__actions">
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
               ${ICONS.github}<span>GitHub</span>
@@ -1368,7 +1440,7 @@ function renderProject(project) {
 
       <div class="project-layout">
         <section class="project-stage">
-          ${project.media()}
+          ${project.media() || renderGithubCard(project)}
         </section>
 
         <aside class="project-aside">
@@ -1402,6 +1474,96 @@ function renderProject(project) {
         </aside>
       </div>
     </article>
+  `;
+}
+
+function renderSlider(id, images) {
+  return `
+    <div class="proj-slider" data-slider-id="${id}" data-slider-current="0">
+      <div class="proj-slider__viewport">
+        <div class="proj-slider__track">
+          ${images.map((src, i) => `
+            <div class="proj-slider__slide">
+              <img src="${src}" alt="Slide ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" draggable="false" />
+            </div>
+          `).join("")}
+        </div>
+        <button class="proj-slider__btn proj-slider__btn--prev" data-slider-prev="${id}" aria-label="Previous slide">${ICONS.arrowLeft}</button>
+        <button class="proj-slider__btn proj-slider__btn--next" data-slider-next="${id}" aria-label="Next slide">${ICONS.arrowRight}</button>
+        <span class="proj-slider__count"><span class="proj-slider__count-cur">1</span> / ${images.length}</span>
+      </div>
+      <div class="proj-slider__dots">
+        ${images.map((_, i) => `<button class="proj-slider__dot${i === 0 ? " is-active" : ""}" data-slider-goto="${id}:${i}" aria-label="Slide ${i + 1}"></button>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function goToSlide(sliderId, index) {
+  const slider = document.querySelector(`[data-slider-id="${sliderId}"]`);
+  if (!slider) return;
+  const total = slider.querySelectorAll(".proj-slider__slide").length;
+  const i = ((index % total) + total) % total;
+  slider.querySelector(".proj-slider__track").style.transform = `translateX(-${i * 100}%)`;
+  slider.querySelector(".proj-slider__count-cur").textContent = i + 1;
+  slider.querySelectorAll(".proj-slider__dot").forEach((d, j) => d.classList.toggle("is-active", j === i));
+  slider.dataset.sliderCurrent = i;
+}
+
+function renderTabs(id, tabs, defaultIndex = 0) {
+  return `
+    <div class="proj-tabs" data-tabs-id="${id}" data-tabs-current="${defaultIndex}">
+      <div class="proj-tabs__nav">
+        ${tabs.map((tab, i) => `
+          <button class="proj-tabs__btn${i === defaultIndex ? " is-active" : ""}" data-tabs-goto="${id}:${i}">${tab.label}</button>
+        `).join("")}
+      </div>
+      <div class="proj-tabs__body">
+        ${tabs.map((tab, i) => `
+          <div class="proj-tabs__panel${i === defaultIndex ? " is-active" : ""}">${tab.content}</div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderPluginCard(name, description, fileTree, codeSnippet) {
+  return `
+    <div class="plugin-card">
+      <div class="plugin-card__header">
+        <span class="plugin-card__name">${name}</span>
+        <span class="plugin-card__lang">Java · Bukkit</span>
+      </div>
+      <p class="plugin-card__desc">${description}</p>
+      <div class="plugin-card__cols">
+        <div class="plugin-card__tree">${fileTree.map(f => `<span>${f}</span>`).join("")}</div>
+        <pre class="plugin-card__code"><code>${codeSnippet}</code></pre>
+      </div>
+    </div>
+  `;
+}
+
+function renderGithubCard(project) {
+  const ghLink = project.links.find(l => l.url.includes("github.com"));
+  const url = ghLink ? ghLink.url : "https://github.com/gniax";
+  const repoName = ghLink ? ghLink.url.replace("https://github.com/gniax/", "") : "";
+  const tech = (project.tech || []).slice(0, 4);
+  return `
+    <a class="gh-card" href="${url}" target="_blank" rel="noreferrer">
+      <div class="gh-card__dots"><span></span><span></span><span></span></div>
+      <div class="gh-card__body">
+        <div class="gh-card__top">
+          <span class="gh-card__icon">${ICONS.github}</span>
+          <span class="gh-card__label">github.com / gniax</span>
+        </div>
+        <strong class="gh-card__name">${repoName}</strong>
+        <p class="gh-card__desc">${project.summary}</p>
+        ${tech.length ? `<div class="gh-card__tags">${tech.map(t => `<span>${t}</span>`).join("")}</div>` : ""}
+      </div>
+      <div class="gh-card__footer">
+        <span class="gh-card__btn">${ICONS.github} View source on GitHub</span>
+      </div>
+    </a>
   `;
 }
 
@@ -1548,6 +1710,41 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const tabsGoto = event.target.closest("[data-tabs-goto]");
+  if (tabsGoto) {
+    const [id, idx] = tabsGoto.dataset.tabsGoto.split(":");
+    const container = document.querySelector(`[data-tabs-id="${id}"]`);
+    if (!container) return;
+    const i = Number(idx);
+    container.querySelectorAll(".proj-tabs__btn").forEach((b, j) => b.classList.toggle("is-active", j === i));
+    container.querySelectorAll(".proj-tabs__panel").forEach((p, j) => p.classList.toggle("is-active", j === i));
+    container.dataset.tabsCurrent = i;
+    return;
+  }
+
+  const sliderPrev = event.target.closest("[data-slider-prev]");
+  if (sliderPrev) {
+    const id = sliderPrev.dataset.sliderPrev;
+    const slider = document.querySelector(`[data-slider-id="${id}"]`);
+    if (slider) goToSlide(id, Number(slider.dataset.sliderCurrent) - 1);
+    return;
+  }
+
+  const sliderNext = event.target.closest("[data-slider-next]");
+  if (sliderNext) {
+    const id = sliderNext.dataset.sliderNext;
+    const slider = document.querySelector(`[data-slider-id="${id}"]`);
+    if (slider) goToSlide(id, Number(slider.dataset.sliderCurrent) + 1);
+    return;
+  }
+
+  const sliderGoto = event.target.closest("[data-slider-goto]");
+  if (sliderGoto) {
+    const [id, i] = sliderGoto.dataset.sliderGoto.split(":");
+    goToSlide(id, Number(i));
+    return;
+  }
+
   const designTarget = event.target.closest("[data-open-design]");
   if (designTarget) {
     const nextIndex = Number(designTarget.dataset.openDesign);
@@ -1555,6 +1752,16 @@ document.addEventListener("click", (event) => {
       state.designIndex = nextIndex;
       renderDesignModal();
     }
+    return;
+  }
+
+  const skillsToggle = event.target.closest("[data-toggle-skills]");
+  if (skillsToggle) {
+    const container = skillsToggle.closest(".hero__skills");
+    const expanded = container.dataset.expanded === "true";
+    container.dataset.expanded = expanded ? "false" : "true";
+    const count = container.querySelectorAll(".hero__skill-extra").length;
+    skillsToggle.textContent = expanded ? `+${count} more` : "show less";
     return;
   }
 

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+  <defs>
+    <style>
+      .mono { font-family: 'Courier New', Courier, monospace; }
+      .dim  { fill: #4a5568; }
+      .muted { fill: #718096; }
+      .white { fill: #e2e8f0; }
+      .green { fill: #68d391; }
+      .yellow { fill: #f6e05e; }
+      .blue  { fill: #63b3ed; }
+      .red   { fill: #fc8181; }
+      .accent { fill: #9f7aea; }
+    </style>
+  </defs>
+
+  <!-- terminal background -->
+  <rect width="720" height="420" rx="10" fill="#0d1117"/>
+  <!-- top bar -->
+  <rect width="720" height="32" rx="10" fill="#161b22"/>
+  <rect y="22" width="720" height="10" fill="#161b22"/>
+  <circle cx="20" cy="16" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="16" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="16" r="6" fill="#28c840"/>
+  <text x="360" y="21" text-anchor="middle" class="mono muted" font-size="12">node index.js</text>
+
+  <!-- content -->
+  <!-- separator 1 -->
+  <text x="32" y="68" class="mono dim" font-size="13">=================================================</text>
+
+  <!-- title -->
+  <text x="32" y="92" class="mono accent" font-size="15" font-weight="bold">  🎮  DOFUS  —  GiftCode Automation</text>
+  <text x="32" y="112" class="mono muted" font-size="12">      Multi-account · Auto-redeem · Node.js</text>
+
+  <!-- separator 2 -->
+  <text x="32" y="132" class="mono dim" font-size="13">=================================================</text>
+
+  <!-- status line -->
+  <text x="32" y="158" class="mono muted" font-size="12">  Accounts loaded :</text>
+  <text x="186" y="158" class="mono green" font-size="12">12 accounts</text>
+  <text x="290" y="158" class="mono muted" font-size="12">│  Codes queued :</text>
+  <text x="430" y="158" class="mono yellow" font-size="12">47 codes</text>
+
+  <!-- separator thin -->
+  <text x="32" y="178" class="mono dim" font-size="13">-------------------------------------------------</text>
+
+  <!-- menu title -->
+  <text x="32" y="200" class="mono white" font-size="13">  What do you want to do?</text>
+
+  <!-- options -->
+  <text x="32" y="224" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="224" class="mono green" font-size="13">1</text>
+  <text x="60" y="224" class="mono dim" font-size="13">]</text>
+  <text x="76" y="224" class="mono white" font-size="13">Redeem all codes on all accounts</text>
+
+  <text x="32" y="248" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="248" class="mono green" font-size="13">2</text>
+  <text x="60" y="248" class="mono dim" font-size="13">]</text>
+  <text x="76" y="248" class="mono white" font-size="13">Redeem on selected accounts</text>
+
+  <text x="32" y="272" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="272" class="mono blue" font-size="13">3</text>
+  <text x="60" y="272" class="mono dim" font-size="13">]</text>
+  <text x="76" y="272" class="mono white" font-size="13">Add / manage accounts</text>
+
+  <text x="32" y="296" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="296" class="mono blue" font-size="13">4</text>
+  <text x="60" y="296" class="mono dim" font-size="13">]</text>
+  <text x="76" y="296" class="mono white" font-size="13">Add new gift codes</text>
+
+  <text x="32" y="320" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="320" class="mono yellow" font-size="13">5</text>
+  <text x="60" y="320" class="mono dim" font-size="13">]</text>
+  <text x="76" y="320" class="mono white" font-size="13">View redemption history</text>
+
+  <text x="32" y="344" class="mono dim" font-size="13">  [</text>
+  <text x="50" y="344" class="mono red" font-size="13">0</text>
+  <text x="60" y="344" class="mono dim" font-size="13">]</text>
+  <text x="76" y="344" class="mono muted" font-size="13">Exit</text>
+
+  <!-- separator -->
+  <text x="32" y="364" class="mono dim" font-size="13">-------------------------------------------------</text>
+
+  <!-- prompt -->
+  <text x="32" y="388" class="mono green" font-size="13">  ❯</text>
+  <text x="52" y="388" class="mono white" font-size="13">Enter your choice :</text>
+  <!-- blinking cursor simulation -->
+  <rect x="216" y="375" width="9" height="16" fill="#68d391" opacity="0.85" rx="1"/>
+</svg>
