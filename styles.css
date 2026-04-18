@@ -2065,6 +2065,13 @@ svg {
   letter-spacing: 0.03em;
 }
 
+.hero__skills span em {
+  font-style: normal;
+  color: var(--faint);
+  font-size: 0.9em;
+  margin-left: 4px;
+}
+
 .hero__skills span.hero__skill-extra {
   display: none;
 }
@@ -2092,6 +2099,16 @@ svg {
 .hero__skills-more:hover {
   background: var(--surface);
   color: var(--fg);
+}
+
+.hero__skills-note {
+  margin: 2px 0 0;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
 }
 
 .hero__now {

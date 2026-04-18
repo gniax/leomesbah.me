@@ -1357,7 +1357,7 @@ function renderOverview() {
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I can't stop building things. Never really wanted to. <span class="hero__flag">🇫🇷</span>
+            I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
           </p>
           ${(() => {
             const primary = computeSkillStats();
