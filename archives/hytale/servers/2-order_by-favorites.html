@@ -109,27 +109,27 @@
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">1</p>
+								<p id="rang">11</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/legacy.example:25565.html">Hytale Legacy</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/silverkeep.example-25565.html">Silverkeep</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur16').style.visibility = 'visible';document.getElementById('myTooltipinputserveur16').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur16').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur16').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur16').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur16')"
-								 id="inputserveur16"
+								 onmouseover="document.getElementById('myTooltipinputserveur23').style.visibility = 'visible';document.getElementById('myTooltipinputserveur23').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur23').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur23').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur23').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur23')"
+								 id="inputserveur23"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="legacy.example"
+								 value="silverkeep.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur16">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur23">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -148,415 +148,7 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/legacy.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_community.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Le serveur phare, presente comme une vraie vitrine.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								1003 VOTES								  <p style="display:contents;position:relative;"id="votesfav16">91</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/legacy.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">2</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/play.aetheria.example:25565.html">Aetheria Network</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur6').style.visibility = 'visible';document.getElementById('myTooltipinputserveur6').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur6').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur6').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur6').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur6')"
-								 id="inputserveur6"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="play.aetheria.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur6">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/play.aetheria.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Survie semi-RP, quetes et economie communautaire.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								842 VOTES								  <p style="display:contents;position:relative;"id="votesfav6">64</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/play.aetheria.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">3</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/valoria.example:25565.html">Valoria RP</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur10').style.visibility = 'visible';document.getElementById('myTooltipinputserveur10').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur10').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur10').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur10').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur10')"
-								 id="inputserveur10"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="valoria.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur10">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/valoria.example:25565.html">
+							<a href="../server/silverkeep.example-25565.html">
 								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_roleplay.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
@@ -565,18 +157,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Roleplay fantasy, factions et missions narratives.							</div>
+								Roleplay medieval et progression saisonniere.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								760 VOTES								  <p style="display:contents;position:relative;"id="votesfav10">51</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								150 VOTES								  <p style="display:contents;position:relative;"id="votesfav23">13</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/valoria.example:25565.html" >
+									<a onClick="test();" href="../server/silverkeep.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -721,27 +313,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">4</p>
+								<p id="rang">12</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/skyforge.example:25565.html">Skyforge SMP</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/terra-nova.example-25565.html">Terra Nova</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur13').style.visibility = 'visible';document.getElementById('myTooltipinputserveur13').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur13').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur13').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur13').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur13')"
-								 id="inputserveur13"
+								 onmouseover="document.getElementById('myTooltipinputserveur19').style.visibility = 'visible';document.getElementById('myTooltipinputserveur19').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur19').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur19').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur19').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur19')"
+								 id="inputserveur19"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="skyforge.example"
+								 value="terra-nova.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur13">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur19">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -760,7 +352,7 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/skyforge.example:25565.html">
+							<a href="../server/terra-nova.example-25565.html">
 								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
@@ -769,18 +361,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Survival saisonnier et progression propre.							</div>
+								Survie exploration et progression tranquille.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								690 VOTES								  <p style="display:contents;position:relative;"id="votesfav13">47</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								130 VOTES								  <p style="display:contents;position:relative;"id="votesfav19">12</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/skyforge.example:25565.html" >
+									<a onClick="test();" href="../server/terra-nova.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -925,27 +517,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">5</p>
+								<p id="rang">13</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/crownpeak.example:25565.html">CrownPeak</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/northwind.example-25565.html">Northwind PvP</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur18').style.visibility = 'visible';document.getElementById('myTooltipinputserveur18').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur18').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur18').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur18').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur18')"
-								 id="inputserveur18"
+								 onmouseover="document.getElementById('myTooltipinputserveur12').style.visibility = 'visible';document.getElementById('myTooltipinputserveur12').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur12').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur12').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur12').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur12')"
+								 id="inputserveur12"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="crownpeak.example"
+								 value="northwind.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur18">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur12">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -964,7 +556,7 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/crownpeak.example:25565.html">
+							<a href="../server/northwind.example-25565.html">
 								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
@@ -973,18 +565,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								PvP rapide, arenas et tournois.							</div>
+								PvP, factions et arene de duels.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								410 VOTES								  <p style="display:contents;position:relative;"id="votesfav18">33</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								110 VOTES								  <p style="display:contents;position:relative;"id="votesfav12">10</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/crownpeak.example:25565.html" >
+									<a onClick="test();" href="../server/northwind.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1129,27 +721,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">6</p>
+								<p id="rang">14</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/aurora-vale.example:25565.html">Aurora Vale</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/frostgate.example-25565.html">Frostgate</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur22').style.visibility = 'visible';document.getElementById('myTooltipinputserveur22').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur22').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur22').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur22').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur22')"
-								 id="inputserveur22"
+								 onmouseover="document.getElementById('myTooltipinputserveur26').style.visibility = 'visible';document.getElementById('myTooltipinputserveur26').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur26').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur26').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur26').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur26')"
+								 id="inputserveur26"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="aurora-vale.example"
+								 value="frostgate.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur22">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur26">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -1168,8 +760,8 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/aurora-vale.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_roleplay.svg" class="img-rounded resize-banner-2 banner"/>
+							<a href="../server/frostgate.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
 						<td class="header">
@@ -1177,18 +769,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Roleplay communautaire et events reguliers.							</div>
+								Hardcore PvP et saisons courtes.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								350 VOTES								  <p style="display:contents;position:relative;"id="votesfav22">28</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								95 VOTES								  <p style="display:contents;position:relative;"id="votesfav26">9</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/aurora-vale.example:25565.html" >
+									<a onClick="test();" href="../server/frostgate.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1333,27 +925,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">7</p>
+								<p id="rang">15</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/emberfall.example:25565.html">Emberfall</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/nexus-frontier.example-25565.html">Nexus Frontier</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur15').style.visibility = 'visible';document.getElementById('myTooltipinputserveur15').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur15').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur15').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur15').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur15')"
-								 id="inputserveur15"
+								 onmouseover="document.getElementById('myTooltipinputserveur20').style.visibility = 'visible';document.getElementById('myTooltipinputserveur20').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur20').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur20').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur20').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur20')"
+								 id="inputserveur20"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="emberfall.example"
+								 value="nexus-frontier.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur15">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur20">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -1372,8 +964,8 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/emberfall.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							<a href="../server/nexus-frontier.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_creative.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
 						<td class="header">
@@ -1381,18 +973,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Aventure, donjons et exploration guidee.							</div>
+								Creatif, showcases et projets communautaires.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								310 VOTES								  <p style="display:contents;position:relative;"id="votesfav15">22</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								80 VOTES								  <p style="display:contents;position:relative;"id="votesfav20">8</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/emberfall.example:25565.html" >
+									<a onClick="test();" href="../server/nexus-frontier.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1537,27 +1129,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">8</p>
+								<p id="rang">16</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/mythos.example:25565.html">Mythos Realm</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/elyria.example-25555.html">Wilds of Elyria</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur17').style.visibility = 'visible';document.getElementById('myTooltipinputserveur17').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur17').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur17').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur17').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur17')"
-								 id="inputserveur17"
+								 onmouseover="document.getElementById('myTooltipinputserveur25').style.visibility = 'visible';document.getElementById('myTooltipinputserveur25').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur25').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur25').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur25').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur25')"
+								 id="inputserveur25"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="mythos.example"
+								 value="elyria.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur17">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur25">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -1576,8 +1168,8 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/mythos.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							<a href="../server/elyria.example-25555.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
 						<td class="header">
@@ -1585,18 +1177,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								MMORPG fantasy et quetes scenarisees.							</div>
+								Monde ouvert et survie organique.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								260 VOTES								  <p style="display:contents;position:relative;"id="votesfav17">20</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								70 VOTES								  <p style="display:contents;position:relative;"id="votesfav25">6</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/mythos.example:25565.html" >
+									<a onClick="test();" href="../server/elyria.example-25555.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1741,27 +1333,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">9</p>
+								<p id="rang">17</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/lunaris.example:25565.html">Lunaris</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/stormveil.example-25565.html">Stormveil</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur24').style.visibility = 'visible';document.getElementById('myTooltipinputserveur24').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur24').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur24').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur24').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur24')"
-								 id="inputserveur24"
+								 onmouseover="document.getElementById('myTooltipinputserveur27').style.visibility = 'visible';document.getElementById('myTooltipinputserveur27').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur27').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur27').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur27').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur27')"
+								 id="inputserveur27"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="lunaris.example"
+								 value="stormveil.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur24">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur27">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -1780,8 +1372,8 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/lunaris.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							<a href="../server/stormveil.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
 						<td class="header">
@@ -1789,18 +1381,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Exploration, ruines et objectifs long terme.							</div>
+								Sieges, factions et guerres d objectifs.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								220 VOTES								  <p style="display:contents;position:relative;"id="votesfav24">18</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								60 VOTES								  <p style="display:contents;position:relative;"id="votesfav27">5</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/lunaris.example:25565.html" >
+									<a onClick="test();" href="../server/stormveil.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1945,27 +1537,27 @@ function test()
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">10</p>
+								<p id="rang">18</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/oakheart.example:25565.html">Oakheart</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/riftlands.example-25565.html">Riftlands</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
 								 <div class="ipelement">
 								 <p id="iptitre">IP:</p>
 								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur11').style.visibility = 'visible';document.getElementById('myTooltipinputserveur11').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur11').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur11').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur11').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur11')"
-								 id="inputserveur11"
+								 onmouseover="document.getElementById('myTooltipinputserveur28').style.visibility = 'visible';document.getElementById('myTooltipinputserveur28').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur28').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur28').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur28').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur28')"
+								 id="inputserveur28"
 								 type="text"
 								 class="form-control iptextbox"
-								 value="oakheart.example"
+								 value="riftlands.example"
 								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur11">Cliquez pour copier</span>
+		 						 <span class="tooltiptext" id="myTooltipinputserveur28">Cliquez pour copier</span>
 								</div>
 								</div>
 
@@ -1984,8 +1576,8 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/oakheart.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_community.svg" class="img-rounded resize-banner-2 banner"/>
+							<a href="../server/riftlands.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
 						<td class="header">
@@ -1993,18 +1585,18 @@ function myFunction($id, $tooltip) {
 							<div class="pull-right inline" style="position: relative;top: -20px;">
 															</div>
 							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Survie communautaire et construction libre.							</div>
+								Survie economique et progression souple.							</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="footer" style="display:block;">
 							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								180 VOTES								  <p style="display:contents;position:relative;"id="votesfav11">15</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+								45 VOTES								  <p style="display:contents;position:relative;"id="votesfav28">4</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
 							</div>
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/oakheart.example:25565.html" >
+									<a onClick="test();" href="../server/riftlands.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -2122,7 +1714,211 @@ function test()
 	setCookie("votevaleur", 1, 1);
 }
 </script>
-			<ul class="new-pagination"><li class="disabled"><a href="1.html">&laquo;</a></li><li class="active"><a href="1%3F&amp;order_by=favorites.html">1</a></li><li><a href="2%3F&amp;order_by=favorites.html">2</a></li><li><a href="2%3F&amp;order_by=favorites.html">&raquo;</a></li></ul>					</div> <!-- END Main Column -->
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">19</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/helios.example-25565.html">Helios Ascend</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur29').style.visibility = 'visible';document.getElementById('myTooltipinputserveur29').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur29').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur29').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur29').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur29')"
+								 id="inputserveur29"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="helios.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur29">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/helios.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_creative.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Build, concours et rendez-vous communautaires.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								35 VOTES								  <p style="display:contents;position:relative;"id="votesfav29">3</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/helios.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+			<ul class="new-pagination"><li><a href="1%3F&amp;order_by=favorites.html">&laquo;</a></li><li><a href="1%3F&amp;order_by=favorites.html">1</a></li><li class="active"><a href="2%3F&amp;order_by=favorites.html">2</a></li><li class="disabled"><a href="2.html">&raquo;</a></li></ul>					</div> <!-- END Main Column -->
 
 				<!-- START Sidebar -->
 									<div class="col-md-2">
@@ -2145,15 +1941,15 @@ function test()
 			<ul class="nav nav-pills nav-stacked">
 
 								<li class="dropdown active">
-					<a href="1.html">Réinitialiser les filtres</a>
+					<a href="2.html">Réinitialiser les filtres</a>
 				</li>
 				
 				<li class="dropdown active">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="../index.html">Classer par<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="1%3F&amp;order_by=votes.html">Votes</a></li>
-						<li><a href="1%3F&amp;order_by=favorites.html">Favoris</a></li>
-						<li><a href="1%3F&amp;order_by=server_id.html">Nouveauté</a></li>
+						<li><a href="2%3F&amp;order_by=votes.html">Votes</a></li>
+						<li><a href="2%3F&amp;order_by=favorites.html">Favoris</a></li>
+						<li><a href="2%3F&amp;order_by=server_id.html">Nouveauté</a></li>
 					</ul>
 				</li>
 

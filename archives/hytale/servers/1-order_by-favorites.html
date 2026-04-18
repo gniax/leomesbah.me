@@ -109,419 +109,11 @@
 			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
 				<div class="megaheader">
 					<div class="serverelement">
-								<p id="rang">5</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/crownpeak.example:25565.html">CrownPeak</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur18').style.visibility = 'visible';document.getElementById('myTooltipinputserveur18').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur18').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur18').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur18').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur18')"
-								 id="inputserveur18"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="crownpeak.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur18">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/crownpeak.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								PvP rapide, arenas et tournois.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								410 VOTES								  <p style="display:contents;position:relative;"id="votesfav18">33</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/crownpeak.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">8</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/mythos.example:25565.html">Mythos Realm</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur17').style.visibility = 'visible';document.getElementById('myTooltipinputserveur17').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur17').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur17').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur17').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur17')"
-								 id="inputserveur17"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="mythos.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur17">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/mythos.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								MMORPG fantasy et quetes scenarisees.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								260 VOTES								  <p style="display:contents;position:relative;"id="votesfav17">20</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/mythos.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
 								<p id="rang">1</p>
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/legacy.example:25565.html">Hytale Legacy</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/legacy.example-25565.html">Hytale Legacy</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
@@ -556,7 +148,7 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/legacy.example:25565.html">
+							<a href="../server/legacy.example-25565.html">
 								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_community.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
@@ -576,1027 +168,7 @@ function myFunction($id, $tooltip) {
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/legacy.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">7</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/emberfall.example:25565.html">Emberfall</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur15').style.visibility = 'visible';document.getElementById('myTooltipinputserveur15').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur15').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur15').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur15').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur15')"
-								 id="inputserveur15"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="emberfall.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur15">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/emberfall.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Aventure, donjons et exploration guidee.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								310 VOTES								  <p style="display:contents;position:relative;"id="votesfav15">22</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/emberfall.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">4</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/skyforge.example:25565.html">Skyforge SMP</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur13').style.visibility = 'visible';document.getElementById('myTooltipinputserveur13').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur13').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur13').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur13').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur13')"
-								 id="inputserveur13"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="skyforge.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur13">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/skyforge.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Survival saisonnier et progression propre.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								690 VOTES								  <p style="display:contents;position:relative;"id="votesfav13">47</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/skyforge.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">13</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/northwind.example:25565.html">Northwind PvP</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur12').style.visibility = 'visible';document.getElementById('myTooltipinputserveur12').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur12').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur12').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur12').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur12')"
-								 id="inputserveur12"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="northwind.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur12">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/northwind.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								PvP, factions et arene de duels.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								110 VOTES								  <p style="display:contents;position:relative;"id="votesfav12">10</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/northwind.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">10</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/oakheart.example:25565.html">Oakheart</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur11').style.visibility = 'visible';document.getElementById('myTooltipinputserveur11').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur11').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur11').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur11').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur11')"
-								 id="inputserveur11"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="oakheart.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur11">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/oakheart.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_community.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Survie communautaire et construction libre.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								180 VOTES								  <p style="display:contents;position:relative;"id="votesfav11">15</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/oakheart.example:25565.html" >
-									<img id="votebouton" alt="boutonvote" 
-											src="../template/images/boutonvoterpetitnormal.png" 
-											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
-											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
-									</a>
-								</div>
-						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
-			src="../template/images/boutonaddfavpetitnormal.png" 
-			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
-			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
-
-<script>
-
-function ajax(url, method, data, async)
-{
-    method = typeof method !== 'undefined' ? method : 'GET';
-    async = typeof async !== 'undefined' ? async : false;
-
-    if (window.XMLHttpRequest)
-    {
-        var xhReq = new XMLHttpRequest();
-    }
-    else
-    {
-        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-
-    if (method == 'POST')
-    {
-        xhReq.open(method, url, async);
-        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
-        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
-        xhReq.send(data);
-    }
-    else
-    {
-        if(typeof data !== 'undefined' && data !== null)
-        {
-            url = url+'?'+data;
-        }
-
-        xhReq.open(method, url, async);
-        xhReq.responseType = "text";
-        xhReq.send(null);
-    }
-var serverResponse = xhReq.responseText;
-return serverResponse;
-
-}
-
-function getID(id) {
-var test = "q=" + id;
-var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
-if (!value.includes("debug"))
-{
-	var votefav = ("votesfav" + id);
-	var $votefav = $("#votesfav" + id);
-	var $child = $("#image" + id);
-	var $div = $("#" + id);
-				if(value.includes("favorited")){
-					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number2 = number + 1;
-					$votefav.text(number2);
-				} 
-				if(value.includes("unfavorited")) {
-					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
-					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
-					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
-					var node = document.getElementById(votefav);
-					number = parseInt(node.textContent, 10);
-					var number3 = number - 2;
-					$votefav.text(number3);
-				}
-
-				if(value.includes("temprestant")) {
-					var textvalue = value.replace( /^\D+/g, '');
-					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
-				} 
-				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
-				{
-					$('#erreur').modal('show'); 
-					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-				}
-}
-}
-//Fonction qui alert qu'il faut se connecter
-function alertLog()
-{
-$('#erreur').modal('show'); 
-$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
-}
-</script>						</div>
-					</tr>
-				</table>
-			</div>
-		</div>
-<script>
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function test()
-{
-	setCookie("votevaleur", 1, 1);
-}
-</script>
-					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" style=" 
-  height: 50%;
-  overflow: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0;">
-		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">INFORMATION</h4>
-				</div>
-
-				<div class="modal-body" width="100px">
-				</div>
-				<div class="modal-footer">
-					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
-			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
-			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
-				</div>
-		</div>
-	</div>
-</div>
-
-		<div class="panel panel-default">
-
-			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
-				<div class="megaheader">
-					<div class="serverelement">
-								<p id="rang">3</p>
-					</div>
-
-					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/valoria.example:25565.html">Valoria RP</a></p>
-					</div>
-														 			</div> <!--Fin MEGAHEADER-->
-								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
-								 <div class="ipelement">
-								 <p id="iptitre">IP:</p>
-								 <input 
-								 onmouseover="document.getElementById('myTooltipinputserveur10').style.visibility = 'visible';document.getElementById('myTooltipinputserveur10').style.opacity = '1';" 
-								 onmouseout="document.getElementById('myTooltipinputserveur10').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur10').style.opacity = '0';
-								 document.getElementById('myTooltipinputserveur10').innerHTML = 'Cliquez pour copier';" 
-								 onclick="myFunction(this.id, 'myTooltipinputserveur10')"
-								 id="inputserveur10"
-								 type="text"
-								 class="form-control iptextbox"
-								 value="valoria.example"
-								 style="cursor: pointer;">
-		 						 <span class="tooltiptext" id="myTooltipinputserveur10">Cliquez pour copier</span>
-								</div>
-								</div>
-
-							<script>
-function myFunction($id, $tooltip) {
-  var copyText = document.getElementById($id);
-  copyText.select();
-  document.execCommand("copy");
-  
-  var tooltip = document.getElementById($tooltip);
-  tooltip.innerHTML = "IP copiée !";
-}
-</script>
-
-				<table class="server" style="width: 100%;
-    min-width: 100%;">
-					<tr class="changeDisplay" style="display:block;">
-						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/valoria.example:25565.html">
-								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_roleplay.svg" class="img-rounded resize-banner-2 banner"/>
-							</a>
-						</td>
-						<td class="header">
-													
-							<div class="pull-right inline" style="position: relative;top: -20px;">
-															</div>
-							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
-								Roleplay fantasy, factions et missions narratives.							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="footer" style="display:block;">
-							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
-								760 VOTES								  <p style="display:contents;position:relative;"id="votesfav10">51</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
-							</div>
-
-							<div style="display:inline-block;float:right;">
-								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/valoria.example:25565.html" >
+									<a onClick="test();" href="../server/legacy.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1745,7 +317,7 @@ function test()
 					</div>
 
 					<div class="titreelement">
-				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/play.aetheria.example:25565.html">Aetheria Network</a></p>
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/play.aetheria.example-25565.html">Aetheria Network</a></p>
 					</div>
 														 			</div> <!--Fin MEGAHEADER-->
 								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
@@ -1780,7 +352,7 @@ function myFunction($id, $tooltip) {
     min-width: 100%;">
 					<tr class="changeDisplay" style="display:block;">
 						<td rowspan="2" class="changeDisplay2">
-							<a href="../server/play.aetheria.example:25565.html">
+							<a href="../server/play.aetheria.example-25565.html">
 								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
 							</a>
 						</td>
@@ -1800,7 +372,7 @@ function myFunction($id, $tooltip) {
 
 							<div style="display:inline-block;float:right;">
 								<div class="btn-group boutons-srv" style="margin-right:10px" >
-									<a onClick="test();" href="../server/play.aetheria.example:25565.html" >
+									<a onClick="test();" href="../server/play.aetheria.example-25565.html" >
 									<img id="votebouton" alt="boutonvote" 
 											src="../template/images/boutonvoterpetitnormal.png" 
 											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
@@ -1918,7 +490,1639 @@ function test()
 	setCookie("votevaleur", 1, 1);
 }
 </script>
-			<ul class="new-pagination"><li><a href="1%3F&amp;order_by=server_id.html">&laquo;</a></li><li><a href="1%3F&amp;order_by=server_id.html">1</a></li><li class="active"><a href="2%3F&amp;order_by=server_id.html">2</a></li><li class="disabled"><a href="2.html">&raquo;</a></li></ul>					</div> <!-- END Main Column -->
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">3</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/valoria.example-25565.html">Valoria RP</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur10').style.visibility = 'visible';document.getElementById('myTooltipinputserveur10').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur10').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur10').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur10').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur10')"
+								 id="inputserveur10"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="valoria.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur10">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/valoria.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_roleplay.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Roleplay fantasy, factions et missions narratives.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								760 VOTES								  <p style="display:contents;position:relative;"id="votesfav10">51</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/valoria.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">4</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/skyforge.example-25565.html">Skyforge SMP</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur13').style.visibility = 'visible';document.getElementById('myTooltipinputserveur13').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur13').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur13').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur13').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur13')"
+								 id="inputserveur13"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="skyforge.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur13">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/skyforge.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_survival.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Survival saisonnier et progression propre.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								690 VOTES								  <p style="display:contents;position:relative;"id="votesfav13">47</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/skyforge.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">5</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/crownpeak.example-25565.html">CrownPeak</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur18').style.visibility = 'visible';document.getElementById('myTooltipinputserveur18').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur18').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur18').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur18').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur18')"
+								 id="inputserveur18"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="crownpeak.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur18">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/crownpeak.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_pvp.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								PvP rapide, arenas et tournois.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								410 VOTES								  <p style="display:contents;position:relative;"id="votesfav18">33</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/crownpeak.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">6</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/aurora-vale.example-25565.html">Aurora Vale</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur22').style.visibility = 'visible';document.getElementById('myTooltipinputserveur22').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur22').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur22').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur22').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur22')"
+								 id="inputserveur22"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="aurora-vale.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur22">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/aurora-vale.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_roleplay.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Roleplay communautaire et events reguliers.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								350 VOTES								  <p style="display:contents;position:relative;"id="votesfav22">28</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/aurora-vale.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">7</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/emberfall.example-25565.html">Emberfall</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur15').style.visibility = 'visible';document.getElementById('myTooltipinputserveur15').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur15').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur15').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur15').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur15')"
+								 id="inputserveur15"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="emberfall.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur15">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/emberfall.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Aventure, donjons et exploration guidee.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								310 VOTES								  <p style="display:contents;position:relative;"id="votesfav15">22</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/emberfall.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">8</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/mythos.example-25565.html">Mythos Realm</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur17').style.visibility = 'visible';document.getElementById('myTooltipinputserveur17').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur17').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur17').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur17').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur17')"
+								 id="inputserveur17"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="mythos.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur17">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/mythos.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								MMORPG fantasy et quetes scenarisees.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								260 VOTES								  <p style="display:contents;position:relative;"id="votesfav17">20</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/mythos.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">9</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/lunaris.example-25565.html">Lunaris</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur24').style.visibility = 'visible';document.getElementById('myTooltipinputserveur24').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur24').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur24').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur24').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur24')"
+								 id="inputserveur24"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="lunaris.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur24">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/lunaris.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_quest.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Exploration, ruines et objectifs long terme.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								220 VOTES								  <p style="display:contents;position:relative;"id="votesfav24">18</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/lunaris.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+					<div class="modal fade" id="erreur" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" style=" 
+  height: 50%;
+  overflow: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">INFORMATION</h4>
+				</div>
+
+				<div class="modal-body" width="100px">
+				</div>
+				<div class="modal-footer">
+					<img style="cursor:pointer;"data-dismiss="modal" alt="fermer" src="../template/images/boutonclosemodalnormal.png"
+			onmouseover="this.src='../template/images/boutonclosemodalhover.png'" 
+			onmouseout="this.src='../template/images/boutonclosemodalnormal.png'"/>
+				</div>
+		</div>
+	</div>
+</div>
+
+		<div class="panel panel-default">
+
+			<div style="background-color: #1d293b;" class="panel-body vip-shadow2" style="padding: 10px;">
+				<div class="megaheader">
+					<div class="serverelement">
+								<p id="rang">10</p>
+					</div>
+
+					<div class="titreelement">
+				 <p class="titre-serveur" ><a style="color: rgb(217, 217, 217) !important;" href="../server/oakheart.example-25565.html">Oakheart</a></p>
+					</div>
+														 			</div> <!--Fin MEGAHEADER-->
+								 <div class="input-group input-group-sm" style="width: 60%;display: inline-block;float: right;overflow: hidden;">
+								 <div class="ipelement">
+								 <p id="iptitre">IP:</p>
+								 <input 
+								 onmouseover="document.getElementById('myTooltipinputserveur11').style.visibility = 'visible';document.getElementById('myTooltipinputserveur11').style.opacity = '1';" 
+								 onmouseout="document.getElementById('myTooltipinputserveur11').style.visibility = 'hidden';document.getElementById('myTooltipinputserveur11').style.opacity = '0';
+								 document.getElementById('myTooltipinputserveur11').innerHTML = 'Cliquez pour copier';" 
+								 onclick="myFunction(this.id, 'myTooltipinputserveur11')"
+								 id="inputserveur11"
+								 type="text"
+								 class="form-control iptextbox"
+								 value="oakheart.example"
+								 style="cursor: pointer;">
+		 						 <span class="tooltiptext" id="myTooltipinputserveur11">Cliquez pour copier</span>
+								</div>
+								</div>
+
+							<script>
+function myFunction($id, $tooltip) {
+  var copyText = document.getElementById($id);
+  copyText.select();
+  document.execCommand("copy");
+  
+  var tooltip = document.getElementById($tooltip);
+  tooltip.innerHTML = "IP copiée !";
+}
+</script>
+
+				<table class="server" style="width: 100%;
+    min-width: 100%;">
+					<tr class="changeDisplay" style="display:block;">
+						<td rowspan="2" class="changeDisplay2">
+							<a href="../server/oakheart.example-25565.html">
+								<img style="margin-left:-2px;" alt="banner" src="../user_data/server_banners/banner_community.svg" class="img-rounded resize-banner-2 banner"/>
+							</a>
+						</td>
+						<td class="header">
+													
+							<div class="pull-right inline" style="position: relative;top: -20px;">
+															</div>
+							<div style="margin-left: 15px;overflow: hidden;" accept-charset="UTF-8" id="courtedescription">
+								Survie communautaire et construction libre.							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" style="display:block;">
+							<div class="alignerbutton" style="display:inline-block;float:left;margin-top: 10px;">
+								180 VOTES								  <p style="display:contents;position:relative;"id="votesfav11">15</p> <img src="../template/images/coeur.png" width="16px" height="16px"></img>
+							</div>
+
+							<div style="display:inline-block;float:right;">
+								<div class="btn-group boutons-srv" style="margin-right:10px" >
+									<a onClick="test();" href="../server/oakheart.example-25565.html" >
+									<img id="votebouton" alt="boutonvote" 
+											src="../template/images/boutonvoterpetitnormal.png" 
+											onmouseover="this.src='../template/images/boutonvoterpetithover.png'" 
+											onmouseout="this.src='../template/images/boutonvoterpetitnormal.png'"/>
+									</a>
+								</div>
+						<div class="btn-group boutons-srv" style=""><a style="cursor: pointer;" onClick="alertLog()"><img id="favbouton" alt="boutonfav" 
+			src="../template/images/boutonaddfavpetitnormal.png" 
+			onmouseover="this.src='../template/images/boutonaddfavpetithover.png';"
+			onmouseout="this.src='../template/images/boutonaddfavpetitnormal.png';"/></a></div></div>
+
+<script>
+
+function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.overrideMimeType('text/xml; charset=iso-8859-1');
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+
+        xhReq.open(method, url, async);
+        xhReq.responseType = "text";
+        xhReq.send(null);
+    }
+var serverResponse = xhReq.responseText;
+return serverResponse;
+
+}
+
+function getID(id) {
+var test = "q=" + id;
+var value = ajax("processing/process_favorites_index.php", 'POST', test, false);
+if (!value.includes("debug"))
+{
+	var votefav = ("votesfav" + id);
+	var $votefav = $("#votesfav" + id);
+	var $child = $("#image" + id);
+	var $div = $("#" + id);
+				if(value.includes("favorited")){
+					$child.attr("onmouseover", "this.src='../template/images/boutonfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonfavpetitnormal.png");
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number2 = number + 1;
+					$votefav.text(number2);
+				} 
+				if(value.includes("unfavorited")) {
+					$child.attr("onmouseover", "this.src='../template/images/boutonaddfavpetithover.png'");
+					$child.attr("onmouseout", "this.src='../template/images/boutonaddfavpetitnormal.png'");		
+					$child.attr("src", "../template/images/boutonaddfavpetitnormal.png");	
+					var node = document.getElementById(votefav);
+					number = parseInt(node.textContent, 10);
+					var number3 = number - 2;
+					$votefav.text(number3);
+				}
+
+				if(value.includes("temprestant")) {
+					var textvalue = value.replace( /^\D+/g, '');
+					var textvalue2 = textvalue.replace(/[^0-9]/g,'');
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Tu dois attendre encore " + textvalue2 + " secondes avant de pouvoir refaire une action.");
+				} 
+				if (!value.includes("unfavorited") && !value.includes("favorited") && !value.includes("temprestant"))
+				{
+					$('#erreur').modal('show'); 
+					$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+				}
+}
+}
+//Fonction qui alert qu'il faut se connecter
+function alertLog()
+{
+$('#erreur').modal('show'); 
+$("#erreur .modal-body").text("Vous devez être connecté pour effectuer cette action !");
+}
+</script>						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+<script>
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function test()
+{
+	setCookie("votevaleur", 1, 1);
+}
+</script>
+			<ul class="new-pagination"><li class="disabled"><a href="1.html">&laquo;</a></li><li class="active"><a href="1%3F&amp;order_by=favorites.html">1</a></li><li><a href="2%3F&amp;order_by=favorites.html">2</a></li><li><a href="2%3F&amp;order_by=favorites.html">&raquo;</a></li></ul>					</div> <!-- END Main Column -->
 
 				<!-- START Sidebar -->
 									<div class="col-md-2">
@@ -1941,15 +2145,15 @@ function test()
 			<ul class="nav nav-pills nav-stacked">
 
 								<li class="dropdown active">
-					<a href="2.html">Réinitialiser les filtres</a>
+					<a href="1.html">Réinitialiser les filtres</a>
 				</li>
 				
 				<li class="dropdown active">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="../index.html">Classer par<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="2%3F&amp;order_by=votes.html">Votes</a></li>
-						<li><a href="2%3F&amp;order_by=favorites.html">Favoris</a></li>
-						<li><a href="2%3F&amp;order_by=server_id.html">Nouveauté</a></li>
+						<li><a href="1%3F&amp;order_by=votes.html">Votes</a></li>
+						<li><a href="1%3F&amp;order_by=favorites.html">Favoris</a></li>
+						<li><a href="1%3F&amp;order_by=server_id.html">Nouveauté</a></li>
 					</ul>
 				</li>
 
