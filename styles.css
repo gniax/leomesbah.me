@@ -2653,15 +2653,31 @@ svg {
   }
 
   .proj-tabs__nav {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 4px;
+    padding: 0 0 6px;
+  }
+
+  .proj-tabs__btn {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    white-space: normal;
+    line-height: 1.25;
   }
 
   .plugin-card {
     padding: 14px;
     min-height: 0;
+  }
+
+  .plugin-card__header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .plugin-card__name {
+    overflow-wrap: anywhere;
   }
 
   .plugin-card__cols {
@@ -2686,6 +2702,21 @@ svg {
   .plugin-card__code code {
     font-size: 0.69rem;
     line-height: 1.55;
+  }
+
+  .project-embed__bar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .project-embed__bar-left {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .project-embed__open {
+    margin-left: auto;
   }
 }
 
