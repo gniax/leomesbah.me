@@ -15,13 +15,13 @@
   </head>
   <body>
     <nav class="mobile-topbar" id="mobile-topbar" aria-label="Navigation">
-      <div class="mobile-topbar__brand">
+      <button class="mobile-topbar__brand" type="button" data-view="overview" aria-label="Back to home">
         <img class="mobile-topbar__portrait" src="assets/images/portrait.jpg" alt="Léo Mesbah" width="768" height="768">
         <span class="mobile-topbar__name">Léo Mesbah</span>
-      </div>
+      </button>
       <div class="mobile-topbar__actions">
-        <button class="mobile-topbar__btn" id="mobile-projects-toggle" type="button" aria-label="Browse projects" aria-expanded="false"></button>
         <button class="mobile-topbar__btn" id="mobile-theme-toggle" type="button" aria-label="Switch color mode"></button>
+        <button class="mobile-topbar__btn" id="mobile-projects-toggle" type="button" aria-label="Open projects menu" aria-expanded="false"></button>
       </div>
     </nav>
     <div class="rail-overlay" id="rail-overlay" aria-hidden="true"></div>

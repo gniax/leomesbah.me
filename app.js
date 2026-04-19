@@ -45,6 +45,7 @@ const ICONS = {
   pen: svg(`<path d="m14 4 6 6-10 10H4v-6z"/><path d="m13 5 6 6"/>`),
   note: svg(`<path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/><path d="M7 12h8"/><path d="M7 16h6"/>`),
   gaming: svg(`<rect x="2" y="8" width="20" height="10" rx="3"/><path d="M7 12h2m-1-1v2"/><circle cx="15" cy="12" r="0.8"/><circle cx="17.5" cy="14" r="0.8"/>`),
+  menu: svg(`<path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>`),
 };
 
 const PROJECT_ICON = {
@@ -383,7 +384,10 @@ function mountMobileNav() {
   const overlay = document.querySelector("#rail-overlay");
   const closeBtn = document.querySelector("#rail-close");
 
-  if (projectsToggle) projectsToggle.innerHTML = ICONS.layers;
+  if (projectsToggle) {
+    projectsToggle.innerHTML = ICONS.menu;
+    projectsToggle.setAttribute("title", "Open projects menu");
+  }
 
   function openRail() {
     rail?.classList.add("is-open");
