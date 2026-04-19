@@ -80,7 +80,6 @@ const TAB_ICON = {
 
 function injectRailIcons() {
   document.querySelectorAll(".rail-link[data-view]").forEach((link) => {
-    if (link.dataset.view === "coinvote") return;
     if (link.querySelector(".rail-link__icon")) return;
     if (link.querySelector(".rail-link__logo-thumb")) return;
     const view = link.dataset.view;
@@ -1492,9 +1491,7 @@ function renderProjectArchiveRail() {
     .map(
       ([id, project]) => `
         <button class="rail-link rail-link--archive${state.view === id ? " is-active" : ""}" type="button" data-view="${id}" title="${project.title}${!hasMedia(project) ? " · GitHub only" : ""}">
-          ${id === "coinvote"
-            ? `<span class="rail-link__icon rail-link__icon--hidden" aria-hidden="true"></span>`
-            : project.logo
+          ${project.logo
             ? `<img class="rail-link__logo-thumb" src="${project.logo}" alt="">`
             : `<span class="rail-link__icon">${ICONS[PROJECT_ICON[id]] || ""}</span>`}
           <span class="rail-link__meta">${project.period}</span>
