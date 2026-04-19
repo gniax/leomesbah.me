@@ -2577,7 +2577,8 @@ svg {
 .project-head__title {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-start;
+  min-width: 0;
 }
 
 .project-head__icon {
@@ -2617,12 +2618,75 @@ svg {
   border-radius: 999px;
   background: var(--surface);
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .project-period svg {
   width: 11px;
   height: 11px;
   color: var(--accent);
+}
+
+@media (max-width: 780px) {
+  .project-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .project-head__title {
+    width: 100%;
+  }
+
+  .project-head__title > div {
+    min-width: 0;
+  }
+
+  .project-head .eyebrow {
+    line-height: 1.35;
+    letter-spacing: 0.12em;
+    overflow-wrap: anywhere;
+  }
+
+  .project-period {
+    align-self: flex-start;
+  }
+
+  .proj-tabs__nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .plugin-card {
+    padding: 14px;
+    min-height: 0;
+  }
+
+  .plugin-card__cols {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .plugin-card__tree {
+    border-right: 0;
+    border-bottom: 1px solid #21262d;
+    padding-right: 0;
+    padding-bottom: 10px;
+  }
+
+  .plugin-card__code {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 50vh;
+  }
+
+  .plugin-card__code code {
+    font-size: 0.69rem;
+    line-height: 1.55;
+  }
 }
 
 /* action-button icon spacing */
