@@ -1929,6 +1929,11 @@ svg {
   color: var(--faint);
 }
 
+.rail-link--archive .rail-link__icon--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .rail-link__logo-thumb {
   width: 22px;
   height: 22px;

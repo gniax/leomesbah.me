@@ -80,6 +80,7 @@ const TAB_ICON = {
 
 function injectRailIcons() {
   document.querySelectorAll(".rail-link[data-view]").forEach((link) => {
+    if (link.dataset.view === "coinvote") return;
     if (link.querySelector(".rail-link__icon")) return;
     if (link.querySelector(".rail-link__logo-thumb")) return;
     const view = link.dataset.view;
@@ -1491,7 +1492,9 @@ function renderProjectArchiveRail() {
     .map(
       ([id, project]) => `
         <button class="rail-link rail-link--archive${state.view === id ? " is-active" : ""}" type="button" data-view="${id}" title="${project.title}${!hasMedia(project) ? " · GitHub only" : ""}">
-          ${project.logo
+          ${id === "coinvote"
+            ? `<span class="rail-link__icon rail-link__icon--hidden" aria-hidden="true"></span>`
+            : project.logo
             ? `<img class="rail-link__logo-thumb" src="${project.logo}" alt="">`
             : `<span class="rail-link__icon">${ICONS[PROJECT_ICON[id]] || ""}</span>`}
           <span class="rail-link__meta">${project.period}</span>
@@ -1715,7 +1718,7 @@ function renderOverview() {
             <a class="action-button action-button--ghost" href="https://t.me/leo_coinvote" target="_blank" rel="noreferrer">
               ${ICONS.telegram}<span>Telegram</span>
             </a>
-            <a class="action-button action-button--ghost" href="mailto:hello@leomesbah.me">
+            <a class="action-button action-button--ghost" href="mailto:leomesbah@outlook.fr">
               ${ICONS.mail}<span>Email</span>
             </a>
           </div>
