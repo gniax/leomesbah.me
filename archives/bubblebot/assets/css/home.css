@@ -1,0 +1,105 @@
+body {
+    padding-top: 72px;
+}
+
+/* ---------- Hero (home index) ---------- */
+.container {
+    max-width: 1080px;
+}
+
+.container > img.mx-auto {
+    margin-top: 3.5rem !important;
+    margin-bottom: 1rem !important;
+    filter: drop-shadow(0 12px 36px rgba(90, 200, 250, 0.35));
+}
+
+.container > .text-center h1 {
+    font-size: 3.25rem;
+    background: linear-gradient(135deg, #ffffff 0%, #8ee4ff 55%, #b8a8ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.25rem;
+}
+
+.container > .text-center > p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 780px;
+    margin: 0 auto 1.75rem;
+    color: #b6bfd4;
+}
+
+.container > .text-center .btn {
+    margin-top: .5rem;
+}
+
+/* ---------- Features ---------- */
+h2.text-center {
+    font-size: 2rem;
+    margin-top: 1rem !important;
+}
+
+.row .media {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 1.15rem 1.25rem;
+    margin-bottom: 1rem;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.row .media:hover {
+    transform: translateY(-2px);
+    border-color: rgba(90, 200, 250, 0.35);
+    background: rgba(90, 200, 250, 0.04);
+}
+.row .media i.fa {
+    color: #5ac8fa;
+    background: linear-gradient(135deg, rgba(90,200,250,0.15), rgba(123,97,255,0.15));
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.row .media-body h5 {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+.row .media-body p {
+    color: #9aa3b8;
+    margin-bottom: 0;
+}
+
+/* ---------- Misc ---------- */
+inputx, select, textarea { max-width: 280px; }
+
+.center-image {
+    display: block;
+    margin: auto;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.title-with-image img {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.title-with-image h4 {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    .container > .text-center h1 { font-size: 2.25rem; }
+    .container > .text-center > p { font-size: .98rem; }
+}

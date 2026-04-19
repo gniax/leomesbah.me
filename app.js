@@ -422,21 +422,21 @@ function boot() {
   document.addEventListener("keydown", handleThemeShortcut);
   document.addEventListener("keydown", handleGlobalKeydown);
   syncThemePicker();
-  fetchArticlesIndex();
-}
-
-if (document.readyState !== "loading") {
-  boot();
-} else {
-  document.addEventListener("DOMContentLoaded", boot, { once: true });
+  if (!HIDDEN_OVERVIEW_TABS.has("writing")) {
+    fetchArticlesIndex();
+  }
 }
 
 const state = {
   view: "overview",
   overviewTab: "about",
   archiveFilter: "all",
+  designFilter: "all",
   designIndex: null,
 };
+
+// Keep tabs configurable so hidden sections can be re-enabled later.
+const HIDDEN_OVERVIEW_TABS = new Set(["writing"]);
 
 const overviewTabs = {
   about: {
@@ -611,54 +611,238 @@ const overviewTabs = {
   },
 };
 
+function getVisibleOverviewTabsEntries() {
+  return Object.entries(overviewTabs).filter(([id]) => !HIDDEN_OVERVIEW_TABS.has(id));
+}
+
+const DESIGN_PROJECTS = [
+  { id: "coinvote", label: "Coinvote" },
+  { id: "gamesneed", label: "GamesNeed" },
+  { id: "bushido", label: "Bushido Quest" },
+  { id: "rapizz", label: "Rapizz" },
+];
+
 const DESIGN_GALLERY = [
   {
-    year: "2016",
-    kind: "Forum / web",
-    title: "SigmaCraft thread",
-    summary: "Community thread screenshot from the SigmaCraft era, when the project lived both in-game and on the web.",
-    src: "assets/images/history/sigmacraft-thread-1.png",
-    alt: "SigmaCraft forum thread screenshot",
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Branding",
+    title: "Coinvote Wordmark Banner",
+    summary: "Wide branding banner used for platform headers and media kits.",
+    src: "assets/designs/Asset 2@4x-8.png",
+    alt: "Coinvote wordmark banner",
   },
   {
-    year: "2016",
-    kind: "Gameplay capture",
-    title: "SigmaCraft gameplay",
-    summary: "A capture from the same period, kept here as a visual reference from the server side of the project.",
-    src: "assets/images/history/sigmacraft-201603-lagfree.jpg",
-    alt: "SigmaCraft gameplay screenshot",
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Motion insight",
+    title: "Most Trending MemeCoins on CoinGecko (Video)",
+    summary: "Animated ranking visual for Coinvote Insights social posts.",
+    src: "assets/designs/Coinvote Top Trending.mp4",
+    alt: "Most Trending MemeCoins on CoinGecko animated visual",
+    type: "video",
   },
   {
-    year: "2019",
-    kind: "Desktop UI",
-    title: "Bubble Bot",
-    summary: "Desktop client UI for the Bubble Bot stack, where the automation logic was exposed to the user.",
-    src: "assets/images/projects/bubblebot.png",
-    alt: "Bubble Bot desktop interface",
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top MemeCoins on CoinMarketCap (Apr 2024, Variant A)",
+    summary: "Most trending and top 24h volume leaderboard snapshot.",
+    src: "assets/designs/Copie de Top CMC.png",
+    alt: "Top MemeCoins on CoinMarketCap April 2024 variant A",
   },
   {
-    year: "2019",
-    kind: "Web screenshot",
-    title: "Hytale-Serveur.com",
-    summary: "A live screenshot from the Hytale server listing platform and its public-facing website.",
-    src: "assets/images/projects/hytale-serveur.png",
-    alt: "Hytale-Serveur.com screenshot",
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top MemeCoins on CoinMarketCap (Apr 2024, Variant B)",
+    summary: "Alternative export of the same CoinMarketCap leaderboard concept.",
+    src: "assets/designs/Copie de Copie de Top CMC.png",
+    alt: "Top MemeCoins on CoinMarketCap April 2024 variant B",
   },
   {
-    year: "2019",
-    kind: "Mobile UI",
-    title: "Leclerc SAV",
-    summary: "Xamarin-based mobile service app for after-sales flows at Leclerc.",
-    src: "assets/images/projects/leclerc-sav.png",
-    alt: "Leclerc service app screenshot",
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top MemeCoins by Highest Social Engagement",
+    summary: "LunarCrush-based engagement leaderboard with ranked coin visuals.",
+    src: "assets/designs/Copie de Nouvelle.png",
+    alt: "Top MemeCoins by highest social engagement visual",
   },
   {
-    year: "2020",
-    kind: "Realtime UI",
-    title: "VELA Tracking",
-    summary: "Regatta tracking interface from the VELA stack, shown here as a clean project snapshot.",
-    src: "assets/images/projects/vela-tracking/qt-app.png",
-    alt: "VELA tracking dashboard screenshot",
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top MemeCoins by Highest Social Mentions",
+    summary: "Ranked social mentions visual with top 8 meme coin projects.",
+    src: "assets/designs/Copie de Panorama.png",
+    alt: "Top MemeCoins by highest social mentions visual",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Campaign",
+    title: "Solana VM Launch Campaign Visual",
+    summary: "Promotional creative for SSVM token and pre-sale launch message.",
+    src: "assets/designs/Copie de X is now live.jpg",
+    alt: "Solana VM launch campaign visual",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Social cover",
+    title: "Twitter Cover - Pioneering Early Crypto Discoveries",
+    summary: "Twitter/X header creative showcasing the mobile app and positioning.",
+    src: "assets/designs/Couverture Twitter - Juillet (1024 x 500 px).png",
+    alt: "Coinvote Twitter cover highlighting early crypto discoveries",
+  },
+  {
+    year: "2023",
+    project: "bushido",
+    projectLabel: "Bushido Quest",
+    kind: "Logo",
+    title: "Bushido Quest Logo",
+    summary: "Logo exploration with samurai silhouette and rising sun mark.",
+    src: "assets/designs/Design sans titre.png",
+    alt: "Bushido Quest logo",
+  },
+  {
+    year: "2024",
+    project: "gamesneed",
+    projectLabel: "GamesNeed",
+    kind: "Logo",
+    title: "GamesNeed Brand Lockup",
+    summary: "Primary GamesNeed logo lockup on dark background.",
+    src: "assets/designs/GamesNeed.png",
+    alt: "GamesNeed logo lockup",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top Meme Coins by Highest Social Volume",
+    summary: "Dropstab social volume leaderboard with top meme coin entries.",
+    src: "assets/designs/Greatest Volume.png",
+    alt: "Top meme coins by highest social volume visual",
+  },
+  {
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Highest Social Contributors on BNBChain (Dec 2023)",
+    summary: "Contributor ranking card with coin highlights and BNBChain branding.",
+    src: "assets/designs/Highest Social Contributors.png",
+    alt: "Highest social contributors on BNBChain December 2023",
+  },
+  {
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top Ethereum Projects by Highest Social Engagement",
+    summary: "Engagement leaderboard visual focused on Ethereum ecosystem coins.",
+    src: "assets/designs/image.png",
+    alt: "Top Ethereum projects by highest social engagement visual",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Social cover",
+    title: "LinkedIn Cover - Find The Next Rising Cryptos Early",
+    summary: "LinkedIn header creative with product CTA and app store badges.",
+    src: "assets/designs/Linkedin Cover (1584 x 396 px).png",
+    alt: "Coinvote LinkedIn cover with app call to action",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Most Bullish MemeCoins on X",
+    summary: "LiveCoinWatch sentiment visual ranking bullish meme coins on X.",
+    src: "assets/designs/Livecoinwatch.png",
+    alt: "Most bullish meme coins on X visual",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Logo",
+    title: "Coinvote App Icon",
+    summary: "Rounded square app icon with the Coinvote emblem.",
+    src: "assets/designs/logo.png",
+    alt: "Coinvote app icon",
+  },
+  {
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top MemeCoins Projects by Highest Social Interactions",
+    summary: "LunarCrush interaction leaderboard with multi-project rank panel.",
+    src: "assets/designs/Nouvelle.png",
+    alt: "Top MemeCoins projects by highest social interactions visual",
+  },
+  {
+    year: "2023",
+    project: "rapizz",
+    projectLabel: "Rapizz",
+    kind: "Logo",
+    title: "Rapizz Pizzeria Logo",
+    summary: "Pizza-themed logo badge concept for Rapizz branding.",
+    src: "assets/designs/Pizzeria Logo.png",
+    alt: "Rapizz pizzeria logo",
+  },
+  {
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Highest Social Contributors on BNBChain (Circle Layout)",
+    summary: "Circular layout variant of the BNBChain social contributors visual.",
+    src: "assets/designs/Social Contributors Circle.png",
+    alt: "Highest social contributors on BNBChain circle layout",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top BNBChain Projects by Highest Sentiment on Telegram",
+    summary: "LiveCoinWatch sentiment chart focused on Telegram momentum.",
+    src: "assets/designs/TOP 10 - Example 2.png",
+    alt: "Top BNBChain projects by highest sentiment on Telegram",
+  },
+  {
+    year: "2023",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight ranking",
+    title: "Top Projects on CoinMarketCap (May 2023)",
+    summary: "Legacy CoinMarketCap snapshot featuring trending and volume sections.",
+    src: "assets/designs/Top CMC.png",
+    alt: "Top projects on CoinMarketCap May 2023",
+  },
+  {
+    year: "2024",
+    project: "coinvote",
+    projectLabel: "Coinvote",
+    kind: "Insight card",
+    title: "Most Active Communities",
+    summary: "Community activity highlight card used in Coinvote Insights content.",
+    src: "assets/designs/Trending Coins.png",
+    alt: "Most active communities visual card",
   },
 ];
 
@@ -716,9 +900,9 @@ const projects = {
     logo: "assets/images/logos/bubblebot.png",
     category: "systems",
     filters: ["web", "software"],
-    sortYear: 2019,
+    sortYear: 2020,
     railNote: "desktop client, protocol, automation",
-    period: "2019 →",
+    period: "2020 →",
     kind: "SaaS · Automation",
     title: "Bubble Bot",
     summary:
@@ -730,9 +914,32 @@ const projects = {
       "Distributed as a licensed SaaS — users paid for access to the bot and its automation flows.",
       "Account generation stack used Chromium offscreen automation, proxies, anti-captcha integration and email handling.",
     ],
-    links: [],
+    links: [
+      { label: "Browse site", url: "archives/bubblebot/index.html" },
+    ],
     media() {
-      return `<img class="project-media__image" src="assets/images/projects/bubblebot.png" alt="Bubble Bot interface" width="1171" height="768" />`;
+      const real = (name) => `archives/bubblebot/assets/images/bubblebot-real/${name}`;
+      const merged = (n) => `archives/bubblebot/assets/images/bubblebot-merged/${String(n).padStart(2, "0")}.png`;
+      return renderTabs("bubblebot-media", [
+        {
+          label: "Desktop client",
+          content: renderSlider("bubblebot-desktop", [
+            merged(1), merged(2), merged(3), merged(4), merged(5),
+            merged(6), merged(7), merged(8), merged(9), merged(10),
+            merged(11), merged(12), merged(13), merged(14), merged(15),
+            real("02-main.png"),
+            real("04-accounts.png"),
+            real("05-quickactions.png"),
+            real("06-planner.png"),
+            real("03-options.png"),
+            real("01-login.png"),
+          ]),
+        },
+        {
+          label: "Browse site",
+          content: renderArchiveEmbed("archives/bubblebot/index.html", "Bubble Bot"),
+        },
+      ]);
     },
   },
   hytale: {
@@ -844,7 +1051,16 @@ const projects = {
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/leclerc-service-app" }],
     media() {
-      return `<img class="project-media__image" src="assets/images/projects/leclerc-sav.png" alt="Leclerc service app" width="768" height="768" />`;
+      const screens = [
+        "assets/images/projects/leclerc/screen-home.png",
+        "assets/images/projects/leclerc/screen-pieces.png",
+        "assets/images/projects/leclerc/screen-depannage.png",
+        "assets/images/projects/leclerc/screen-reparation.png",
+        "assets/images/projects/leclerc/screen-antenne.png",
+        "assets/images/projects/leclerc/screen-livraison.png",
+        "assets/images/projects/leclerc/screen-fioul.png",
+      ];
+      return renderSlider("leclerc-screens", screens);
     },
   },
   sigmacraft: {
@@ -1021,7 +1237,9 @@ const projects = {
       "Built in Unity during a game jam.",
     ],
     links: [{ label: "Source", url: "https://github.com/gniax/drone-ball" }],
-    media() { return ""; },
+    media() {
+      return `<video class="project-media__video" src="assets/files/drone-ball/video.mp4" controls playsinline preload="metadata"></video>`;
+    },
   },
   "edu-bushido": {
     featured: false,
@@ -1046,9 +1264,9 @@ const projects = {
       const vid = (src) => `<video class="project-media__video" src="${src}" controls playsinline preload="metadata"></video>`;
       return renderTabs("bushido-media", [
         { label: "Overview", content: `<img class="project-media__image" src="assets/images/projects/bushido.png" alt="Bushido Quest" />` },
-        { label: "Step 1", content: vid("assets/files/bushido/step_1.mp4") },
-        { label: "Step 2", content: vid("assets/files/bushido/step_2.mp4") },
-        { label: "Step 3", content: vid("assets/files/bushido/step_3.mp4") },
+        { label: "Gameplay 1", content: vid("assets/files/bushido/step_1.mp4") },
+        { label: "Gameplay 2", content: vid("assets/files/bushido/step_2.mp4") },
+        { label: "Gameplay 3", content: vid("assets/files/bushido/step_3.mp4") },
       ]);
     },
   },
@@ -1260,23 +1478,70 @@ function renderDesignMedia(item, className = "", interactive = false) {
   return `<img${classAttr} src="${item.src}" alt="${item.alt}" loading="lazy" />`;
 }
 
+function getDesignFilterOptions() {
+  const counts = new Map();
+  for (const item of DESIGN_GALLERY) {
+    counts.set(item.project, (counts.get(item.project) || 0) + 1);
+  }
+
+  return [
+    { id: "all", label: "All", count: DESIGN_GALLERY.length },
+    ...DESIGN_PROJECTS
+      .map((project) => ({ ...project, count: counts.get(project.id) || 0 }))
+      .filter((project) => project.count > 0),
+  ];
+}
+
+function normalizeDesignFilter() {
+  const options = getDesignFilterOptions();
+  if (options.some((filter) => filter.id === state.designFilter)) return;
+  state.designFilter = "all";
+}
+
+function getVisibleDesignEntries() {
+  normalizeDesignFilter();
+  return DESIGN_GALLERY
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => state.designFilter === "all" || item.project === state.designFilter);
+}
+
 function renderDesigns() {
+  const filterOptions = getDesignFilterOptions();
+  const visibleEntries = getVisibleDesignEntries();
+  const designCount = `${visibleEntries.length} design${visibleEntries.length > 1 ? "s" : ""}`;
+
   return `
     <section class="space-pane designs-page">
       <div class="designs-head">
         <p class="eyebrow">Visual archive</p>
         <h2>Designs</h2>
-        <p class="muted-note">Screenshots, interfaces, and experiments from projects over the years. Click any tile to open it larger.</p>
+        <p class="muted-note">Personal visuals organized by project. Use filters to focus on a specific brand or product.</p>
+      </div>
+      <div class="design-controls">
+        <div class="design-filters" role="tablist" aria-label="Filter designs by project">
+          ${filterOptions.map((filter) => `
+            <button
+              class="design-filter${state.designFilter === filter.id ? " is-active" : ""}"
+              type="button"
+              data-design-filter="${filter.id}"
+              aria-pressed="${state.designFilter === filter.id ? "true" : "false"}"
+              title="${filter.label}"
+            >
+              <span>${filter.label}</span>
+              <small>${filter.count}</small>
+            </button>
+          `).join("")}
+        </div>
+        <p class="muted-note designs-count">${designCount}</p>
       </div>
       <div class="design-grid">
-        ${DESIGN_GALLERY.map((item, index) => `
+        ${visibleEntries.map(({ item, index }) => `
           <button class="design-card" type="button" data-open-design="${index}" aria-label="Open ${item.title}">
             <span class="design-card__media">
               ${renderDesignMedia(item, "design-card__asset")}
-              <span class="design-card__open" aria-hidden="true">${ICONS.sparkle}<span>View larger</span></span>
             </span>
             <span class="design-card__copy">
-              <span class="design-card__meta">${item.year} · ${item.kind}</span>
+              <span class="design-card__meta">${item.projectLabel} · ${item.year}</span>
               <strong>${item.title}</strong>
               <small>${item.summary}</small>
             </span>
@@ -1307,7 +1572,7 @@ function renderDesignModal() {
         ${renderDesignMedia(item, "design-modal__asset", true)}
       </div>
       <div class="design-modal__copy">
-        <p class="eyebrow">${item.year} · ${item.kind}</p>
+        <p class="eyebrow">${item.projectLabel} · ${item.year} · ${item.kind}</p>
         <h2 id="design-modal-title">${item.title}</h2>
         <p>${item.summary}</p>
       </div>
@@ -1346,6 +1611,14 @@ function computeSecondarySkills() {
 }
 
 function renderOverview() {
+  const visibleTabs = getVisibleOverviewTabsEntries();
+  const fallbackTabId = visibleTabs[0]?.[0] || "about";
+  const activeTabId = visibleTabs.some(([id]) => id === state.overviewTab) ? state.overviewTab : fallbackTabId;
+  const activeTab = overviewTabs[activeTabId] || overviewTabs.about;
+  if (state.overviewTab !== activeTabId) {
+    state.overviewTab = activeTabId;
+  }
+
   return `
     <article class="space">
       <section class="hero">
@@ -1401,10 +1674,10 @@ function renderOverview() {
       </section>
 
       <nav class="space-tabs" aria-label="My space tabs">
-        ${Object.entries(overviewTabs)
+        ${visibleTabs
           .map(
             ([id, tab]) => `
-              <button class="space-tab${state.overviewTab === id ? " is-active" : ""}" type="button" data-switch-tab="${id}">
+              <button class="space-tab${activeTabId === id ? " is-active" : ""}" type="button" data-switch-tab="${id}">
                 ${ICONS[TAB_ICON[id]] || ""}<span class="space-tab__label">${tab.label}</span>
               </button>
             `,
@@ -1413,7 +1686,7 @@ function renderOverview() {
       </nav>
 
       <section class="space-body">
-        ${overviewTabs[state.overviewTab].render()}
+        ${activeTab.render()}
       </section>
     </article>
   `;
@@ -1703,6 +1976,14 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const designFilterTarget = event.target.closest("[data-design-filter]");
+  if (designFilterTarget) {
+    state.designFilter = designFilterTarget.dataset.designFilter;
+    state.designIndex = null;
+    render();
+    return;
+  }
+
   const designCloseTarget = event.target.closest("[data-close-design-modal]");
   if (designCloseTarget) {
     state.designIndex = null;
@@ -1802,4 +2083,13 @@ document.addEventListener("click", (event) => {
   }
 });
 
-render();
+function startApp() {
+  boot();
+  render();
+}
+
+if (document.readyState !== "loading") {
+  startApp();
+} else {
+  document.addEventListener("DOMContentLoaded", startApp, { once: true });
+}

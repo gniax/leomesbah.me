@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bubble Bot - Inscription</title>
+<link href="assets/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="assets/css/home.css" rel="stylesheet"/>
+<link href="assets/css/site.css" rel="stylesheet"/>
+<link href="assets/lib/ekko-lightbox/dist/ekko-lightbox.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-info">
+<a class="navbar-brand" href="index.html">
+<img alt="Logo" class="d-inline-block align-top" height="30" src="assets/images/Logo.png" width="30"/>
+            Bubble Bot
+        </a>
+<button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="index.html">Accueil</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="functionalities.html">Fonctionnalités</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="galery.html">Galerie</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="offers.html">Offres</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="panel/index.html">Panel</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 col-sm-8 col-md-4 text-center mt-4 mx-auto">
+<div class="card">
+<div class="card-header">
+<img alt="Logo" class="center-image mb-2" height="128" src="assets/images/Logo.png" width="128">
+<h3>Bubble Bot  Inscription</h3>
+</img></div>
+<div class="card-body">
+<form action="#" method="post" onsubmit="return false;">
+<fieldset>
+<div class="form-group">
+<input autofocus="" class="form-control" data-val="true" data-val-required="The Username field is required." id="Username" minlength="3" name="Username" placeholder="Identifiant" required="" type="text" value=""/>
+<span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+</div>
+<div class="form-group">
+<input class="form-control" data-val="true" data-val-required="The Password field is required." id="password" minlength="5" name="Password" placeholder="Mot de passe" required="" type="password" value=""/>
+<span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+</div>
+<div class="form-group">
+<input class="form-control" id="confirm_password" minlength="5" placeholder="Confirmez le mot de passe" required="" type="password" value=""/>
+<span></span>
+</div>
+<div class="form-group">
+<input class="form-control" data-val="true" data-val-required="The EmailAddress field is required." id="EmailAddress" name="EmailAddress" placeholder="Adresse E-Mail" required="" type="email" value=""/>
+<span class="field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
+</div>
+<div class="form-group">
+<input id="reCaptcha" name="reCaptcha" type="hidden">
+</input></div>
+<div class="alert alert-info" role="alert">Vous êtes déjà inscrit ?<br\></br\> Il suffit de cliquer <a href="panel/index.html">ici</a>.</div>
+<button class="btn btn-lg btn-info float-right" id="btnRegister" type="submit">S'Inscrire</button>
+</fieldset>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JJwtA4GmdNMhsouKC48WGcZAuUD3y_YzT_7hniDqfpTTY6e0NgrmyxGtMrqGSIohQ0OCK1bmg5n9cLBSIF6RpENARVUXl9m97RohLlHTyID5OzITDDVaI2G1YvUmuPUnCEsK1Jfh2oZPOdLZ3TJq-VMkzcd6sVNpI0s9FoTS5DHy0E40cYrxDcP2LQDlnWNug"/></form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="text-light bg-info">
+<span>© 2020 - Bubble Bot - Mamar &amp; Gniax</span>
+</footer>
+<script src="assets/lib/jquery/dist/jquery.js"></script>
+<script src="assets/lib/popper.js/dist/umd/popper.js"></script>
+<script src="assets/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="assets/lib/ekko-lightbox/dist/ekko-lightbox.js"></script>
+<script>
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    </script>
+
+
+</body>
+</html>
