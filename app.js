@@ -855,14 +855,47 @@ const ARCHIVE_FILTERS = [
   { id: "tools", label: "Tools" },
 ];
 const HERO_SKILL_LIMIT = 6;
-const HERO_SKILL_SECONDARY_LIMIT = 7;
-const HERO_SKILL_BOOSTS = {
-  PHP: 5.2, "C#": 5.1, JavaScript: 4.9, "C++": 1.6, ".NET": 2.3, Linux: 3.2,
-};
-const HERO_SKILLS_SECONDARY_EXCLUDE = new Set([
-  "React Native", "Java", "Expo", "Nginx", "Objective-C", "Xamarin",
-  "Magisk", "Android", "iOS", "WPF", "ASP.NET", "MySQL", "Automation",
-]);
+const HERO_SKILL_SECONDARY_LIMIT = 10;
+const HERO_SKILL_MIN_PCT = 48;
+const HERO_SKILL_MAX_PCT = 88;
+const HERO_SKILL_BUCKETS = [
+  { name: "C# / .NET", keywords: ["c#", ".net", "asp.net", "xamarin", "wpf"] },
+  { name: "PHP", keywords: ["php"] },
+  { name: "C++", keywords: ["c++"] },
+  { name: "Backend & Web Development", keywords: ["php", "asp.net", "node.js", "rest api", "api", "full-stack", "backend"] },
+  { name: "MySQL / SQL", keywords: ["mysql", "sql", "database"] },
+  { name: "Infrastructure & DevOps", keywords: ["linux", "nginx", "cloudflare", "vps", "deployment", "devops", "sysadmin", "server admin"] },
+  { name: "JavaScript", keywords: ["javascript"] },
+  { name: "Mobile Development", keywords: ["mobile", "android", "ios", "react native", "expo", "xamarin"] },
+  { name: "API Design & Integrations", keywords: ["rest api", " api ", "endpoint", "integration", "backend"] },
+  { name: "Reverse Engineering", keywords: ["reverse engineering", "protocol", "intercept", "replay"] },
+  { name: "Desktop Applications", keywords: ["wpf", "qt", "cefsharp", "desktop client"] },
+  { name: "Game Development (Unity/Unreal)", keywords: ["unity", "unreal engine", "ue4", "opengl", "vr", "gameplay"] },
+  { name: "SaaS & Product Engineering", keywords: ["saas", "billing", "monetisation", "monetization", "license-based", "profitable"] },
+  { name: "Python Scripting & Automation", keywords: ["python", "script", "automation", "scrap", "crawler"] },
+  { name: "Data Scraping", keywords: ["scrap", "crawler", "data extraction"] },
+  { name: "AI / ML", keywords: ["ai", "ml", "machine learning"] },
+];
+const HERO_PRIMARY_SKILL_ORDER = [
+  "C# / .NET",
+  "PHP",
+  "C++",
+  "Backend & Web Development",
+  "MySQL / SQL",
+  "Infrastructure & DevOps",
+];
+const HERO_SECONDARY_SKILL_ORDER = [
+  "Python Scripting & Automation",
+  "API Design & Integrations",
+  "Reverse Engineering",
+  "Desktop Applications",
+  "Game Development (Unity/Unreal)",
+  "SaaS & Product Engineering",
+  "Data Scraping",
+  "JavaScript",
+  "Mobile Development",
+  "AI / ML",
+];
 const projects = {
   coinvote: {
     featured: true,
@@ -1582,32 +1615,54 @@ function renderDesignModal() {
 
 
 function computeSkillStats() {
-  const counts = {};
-  const all = Object.values(projects);
-  all.forEach(p => (p.tech || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
-  return Object.entries(counts)
-    .map(([name, count]) => {
-      const pct = Math.round((count / all.length) * 100);
-      const score = count + (HERO_SKILL_BOOSTS[name] || 0);
-      return { name, pct, score };
-    })
-    .sort((a, b) => b.score - a.score || b.pct - a.pct || a.name.localeCompare(b.name))
+  const coverage = computeSkillCoverage();
+  const maxCoverage = Math.max(...coverage.values(), 1);
+  return HERO_PRIMARY_SKILL_ORDER
+    .map((name) => ({
+      name,
+      pct: skillScoreFromCoverage(coverage.get(name) || 0, maxCoverage),
+    }))
     .slice(0, HERO_SKILL_LIMIT);
 }
 
 function computeSecondarySkills() {
-  const primary = new Set(computeSkillStats().map(s => s.name));
-  const counts = {};
-  const all = Object.values(projects);
-  all.forEach(p => (p.tech || []).forEach(t => {
-    if (!primary.has(t) && !HERO_SKILLS_SECONDARY_EXCLUDE.has(t)) {
-      counts[t] = (counts[t] || 0) + 1;
-    }
-  }));
-  return Object.entries(counts)
-    .map(([name, count]) => ({ name, pct: Math.round((count / all.length) * 100) }))
-    .sort((a, b) => b.pct - a.pct || a.name.localeCompare(b.name))
+  const coverage = computeSkillCoverage();
+  const maxCoverage = Math.max(...coverage.values(), 1);
+  return HERO_SECONDARY_SKILL_ORDER
+    .map((name) => ({
+      name,
+      pct: skillScoreFromCoverage(coverage.get(name) || 0, maxCoverage),
+    }))
+    .filter((skill) => (coverage.get(skill.name) || 0) > 0)
     .slice(0, HERO_SKILL_SECONDARY_LIMIT);
+}
+
+function skillScoreFromCoverage(count, maxCoverage) {
+  const ratio = maxCoverage > 0 ? count / maxCoverage : 0;
+  return Math.round(HERO_SKILL_MIN_PCT + ratio * (HERO_SKILL_MAX_PCT - HERO_SKILL_MIN_PCT));
+}
+
+function computeSkillCoverage() {
+  const all = Object.values(projects);
+  const coverage = new Map(HERO_SKILL_BUCKETS.map((bucket) => [bucket.name, 0]));
+
+  for (const project of all) {
+    const source = [
+      ...(project.tech || []),
+      ...(project.meta || []),
+      ...(project.points || []),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    for (const bucket of HERO_SKILL_BUCKETS) {
+      if (bucket.keywords.some((keyword) => source.includes(keyword))) {
+        coverage.set(bucket.name, (coverage.get(bucket.name) || 0) + 1);
+      }
+    }
+  }
+
+  return coverage;
 }
 
 function renderOverview() {
@@ -1630,20 +1685,20 @@ function renderOverview() {
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I can't stop building things. That's probably not going to change. <span class="hero__flag">🇫🇷</span>
+            Engineer focused on C++/C/.NET, building web/mobile products and AI/ML/LLM automation workflows with strong backend and ops work. <span class="hero__flag">🇫🇷</span>
           </p>
           ${(() => {
             const primary = computeSkillStats();
             const secondary = computeSecondarySkills();
             return `
-              <div class="hero__skills" aria-label="Stack across projects">
+              <div class="hero__skills" aria-label="Core skills and additional strengths">
                 ${primary.map(s => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
                 ${secondary.length ? `
                   <button class="hero__skills-more" type="button" data-toggle-skills>+${secondary.length} more</button>
                   ${secondary.map(s => `<span class="hero__skill-extra">${s.name}<em>${s.pct}%</em></span>`).join("")}
                 ` : ""}
               </div>
-              <p class="hero__skills-note">* Calculated from the stack used across my projects.</p>
+              <p class="hero__skills-note">* Auto-calculated as a relative score from stack usage across all listed projects.</p>
             `;
           })()}
           <div class="hero__actions">
