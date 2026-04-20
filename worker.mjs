@@ -76,11 +76,12 @@ const PROJECT_META = {
       "Split-screen Rocket League-like with drones and low-gravity movement, built in Unity during a game jam.",
     image: "/assets/images/logos/drone-ball.png",
   },
-  "edu-bushido": {
-    title: "bushido-quest — Léo Mesbah",
+  "bushido-quest": {
+    title: "Bushido Quest — Léo Mesbah",
     description:
       "VR escape game built with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
     image: "/assets/images/logos/bushidoQuest.png",
+    legacyPaths: ["/projects/edu-bushido"],
   },
   "edu-fitmeal": {
     title: "fitmeal-mobile — Léo Mesbah",
@@ -116,7 +117,23 @@ function getPageMeta(url) {
 
   const slug = decodeURIComponent(match[1]);
   const meta = PROJECT_META[slug];
-  if (!meta) return null;
+  if (!meta) {
+    const aliasMeta = Object.values(PROJECT_META).find((entry) => (entry.legacyPaths || []).includes(path));
+    if (!aliasMeta) return null;
+    return {
+      title: aliasMeta.title,
+      description: aliasMeta.description,
+      image: new URL(aliasMeta.image || DEFAULT_OG_IMAGE, SITE_ORIGIN).toString(),
+      url: new URL(path, SITE_ORIGIN).toString(),
+      canonical: new URL(
+        Object.keys(PROJECT_META).find((key) => PROJECT_META[key] === aliasMeta)
+          ? `/projects/${Object.keys(PROJECT_META).find((key) => PROJECT_META[key] === aliasMeta)}`
+          : path,
+        SITE_ORIGIN
+      ).toString(),
+      type: "article",
+    };
+  }
 
   return {
     title: meta.title,

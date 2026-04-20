@@ -1283,6 +1283,8 @@ const projects = {
   "edu-bushido": {
     featured: false,
     logo: "assets/images/logos/bushidoQuest.png",
+    routeSlug: "bushido-quest",
+    legacyRouteSlugs: ["edu-bushido"],
     category: "games",
     filters: ["games"],
     sortYear: 2024,
@@ -1290,7 +1292,7 @@ const projects = {
     railNote: "UE4, VR escape game",
     period: "2024",
     kind: "Education",
-    title: "bushido-quest",
+    title: "Bushido Quest",
     summary: "VR escape game built with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
     tech: ["Unreal Engine", "C++"],
     meta: ["UE4", "C++", "ESIEE"],
@@ -2038,7 +2040,7 @@ function pathFromState(s = state) {
     return `/articles/${s.view.slice("article-".length)}`;
   }
   if (s.view && s.view !== "overview" && projects[s.view]) {
-    return `/projects/${s.view}`;
+    return `/projects/${projects[s.view].routeSlug || s.view}`;
   }
   if (s.overviewTab === "designs") {
     if (Number.isInteger(s.designIndex) && DESIGN_GALLERY[s.designIndex]) {
@@ -2060,8 +2062,15 @@ function stateFromPath(pathname) {
   if (parts.length === 0) return fallback;
   const [first, second] = parts;
 
-  if (first === "projects" && second && projects[second]) {
-    return { view: second, overviewTab: state.overviewTab, designIndex: null };
+  if (first === "projects" && second) {
+    const projectKey = Object.keys(projects).find((key) => {
+      const routeSlug = projects[key].routeSlug || key;
+      const legacyRouteSlugs = projects[key].legacyRouteSlugs || [];
+      return second === routeSlug || legacyRouteSlugs.includes(second);
+    });
+    if (projectKey) {
+      return { view: projectKey, overviewTab: state.overviewTab, designIndex: null };
+    }
   }
   if (first === "articles" && second) {
     return { view: `article-${second}`, overviewTab: "writing", designIndex: null };

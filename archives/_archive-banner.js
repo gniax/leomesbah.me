@@ -104,6 +104,21 @@
     });
   }
 
+  var shiftedFlowNodes = [];
+  function shiftFlowTop(amount) {
+    shiftedFlowNodes.forEach(function (e) {
+      if (e.prev == null) e.node.style.removeProperty("margin-top");
+      else e.node.style.marginTop = e.prev;
+    });
+    shiftedFlowNodes = [];
+    if (!amount || key !== "hytale") return;
+    var nodes = document.querySelectorAll(".navbar.navbar-static-top");
+    nodes.forEach(function (n) {
+      shiftedFlowNodes.push({ node: n, prev: n.style.marginTop || null });
+      n.style.marginTop = amount + "px";
+    });
+  }
+
   var activeSpacer = null;
   function showTab() {
     var tab = createTab();
@@ -117,10 +132,15 @@
 
   function showBanner() {
     var banner = createBanner();
-    activeSpacer = createSpacer();
-    document.body.insertBefore(activeSpacer, document.body.firstChild);
+    var amount = window.matchMedia("(max-width:720px)").matches ? 40 : 44;
+    if (key === "hytale") {
+      shiftFlowTop(amount);
+    } else {
+      activeSpacer = createSpacer();
+      document.body.insertBefore(activeSpacer, document.body.firstChild);
+    }
     document.body.appendChild(banner);
-    shiftFixedTop(window.matchMedia("(max-width:720px)").matches ? 40 : 44);
+    shiftFixedTop(amount);
     banner.querySelector(".lm-archive-bar__close").addEventListener("click", function () {
       try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch (_) {}
       banner.remove();
@@ -129,6 +149,7 @@
         activeSpacer = null;
       }
       shiftFixedTop(0);
+      shiftFlowTop(0);
       showTab();
     });
   }
