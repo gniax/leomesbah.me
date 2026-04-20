@@ -1071,7 +1071,7 @@ const projects = {
   },
   leclerc: {
     featured: false,
-    logo: "assets/images/logos/leclerc.svg",
+    logo: "assets/images/logos/leclerc.png",
     category: "mobile",
     filters: ["mobile"],
     sortYear: 2019,

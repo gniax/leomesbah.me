@@ -35,7 +35,7 @@ const PROJECT_META = {
   leclerc: {
     title: "leclerc-service-app — Léo Mesbah",
     description: "SAV Leclerc application for iOS & Android made with Xamarin Forms in C#.",
-    image: "/assets/images/logos/leclerc.svg",
+    image: "/assets/images/logos/leclerc.png",
   },
   sigmacraft: {
     title: "SigmaCraft — Léo Mesbah",
