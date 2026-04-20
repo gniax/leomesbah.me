@@ -41,9 +41,8 @@
       ".lm-archive-tab{left:auto;right:14px;border-radius:0 0 6px 6px;padding:6px 12px;cursor:pointer;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;font-weight:700;color:#d88b55;background:#14171c;border:1px solid #262b35;border-top:none;box-shadow:0 4px 10px rgba(0,0,0,.35),inset 0 -2px 0 0 #d88b55;display:inline-flex;align-items:center;gap:7px;letter-spacing:1px;text-transform:uppercase}" +
       ".lm-archive-tab:hover{color:#ecb187;background:#191d24}" +
       ".lm-archive-tab-dot{width:6px;height:6px;border-radius:50%;background:#d88b55;animation:lm-archive-pulse 1.8s ease-in-out infinite;display:inline-block}" +
-      "html.lm-archive-shift{padding-top:44px!important;box-sizing:border-box}" +
-      "html.lm-archive-shift body{margin-top:0}" +
-      "@media (max-width:720px){.lm-archive-bar__note{display:none}.lm-archive-bar{padding:0 10px;gap:8px;height:40px}.lm-archive-bar__back{padding:4px 8px;font-size:11.5px}.lm-archive-bar__title{font-size:11.5px}.lm-archive-bar__title small{display:none}html.lm-archive-shift{padding-top:40px!important}.lm-archive-bar__badge{padding:3px 7px;font-size:10px}}";
+      ".lm-archive-spacer{height:44px;width:100%;flex-shrink:0;pointer-events:none}" +
+      "@media (max-width:720px){.lm-archive-bar__note{display:none}.lm-archive-bar{padding:0 10px;gap:8px;height:40px}.lm-archive-bar__back{padding:4px 8px;font-size:11.5px}.lm-archive-bar__title{font-size:11.5px}.lm-archive-bar__title small{display:none}.lm-archive-bar__badge{padding:3px 7px;font-size:10px}.lm-archive-spacer{height:40px}}";
     document.head.appendChild(style);
   }
 
@@ -80,6 +79,13 @@
     return tab;
   }
 
+  function createSpacer() {
+    var spacer = document.createElement("div");
+    spacer.className = "lm-archive-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    return spacer;
+  }
+
   var shiftedNodes = [];
   function shiftFixedTop(amount) {
     shiftedNodes.forEach(function (e) {
@@ -98,6 +104,7 @@
     });
   }
 
+  var activeSpacer = null;
   function showTab() {
     var tab = createTab();
     document.body.appendChild(tab);
@@ -110,13 +117,17 @@
 
   function showBanner() {
     var banner = createBanner();
+    activeSpacer = createSpacer();
+    document.body.insertBefore(activeSpacer, document.body.firstChild);
     document.body.appendChild(banner);
-    document.documentElement.classList.add("lm-archive-shift");
     shiftFixedTop(window.matchMedia("(max-width:720px)").matches ? 40 : 44);
     banner.querySelector(".lm-archive-bar__close").addEventListener("click", function () {
       try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch (_) {}
       banner.remove();
-      document.documentElement.classList.remove("lm-archive-shift");
+      if (activeSpacer) {
+        activeSpacer.remove();
+        activeSpacer = null;
+      }
       shiftFixedTop(0);
       showTab();
     });
