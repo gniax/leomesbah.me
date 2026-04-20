@@ -373,7 +373,9 @@ function handleGlobalKeydown(event) {
   if (event.key === "Escape" && state.designIndex !== null) {
     event.preventDefault();
     state.designIndex = null;
+    if (typeof updateUrl === "function") updateUrl();
     renderDesignModal();
+    if (typeof applySeo === "function") applySeo();
   }
 }
 
@@ -1996,6 +1998,223 @@ function renderArticle(article) {
   `;
 }
 
+/* ---------- routing & seo ---------- */
+
+const SITE_ORIGIN = "https://leomesbah.me";
+const OVERVIEW_TAB_IDS = Object.keys(overviewTabs);
+const DEFAULT_DESCRIPTION = "Léo Mesbah builds products, tooling and internet systems. Founder of Coinvote.cc.";
+const DEFAULT_OG_IMAGE = "/assets/images/portrait.jpg";
+
+function slugify(str) {
+  return String(str || "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+const DESIGN_SLUG_TO_INDEX = (() => {
+  const map = new Map();
+  const used = new Set();
+  DESIGN_GALLERY.forEach((item, i) => {
+    const base = slugify(item.title) || `design-${i + 1}`;
+    let slug = base;
+    let n = 2;
+    while (used.has(slug)) slug = `${base}-${n++}`;
+    used.add(slug);
+    item.slug = slug;
+    map.set(slug, i);
+  });
+  return map;
+})();
+
+let currentPath = null;
+let suppressUrlUpdates = false;
+
+function pathFromState(s = state) {
+  if (s.view && s.view.startsWith("article-")) {
+    return `/articles/${s.view.slice("article-".length)}`;
+  }
+  if (s.view && s.view !== "overview" && projects[s.view]) {
+    return `/projects/${s.view}`;
+  }
+  if (s.overviewTab === "designs") {
+    if (Number.isInteger(s.designIndex) && DESIGN_GALLERY[s.designIndex]) {
+      return `/designs/${DESIGN_GALLERY[s.designIndex].slug}`;
+    }
+    return `/designs`;
+  }
+  if (s.overviewTab && s.overviewTab !== "about" && OVERVIEW_TAB_IDS.includes(s.overviewTab)) {
+    return `/${s.overviewTab}`;
+  }
+  return `/`;
+}
+
+function stateFromPath(pathname) {
+  const clean = decodeURIComponent((pathname || "/").split("?")[0].split("#")[0]);
+  const parts = clean.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+  const fallback = { view: "overview", overviewTab: "about", designIndex: null };
+
+  if (parts.length === 0) return fallback;
+  const [first, second] = parts;
+
+  if (first === "projects" && second && projects[second]) {
+    return { view: second, overviewTab: state.overviewTab, designIndex: null };
+  }
+  if (first === "articles" && second) {
+    return { view: `article-${second}`, overviewTab: "writing", designIndex: null };
+  }
+  if (first === "designs") {
+    const idx = second ? DESIGN_SLUG_TO_INDEX.get(second) : undefined;
+    return {
+      view: "overview",
+      overviewTab: "designs",
+      designIndex: Number.isInteger(idx) ? idx : null,
+    };
+  }
+  if (OVERVIEW_TAB_IDS.includes(first)) {
+    return { view: "overview", overviewTab: first, designIndex: null };
+  }
+  if (projects[first]) {
+    return { view: first, overviewTab: state.overviewTab, designIndex: null };
+  }
+  return fallback;
+}
+
+function updateUrl(replace = false) {
+  if (suppressUrlUpdates) return;
+  const next = pathFromState(state);
+  if (next === currentPath && !replace) {
+    applySeo();
+    return;
+  }
+  if (typeof history !== "undefined" && history.pushState) {
+    const fn = replace ? "replaceState" : "pushState";
+    history[fn]({ path: next }, "", next);
+  }
+  currentPath = next;
+  applySeo();
+}
+
+function applyInitialRoute() {
+  const partial = stateFromPath(location.pathname);
+  Object.assign(state, partial);
+  currentPath = pathFromState(state);
+  if (location.pathname.replace(/\/+$/, "") !== currentPath.replace(/\/+$/, "")) {
+    history.replaceState({ path: currentPath }, "", currentPath);
+  }
+}
+
+function handlePopstate() {
+  suppressUrlUpdates = true;
+  Object.assign(state, { view: "overview", overviewTab: "about", designIndex: null });
+  Object.assign(state, stateFromPath(location.pathname));
+  currentPath = pathFromState(state);
+  render();
+  suppressUrlUpdates = false;
+}
+
+window.addEventListener("popstate", handlePopstate);
+
+function ensureMeta(attr, name) {
+  let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, name);
+    document.head.appendChild(el);
+  }
+  return el;
+}
+
+function setMetaName(name, content) {
+  if (content == null) return;
+  ensureMeta("name", name).setAttribute("content", content);
+}
+
+function setMetaProp(property, content) {
+  if (content == null) return;
+  ensureMeta("property", property).setAttribute("content", content);
+}
+
+function setCanonical(url) {
+  let el = document.head.querySelector("link[rel='canonical']");
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", "canonical");
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", url);
+}
+
+function seoFor(s = state) {
+  const suffix = "Léo Mesbah";
+  if (s.view && s.view.startsWith("article-")) {
+    const slug = s.view.slice("article-".length);
+    const meta = (articlesIndex || []).find((a) => a.slug === slug);
+    return {
+      title: meta ? `${meta.title} — ${suffix}` : `Article — ${suffix}`,
+      description: meta?.summary || DEFAULT_DESCRIPTION,
+      type: "article",
+    };
+  }
+  if (s.view && projects[s.view]) {
+    const p = projects[s.view];
+    return {
+      title: `${p.title} — ${suffix}`,
+      description: p.summary || DEFAULT_DESCRIPTION,
+      image: p.logo ? `/${p.logo.replace(/^\//, "")}` : DEFAULT_OG_IMAGE,
+      type: "article",
+    };
+  }
+  if (s.overviewTab === "designs") {
+    const item = Number.isInteger(s.designIndex) ? DESIGN_GALLERY[s.designIndex] : null;
+    if (item) {
+      return {
+        title: `${item.title} — Design — ${suffix}`,
+        description: item.summary || DEFAULT_DESCRIPTION,
+        image: item.type === "video" ? (item.poster || DEFAULT_OG_IMAGE) : `/${item.src.replace(/^\//, "")}`,
+      };
+    }
+    return {
+      title: `Designs — ${suffix}`,
+      description: "Personal visual archive — branding, insight rankings and social covers organized by project.",
+    };
+  }
+  if (s.overviewTab && s.overviewTab !== "about" && overviewTabs[s.overviewTab]) {
+    return {
+      title: `${overviewTabs[s.overviewTab].label} — ${suffix}`,
+      description: DEFAULT_DESCRIPTION,
+    };
+  }
+  return {
+    title: `${suffix} — Software Engineer & Builder`,
+    description: DEFAULT_DESCRIPTION,
+  };
+}
+
+function applySeo() {
+  const meta = seoFor(state);
+  const url = SITE_ORIGIN + (currentPath || pathFromState(state));
+  const image = SITE_ORIGIN + (meta.image || DEFAULT_OG_IMAGE);
+
+  document.title = meta.title;
+  setMetaName("description", meta.description);
+  setCanonical(url);
+
+  setMetaProp("og:type", meta.type || "website");
+  setMetaProp("og:site_name", "Léo Mesbah");
+  setMetaProp("og:title", meta.title);
+  setMetaProp("og:description", meta.description);
+  setMetaProp("og:url", url);
+  setMetaProp("og:image", image);
+  setMetaName("twitter:card", "summary_large_image");
+  setMetaName("twitter:title", meta.title);
+  setMetaName("twitter:description", meta.description);
+  setMetaName("twitter:image", image);
+}
+
 function render() {
   if (state.view === "overview") {
     mainView.innerHTML = renderOverview();
@@ -2025,6 +2244,7 @@ function render() {
   renderProjectArchiveRail();
   renderDesignModal();
   mainView.scrollTop = 0;
+  applySeo();
 }
 
 document.addEventListener("click", (event) => {
@@ -2039,6 +2259,7 @@ document.addEventListener("click", (event) => {
   if (designFilterTarget) {
     state.designFilter = designFilterTarget.dataset.designFilter;
     state.designIndex = null;
+    updateUrl();
     render();
     return;
   }
@@ -2046,7 +2267,9 @@ document.addEventListener("click", (event) => {
   const designCloseTarget = event.target.closest("[data-close-design-modal]");
   if (designCloseTarget) {
     state.designIndex = null;
+    updateUrl();
     renderDesignModal();
+    applySeo();
     return;
   }
 
@@ -2090,7 +2313,9 @@ document.addEventListener("click", (event) => {
     const nextIndex = Number(designTarget.dataset.openDesign);
     if (Number.isInteger(nextIndex) && DESIGN_GALLERY[nextIndex]) {
       state.designIndex = nextIndex;
+      updateUrl();
       renderDesignModal();
+      applySeo();
     }
     return;
   }
@@ -2108,6 +2333,7 @@ document.addEventListener("click", (event) => {
   const navTarget = event.target.closest("[data-view]");
   if (navTarget) {
     state.view = navTarget.dataset.view;
+    updateUrl();
     render();
     return;
   }
@@ -2117,6 +2343,7 @@ document.addEventListener("click", (event) => {
     state.overviewTab = overviewTarget.dataset.switchTab;
     state.view = "overview";
     state.designIndex = null;
+    updateUrl();
     render();
     return;
   }
@@ -2124,6 +2351,7 @@ document.addEventListener("click", (event) => {
   const projectTarget = event.target.closest("[data-open-project]");
   if (projectTarget) {
     state.view = projectTarget.dataset.openProject;
+    updateUrl();
     render();
     return;
   }
@@ -2132,6 +2360,7 @@ document.addEventListener("click", (event) => {
   if (articleTarget) {
     state.view = "article-" + articleTarget.dataset.openArticle;
     state.overviewTab = "writing";
+    updateUrl();
     render();
     return;
   }
@@ -2144,6 +2373,7 @@ document.addEventListener("click", (event) => {
 
 function startApp() {
   boot();
+  applyInitialRoute();
   render();
 }
 

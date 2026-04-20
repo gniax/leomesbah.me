@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /.wrangler/
+Disallow: /archives/
+
+Sitemap: https://leomesbah.me/sitemap.xml
