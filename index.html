@@ -9,6 +9,7 @@
       name="description"
       content="Léo Mesbah builds products, tooling and internet systems. Founder of Coinvote.cc."
     />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="author" content="Léo Mesbah" />
     <meta name="theme-color" content="#171a21" />
     <link rel="canonical" href="https://leomesbah.me/" />
@@ -30,7 +31,104 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      :root {
+        --bg: #100d0a;
+        --panel: #15110d;
+        --surface: #1c1814;
+        --text: #ede6d6;
+        --muted: #968a75;
+        --rule: rgba(236, 228, 210, 0.08);
+        --accent: #d98b58;
+        --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        --radius: 12px;
+        --border-w: 1px;
+        --body-bg: radial-gradient(circle at 12% 8%, rgba(217, 139, 88, 0.07), transparent 30%),
+          radial-gradient(circle at 92% 14%, rgba(143, 170, 152, 0.05), transparent 28%), #0a0806;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; overflow-x: hidden; }
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.55;
+        background: var(--body-bg);
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      img { display: block; max-width: 100%; }
+      a { color: var(--accent); text-decoration: none; }
+      .shell { display: grid; grid-template-columns: 284px minmax(0, 1fr); gap: 14px; min-height: 100vh; padding: 14px; }
+      .rail, .mobile-topbar, .site-theme-toggle { display: none; }
+      .panel {
+        min-width: 0;
+        border: var(--border-w) solid var(--rule);
+        border-radius: var(--radius);
+        background: var(--panel);
+        position: relative;
+        overflow: hidden;
+      }
+      #main-view { max-width: 1260px; margin: 0 auto; padding: 22px 22px 48px; }
+      .space { padding: 0; }
+      .hero, .space-body, .space-section { display: grid; gap: 12px; }
+      .hero__main { display: grid; gap: 12px; }
+      .hero__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px;
+        border: var(--border-w) solid var(--rule);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        width: max-content;
+        max-width: 100%;
+      }
+      .hero__lead {
+        margin: 0;
+        font-size: clamp(1.34rem, 2.45vw, 1.78rem);
+        line-height: 1.12;
+        letter-spacing: -0.022em;
+        font-weight: 700;
+        max-width: 20ch;
+      }
+      .hero__sub { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.45; max-width: 60ch; }
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .bullet-list { margin: 0; padding-left: 18px; }
+      @media (max-width: 960px) {
+        .shell { grid-template-columns: 1fr; padding: 0; min-height: 100dvh; }
+        .mobile-topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          position: sticky;
+          top: 0;
+          z-index: 40;
+          padding: 12px 14px;
+          border-bottom: var(--border-w) solid var(--rule);
+          background: rgba(21, 17, 13, 0.92);
+          backdrop-filter: blur(12px);
+        }
+        .panel { border: 0; border-radius: 0; }
+        #main-view { padding: 28px 22px 56px; }
+      }
+    </style>
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,12 +156,13 @@
       "url": "https://leomesbah.me/"
     }
     </script>
+    <script id="route-structured-data" type="application/ld+json" data-seo-structured-data>{}</script>
     <script defer src="app.js"></script>
   </head>
   <body>
     <nav class="mobile-topbar" id="mobile-topbar" aria-label="Navigation">
       <button class="mobile-topbar__brand" type="button" data-view="overview" aria-label="Back to home">
-        <img class="mobile-topbar__portrait" src="assets/images/portrait.jpg" alt="Léo Mesbah" width="768" height="768">
+        <img class="mobile-topbar__portrait" src="assets/images/portrait.jpg" alt="Léo Mesbah" width="768" height="768" fetchpriority="high" decoding="async">
         <span class="mobile-topbar__name">Léo Mesbah</span>
       </button>
       <div class="mobile-topbar__actions">
@@ -85,6 +184,8 @@
             alt="Portrait of Léo Mesbah"
             width="768"
             height="768"
+            fetchpriority="high"
+            decoding="async"
           />
           <div class="identity__copy">
             <h1>Léo Mesbah</h1>
@@ -164,7 +265,40 @@
         <button class="site-theme-toggle" id="theme-mode-toggle" type="button" aria-label="Switch color mode" title="Switch color mode">
           <span class="theme-mode-toggle__icon" aria-hidden="true"></span>
         </button>
-        <div id="main-view"></div>
+        <div id="main-view">
+          <article class="space">
+            <section class="hero">
+              <div class="hero__main">
+                <div class="hero__eyebrow hero__eyebrow--hello">
+                  <span>software engineer · builder</span>
+                </div>
+                <h1 class="hero__lead">Léo Mesbah</h1>
+                <p class="hero__sub">
+                  Software engineer focused on backend systems, C++/C/.NET, web and mobile products, and AI/ML/LLM automation workflows.
+                </p>
+                <p>
+                  Founder of Coinvote.cc and engineer at KNDS France. This portfolio presents selected software projects, work experience,
+                  education, and design work.
+                </p>
+              </div>
+            </section>
+
+            <section class="space-body">
+              <nav aria-label="Main sections">
+                <p><a href="/experience">Experience</a> · <a href="/education">Education</a> · <a href="/designs">Designs</a></p>
+              </nav>
+
+              <section class="space-section" aria-labelledby="featured-projects-title">
+                <p class="eyebrow" id="featured-projects-title">Featured projects</p>
+                <ul class="bullet-list">
+                  <li><a href="/projects/coinvote">Coinvote.cc</a> — crypto voting and discovery platform built and operated solo.</li>
+                  <li><a href="/projects/bubblebot">Bubble Bot</a> — automation SaaS with desktop client, protocol layer and backend tooling.</li>
+                  <li><a href="/projects/sigmacraft">SigmaCraft</a> — early Minecraft server project with custom plugins and PHP website.</li>
+                </ul>
+              </section>
+            </section>
+          </article>
+        </div>
       </section>
     </main>
     <div class="design-modal" id="design-modal" hidden aria-hidden="true"></div>

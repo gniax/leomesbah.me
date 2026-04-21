@@ -1934,6 +1934,18 @@ function timeAgo(dateStr) {
   return `${mins}m ago`;
 }
 
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 960px)").matches;
+}
+
+function runWhenIdle(task, timeout = 1200) {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(task, { timeout });
+    return;
+  }
+  window.setTimeout(task, 1);
+}
+
 async function fetchGithubActivity() {
   const container = document.querySelector("#github-activity-feed");
   if (!container) return;
@@ -1954,6 +1966,13 @@ async function fetchGithubActivity() {
   } catch {
     container.innerHTML = `<span class="github-activity__empty">—</span>`;
   }
+}
+
+function scheduleGithubActivity() {
+  if (isMobileViewport()) return;
+  runWhenIdle(() => {
+    if (!isMobileViewport()) fetchGithubActivity();
+  });
 }
 
 /* ---------- articles (loaded from articles/ folder) ---------- */
@@ -2034,6 +2053,7 @@ const DESIGN_SLUG_TO_INDEX = (() => {
 
 let currentPath = null;
 let suppressUrlUpdates = false;
+let hasRenderedOnce = false;
 
 function pathFromState(s = state) {
   if (s.view && s.view.startsWith("article-")) {
@@ -2227,7 +2247,7 @@ function applySeo() {
 function render() {
   if (state.view === "overview") {
     mainView.innerHTML = renderOverview();
-    fetchGithubActivity();
+    scheduleGithubActivity();
   } else if (state.view.startsWith("article-")) {
     const slug = state.view.slice("article-".length);
     if (articlesBodyCache[slug]) {
@@ -2250,9 +2270,18 @@ function render() {
     button.classList.toggle("is-active", button.dataset.view === state.view);
   });
 
-  renderProjectArchiveRail();
+  if (isMobileViewport() && !hasRenderedOnce) {
+    runWhenIdle(renderProjectArchiveRail);
+  } else {
+    renderProjectArchiveRail();
+  }
   renderDesignModal();
-  mainView.scrollTop = 0;
+  if (hasRenderedOnce) {
+    requestAnimationFrame(() => {
+      mainView.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
+  }
+  hasRenderedOnce = true;
   applySeo();
 }
 
