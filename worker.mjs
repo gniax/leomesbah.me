@@ -1,12 +1,12 @@
 const SITE_ORIGIN = "https://leomesbah.me";
 const DEFAULT_OG_IMAGE = "/assets/images/portrait.jpg";
 const DEFAULT_DESCRIPTION =
-  "Léo Mesbah builds products, tooling and internet systems. Founder of Coinvote.cc.";
+  "Léo Mesbah develops products, tooling and internet systems. Founder of Coinvote.cc.";
 const INDEX_ROBOTS = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
 
 const OVERVIEW_META = {
   "/": {
-    title: "Léo Mesbah — Software Engineer & Builder",
+    title: "Léo Mesbah — Software Engineer",
     description: DEFAULT_DESCRIPTION,
     heading: "Léo Mesbah",
     intro:
@@ -82,7 +82,7 @@ const PROJECT_META = {
     title: "Coinvote.cc — Léo Mesbah",
     name: "Coinvote.cc",
     description:
-      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, built and operated entirely solo.",
+      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
     image: "/assets/images/logos/coinvote_logo.png",
     category: "SoftwareApplication",
     highlights: [
@@ -95,7 +95,7 @@ const PROJECT_META = {
     title: "Bubble Bot — Léo Mesbah",
     name: "Bubble Bot",
     description:
-      "A SaaS built around reverse engineering Dofus Touch — sold as a license-based automation bot, with a desktop client, custom protocol layer, server, API, website and account generation tooling.",
+      "A SaaS developed around reverse engineering Dofus Touch — sold as a license-based automation bot, with a desktop client, custom protocol layer, server, API, website and account generation tooling.",
     image: "/assets/images/logos/bubblebot.png",
     category: "SoftwareApplication",
     highlights: [
@@ -108,7 +108,7 @@ const PROJECT_META = {
     title: "Hytale-Serveur.com — Léo Mesbah",
     name: "Hytale-Serveur.com",
     description:
-      "A public Hytale server listing platform built in PHP: rankings, server pages, votes, favorites, premium slots, submission flows and full admin tooling.",
+      "A public Hytale server listing platform developed in PHP: rankings, server pages, votes, favorites, premium slots, submission flows and full admin tooling.",
     image: "/assets/images/logos/hytale.png",
     category: "WebSite",
     highlights: [
@@ -134,7 +134,7 @@ const PROJECT_META = {
     title: "VELA-Tracking — Léo Mesbah",
     name: "VELA-Tracking",
     description:
-      "Regatta tracking system built with C++, Qt, PHP and JavaScript, driven by GPS coordinates and XBee links, with a Raspberry Pi demo UI and course data handling.",
+      "Regatta tracking system developed with C++, Qt, PHP and JavaScript, driven by GPS coordinates and XBee links, with a Raspberry Pi demo UI and course data handling.",
     image: "/assets/images/logos/vela.png",
     category: "SoftwareApplication",
     highlights: [
@@ -172,7 +172,7 @@ const PROJECT_META = {
     title: "EltaCraft — Léo Mesbah",
     name: "EltaCraft",
     description:
-      "One of the first live systems I built around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
+      "One of the first live systems I developed around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
     image: "/assets/images/logos/eltacraft.svg",
     category: "CreativeWork",
     highlights: [
@@ -223,14 +223,14 @@ const PROJECT_META = {
     category: "SoftwareSourceCode",
     highlights: [
       "C# WPF utility for enum synchronization across files.",
-      "Focused on practical desktop developer tooling.",
+      "Focused on practical desktop software tooling.",
     ],
   },
   "drone-ball": {
     title: "drone-ball — Léo Mesbah",
     name: "drone-ball",
     description:
-      "Split-screen Rocket League-like with drones and low-gravity movement, built in Unity during a game jam.",
+      "Split-screen Rocket League-like with drones and low-gravity movement, developed in Unity during a game jam.",
     image: "/assets/images/logos/drone-ball.png",
     category: "VideoGame",
     highlights: [
@@ -242,12 +242,12 @@ const PROJECT_META = {
     title: "Bushido Quest — Léo Mesbah",
     name: "Bushido Quest",
     description:
-      "VR escape game built with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
+      "VR escape game developed with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
     image: "/assets/images/logos/bushidoQuest.png",
     category: "VideoGame",
     legacyPaths: ["/projects/edu-bushido"],
     highlights: [
-      "VR escape game built with Unreal Engine 4.",
+      "VR escape game developed with Unreal Engine 4.",
       "Focused on interaction-driven progression and reward loops.",
       "Academic project in game design and technical implementation.",
     ],
@@ -255,7 +255,7 @@ const PROJECT_META = {
   "edu-fitmeal": {
     title: "fitmeal-mobile — Léo Mesbah",
     name: "fitmeal-mobile",
-    description: "Mobile app built with React Native and Expo for calorie tracking and meal planning.",
+    description: "Mobile app developed with React Native and Expo for calorie tracking and meal planning.",
     image: "/assets/images/logos/fitmeal.png",
     category: "MobileApplication",
     highlights: [
@@ -277,11 +277,11 @@ const PROJECT_META = {
   "edu-qt": {
     title: "EDU_QtCalculator — Léo Mesbah",
     name: "EDU_QtCalculator",
-    description: "Basic calculator in Qt (C++) built during BTS SNIR coursework.",
+    description: "Basic calculator in Qt (C++) developed during BTS SNIR coursework.",
     image: DEFAULT_OG_IMAGE,
     category: "SoftwareSourceCode",
     highlights: [
-      "Qt calculator built in C++.",
+      "Qt calculator developed in C++.",
       "Coursework project during BTS SNIR studies.",
     ],
   },
@@ -579,7 +579,7 @@ function renderOverviewSnapshot(path, meta) {
     <article class="space">
       <section class="hero">
         <div class="hero__main">
-          <div class="hero__eyebrow hero__eyebrow--hello"><span>software engineer · builder</span></div>
+          <div class="hero__eyebrow hero__eyebrow--hello"><span>software engineer</span></div>
           <h1 class="hero__lead">${escapeHtml(meta.heading)}</h1>
           <p class="hero__sub">${escapeHtml(meta.intro)}</p>
           ${meta.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
