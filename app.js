@@ -452,11 +452,11 @@ const overviewTabs = {
         <section class="space-pane">
           <div class="pane-copy">
             <p>
-              <strong>At 12, I built a website, a paid shop, and a live Java server —
+              <strong>At 12, I developed a website, a paid shop, and a live Java server —
               <button class="inline-project-link" type="button" data-open-project="eltacraft">EltaCraft</button>
               and
               <button class="inline-project-link" type="button" data-open-project="sigmacraft">SigmaCraft</button>
-              — not for school, but out of curiosity and a genuine love for building things. Real players, real transactions.
+              — not for school, but out of curiosity and a genuine love for making things. Real players, real transactions.
               It was my first experience creating something people actually used, and it made me realize I wanted to keep doing this.</strong>
             </p>
             <p>
@@ -497,7 +497,7 @@ const overviewTabs = {
               <div>
                 <strong>Coinvote.cc LLC</strong>
                 <ul class="exp-bullets">
-                  <li>Founder and sole engineer — built and scaled to 500k+ users</li>
+                  <li>Founder and sole engineer — developed and scaled to 500k+ users</li>
                   <li>Full-stack: backend (PHP), mobile app, infrastructure (Cloudflare, Nginx)</li>
                   <li>Design, marketing, community management and client relations</li>
                   <li>Company operations, billing and accounting</li>
@@ -914,13 +914,13 @@ const projects = {
     kind: "Live product · LLC",
     title: "Coinvote.cc",
     summary:
-      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, built and operated entirely solo.",
+      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
     tech: ["PHP", "MySQL", "JavaScript", "Linux", "Nginx", "Mobile"],
     meta: ["Linux sysadmin", "iOS & Android", "REST API", "Automation", "Ad system", "VPS"],
     points: [
-      "Full-stack solo build: PHP 8.3 backend, Nginx, Cloudflare, VPS administration — no team, no agency.",
+      "Full-stack solo development: PHP 8.3 backend, Nginx, Cloudflare, VPS administration — no team, no agency.",
       "Crypto data ingestion, anti-bot voting protection, automated coin listing pipeline.",
-      "Monetisation system built in-house: ad placements, sponsored listings, billing and client management.",
+      "Monetisation system developed in-house: ad placements, sponsored listings, billing and client management.",
     ],
     links: [{ label: "Open site", url: "https://coinvote.cc" }],
     media() {
@@ -945,7 +945,7 @@ const projects = {
     kind: "SaaS · Automation",
     title: "Bubble Bot",
     summary:
-      "A SaaS built around reverse engineering Dofus Touch — sold as a license-based automation bot, with a desktop client, custom protocol layer, server, API, website and account generation tooling.",
+      "A SaaS developed around reverse engineering Dofus Touch — sold as a license-based automation bot, with a desktop client, custom protocol layer, server, API, website and account generation tooling.",
     tech: ["C#", ".NET", "ASP.NET", "JavaScript", "Automation"],
     meta: ["SaaS", "Reverse engineering", "C#", "Protocol", "CefSharp", "Proxies"],
     points: [
@@ -992,7 +992,7 @@ const projects = {
     kind: "Web platform",
     title: "Hytale-Serveur.com",
     summary:
-      "A public Hytale server listing platform built in PHP: rankings, server pages, votes, favorites, premium slots, submission flows and full admin tooling.",
+      "A public Hytale server listing platform developed in PHP: rankings, server pages, votes, favorites, premium slots, submission flows and full admin tooling.",
     tech: ["PHP", "MySQL", "JavaScript"],
     meta: ["PHP product", "Listings", "Votes + favorites", "Premium queue"],
     points: [
@@ -1044,7 +1044,7 @@ const projects = {
     kind: "Realtime systems",
     title: "VELA-Tracking",
     summary:
-      "Regatta tracking system built with C++, Qt, PHP and JavaScript, driven by GPS coordinates and XBee links, with a Raspberry Pi demo UI and course data handling.",
+      "Regatta tracking system developed with C++, Qt, PHP and JavaScript, driven by GPS coordinates and XBee links, with a Raspberry Pi demo UI and course data handling.",
     tech: ["C++", "Qt", "PHP", "JavaScript"],
     meta: ["Realtime", "Tracking", "C++", "Qt"],
     points: [
@@ -1160,11 +1160,11 @@ const projects = {
     kind: "Early work",
     title: "EltaCraft",
     summary:
-      "One of the first live systems I built around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
+      "One of the first live systems I developed around age 12: Minecraft server, website, vote pages, shop connections, community operations and first plugin work.",
     tech: ["Java", "PHP", "MySQL"],
     meta: ["Server", "Vote", "Shop", "CraftMyCMS", "Ops"],
     points: [
-      "Started self-taught, by building around a live Minecraft server rather than doing isolated exercises.",
+      "Started self-taught, by developing around a live Minecraft server rather than doing isolated exercises.",
       "Connected web pages, vote flows, Starpass shop logic, server management and community/admin work.",
       "Browse the original site below — rebuilt from local source material.",
     ],
@@ -1268,7 +1268,7 @@ const projects = {
     period: "2022",
     kind: "Game Jam",
     title: "drone-ball",
-    summary: "Split-screen Rocket League-like with drones and low-gravity movement, built in Unity during a game jam.",
+    summary: "Split-screen Rocket League-like with drones and low-gravity movement, developed in Unity during a game jam.",
     tech: ["C#", "Unity"],
     meta: ["Unity", "C#", "Game Jam", "Team"],
     points: [
@@ -1293,11 +1293,11 @@ const projects = {
     period: "2024",
     kind: "Education",
     title: "Bushido Quest",
-    summary: "VR escape game built with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
+    summary: "VR escape game developed with Unreal Engine 4, featuring interaction-based progression and reward-driven level design.",
     tech: ["Unreal Engine", "C++"],
     meta: ["UE4", "C++", "ESIEE"],
     points: [
-      "VR escape game built with Unreal Engine 4.",
+      "VR escape game developed with Unreal Engine 4.",
       "Interaction-driven progression and reward-driven level design.",
     ],
     links: [{ label: "View source", url: "https://github.com/gniax/bushido-quest" }],
@@ -1322,7 +1322,7 @@ const projects = {
     period: "2023",
     kind: "Education",
     title: "fitmeal-mobile",
-    summary: "Mobile app built with React Native and Expo for calorie tracking and meal planning.",
+    summary: "Mobile app developed with React Native and Expo for calorie tracking and meal planning.",
     tech: ["JavaScript", "React Native", "Expo", "Mobile"],
     meta: ["React Native", "Expo", "Mobile", "ESIEE"],
     points: [
@@ -1687,13 +1687,13 @@ function renderOverview() {
       <section class="hero">
         <div class="hero__main">
           <div class="hero__eyebrow hero__eyebrow--hello">
-            ${ICONS.wave}<span>software engineer · builder</span>
+            ${ICONS.wave}<span>software engineer</span>
           </div>
           <h2 class="hero__lead">
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            Engineer focused on C++/C/.NET, building web/mobile products and AI/ML/LLM automation workflows with strong backend and ops work. <span class="hero__flag">🇫🇷</span>
+            Engineer focused on C++/C/.NET, developing web/mobile products and AI/ML/LLM automation workflows with strong backend and ops work. <span class="hero__flag">🇫🇷</span>
           </p>
           ${(() => {
             const primary = computeSkillStats();
@@ -2023,7 +2023,7 @@ function renderArticle(article) {
 
 const SITE_ORIGIN = "https://leomesbah.me";
 const OVERVIEW_TAB_IDS = Object.keys(overviewTabs);
-const DEFAULT_DESCRIPTION = "Léo Mesbah builds products, tooling and internet systems. Founder of Coinvote.cc.";
+const DEFAULT_DESCRIPTION = "Léo Mesbah develops products, tooling and internet systems. Founder of Coinvote.cc.";
 const DEFAULT_OG_IMAGE = "/assets/images/portrait.jpg";
 
 function slugify(str) {
@@ -2218,7 +2218,7 @@ function seoFor(s = state) {
     };
   }
   return {
-    title: `${suffix} — Software Engineer & Builder`,
+    title: `${suffix} — Software Engineer`,
     description: DEFAULT_DESCRIPTION,
   };
 }
