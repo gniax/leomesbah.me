@@ -51,6 +51,7 @@ const ICONS = {
 const PROJECT_ICON = {
   overview: "home",
   coinvote: "coin",
+  "cellule-rouge": "sparkle",
   bubblebot: "bot",
   hytale: "server",
   vinted: "bag",
@@ -903,6 +904,30 @@ const HERO_SECONDARY_SKILL_ORDER = [
   "AI / ML",
 ];
 const projects = {
+  "cellule-rouge": {
+    featured: false,
+    logo: "assets/images/logos/cellule-rouge.png",
+    category: "web",
+    filters: ["web"],
+    sortYear: 2026,
+    sortMonth: 5,
+    railNote: "marketing site, French textile startup",
+    period: "2026",
+    kind: "Marketing website",
+    title: "Cellule Rouge",
+    summary:
+      "Marketing site for a French textile startup designing adaptive garments for patients with an implantable port (PAC/CIP).",
+    tech: ["Web"],
+    meta: ["Responsive"],
+    points: [
+      "French textile startup designing adaptive garments for patients with an implantable port (PAC/CIP).",
+      "Responsive marketing site.",
+    ],
+    links: [{ label: "Open site", url: "https://cellulerouge.com" }],
+    media() {
+      return renderArchiveEmbed("https://cellulerouge.com", "Cellule Rouge");
+    },
+  },
   coinvote: {
     featured: true,
     logo: "assets/images/logos/coinvote_logo.png",
