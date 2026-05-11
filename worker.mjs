@@ -78,6 +78,18 @@ const DESIGN_PROJECT_LINKS = {
 };
 
 const PROJECT_META = {
+  "cellule-rouge": {
+    title: "Cellule Rouge — Léo Mesbah",
+    name: "Cellule Rouge",
+    description:
+      "Marketing site for Cellule Rouge, a French textile startup designing adaptive garments for patients with an implantable port (PAC/CIP).",
+    image: "/assets/images/logos/cellule-rouge.png",
+    category: "WebSite",
+    highlights: [
+      "French textile startup designing adaptive garments for patients with an implantable port (PAC/CIP).",
+      "Responsive marketing site.",
+    ],
+  },
   coinvote: {
     title: "Coinvote.cc — Léo Mesbah",
     name: "Coinvote.cc",
