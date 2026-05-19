@@ -912,7 +912,7 @@ const projects = {
     sortYear: 2026,
     sortMonth: 5,
     railNote: "marketing site, French textile startup",
-    period: "2026",
+    period: "recent",
     kind: "Marketing website",
     title: "Cellule Rouge",
     summary:
@@ -1229,7 +1229,7 @@ const projects = {
     sortYear: 2026,
     sortMonth: 1,
     railNote: "Instagram tweak, no Reels",
-    period: "recent",
+    period: "2026",
     kind: "iOS tweak",
     title: "SCInsta-NoReels",
     summary: "Custom SCInsta fork focused on removing Reels and simplifying Instagram navigation.",
