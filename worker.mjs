@@ -130,16 +130,16 @@ const PROJECT_META = {
     ],
   },
   vinted: {
-    title: "vinted-republish-extension — Léo Mesbah",
-    name: "vinted-republish-extension",
+    title: "Revinted — Léo Mesbah",
+    name: "Revinted",
     description:
-      "Browser extension that saves Vinted listings, auto-fills new item forms, reuploads photos, and speeds up republishing.",
+      "Toolkit to re-publish your own Vinted listings faster — a Firefox/Chrome extension plus a Telegram bot powered by Playwright.",
     image: "/assets/images/logos/vinted.svg",
     category: "SoftwareApplication",
     highlights: [
-      "Browser extension focused on Vinted republishing workflows.",
-      "Handled data saving, form refill and image reupload automation.",
-      "Built as practical browser-side tooling.",
+      "Browser extension that saves Vinted listings and auto-fills the new-listing form, photos included.",
+      "Telegram bot built on Playwright that republishes items on demand with image hash variation and optional LLM rewrites.",
+      "Multi-account support, cookie reuse, and chat-based access control.",
     ],
   },
   vela: {
