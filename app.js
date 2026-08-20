@@ -69,6 +69,7 @@ const PROJECT_ICON = {
   "edu-opengl": "terminal",
   "drone-ball": "gaming",
   enumsharp: "terminal",
+  "better-invaders": "phone",
 };
 
 const TAB_ICON = {
@@ -1033,7 +1034,7 @@ const projects = {
     },
   },
   vinted: {
-    featured: false,
+    featured: true,
     logo: "assets/images/logos/vinted.svg",
     category: "systems",
     filters: ["tools", "automation"],
@@ -1055,6 +1056,31 @@ const projects = {
     links: [{ label: "View source", url: "https://github.com/gniax/revinted" }],
     media() {
       return `<img class="project-media__image" src="assets/images/projects/vinted-1.png" alt="Revinted browser extension panel on a Vinted listing" />`;
+    },
+  },
+  "better-invaders": {
+    featured: false,
+    logo: "assets/images/logos/better-invaders.png",
+    category: "mobile",
+    filters: ["mobile"],
+    sortYear: 2026,
+    sortMonth: 8,
+    railNote: "React Native, Expo, offline-first",
+    period: "recent",
+    kind: "Mobile application",
+    title: "Better Invaders",
+    summary:
+      "Open-source iOS and Android companion app for FlashInvaders players: a worldwide map of 4,000+ geolocated Invader mosaics with offline-first tracking.",
+    tech: ["React Native", "Expo", "TypeScript", "MapLibre"],
+    meta: ["React Native", "Expo", "Offline-first", "OCR"],
+    points: [
+      "Worldwide map of 4,000+ geolocated Invader mosaics with distance sorting and compass navigation.",
+      "Route planning and local proximity notifications, all data persisted on-device without an account.",
+      "On-device OCR (ML Kit) to import an existing collection from screenshots.",
+    ],
+    links: [{ label: "View source", url: "https://github.com/gniax/better-invaders" }],
+    media() {
+      return `<img class="project-media__image" src="assets/images/projects/better-invaders.png" alt="Better Invaders app icon" />`;
     },
   },
   vela: {
