@@ -1799,7 +1799,7 @@ function renderOverview() {
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            I design and build complex software systems across AI integration, simulation, backend infrastructure and immersive technologies — from low-level systems integration to production platforms used at scale. <span class="hero__flag">🇫🇷</span>
+            Software engineer working across AI integration, simulation systems, backend infrastructure and immersive applications. C++/C# on the systems side, full stack on the product side. <span class="hero__flag">🇫🇷</span>
           </p>
           <ul class="hero__proof" aria-label="Key facts">
             <li><strong>5+ yrs</strong><span>software engineering</span></li>
@@ -1816,14 +1816,17 @@ function renderOverview() {
               { label: "Backend & infra", items: ["APIs", "Nginx", "Cloudflare", "Linux", "Web infrastructure"] },
             ];
             return `
-              <div class="hero__stack" aria-label="Skills by domain">
+              <details class="hero__stack-wrap">
+                <summary><span>Skills by domain</span></summary>
+                <div class="hero__stack" aria-label="Skills by domain">
                 ${groups.map((g) => `
                   <div class="hero__stack-group">
                     <p class="hero__stack-label">${g.label}</p>
                     <div class="hero__stack-items">${g.items.map((i) => `<span>${i}</span>`).join("")}</div>
                   </div>
                 `).join("")}
-              </div>
+                </div>
+              </details>
             `;
           })()}
           <p class="hero__availability">
@@ -1836,7 +1839,7 @@ function renderOverview() {
               ${ICONS.briefcase || ""}<span>View experience</span>
             </button>
             <a class="action-button action-button--primary" href="mailto:leomesbah@outlook.fr">
-              ${ICONS.mail}<span>Get in touch</span>
+              ${ICONS.mail}<span>Email me</span>
             </a>
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
               ${ICONS.github}<span>GitHub</span>
@@ -1846,9 +1849,6 @@ function renderOverview() {
             </a>
             <a class="action-button action-button--ghost" href="https://t.me/leo_coinvote" target="_blank" rel="noreferrer">
               ${ICONS.telegram}<span>Telegram</span>
-            </a>
-            <a class="action-button action-button--ghost" href="mailto:leomesbah@outlook.fr">
-              ${ICONS.mail}<span>Email</span>
             </a>
           </div>
         </div>
@@ -1862,21 +1862,6 @@ function renderOverview() {
             <p class="github-activity__note">Most of my active contributions are private.</p>
           </div>
         </aside>
-      </section>
-
-      <section class="doing" aria-label="What I do">
-        ${[
-          { t: "AI &amp; automation", d: "AI integration, LLM-powered tooling, workflow automation, speech technologies and rapid experimentation." },
-          { t: "Software engineering", d: "C++, C#, backend development, APIs, distributed services and production software." },
-          { t: "Simulation &amp; systems", d: "Simulation software, integration with external systems and communication with physical equipment." },
-          { t: "XR &amp; immersive", d: "VR/XR applications and interactive training environments with Unreal Engine and Unity." },
-          { t: "Product &amp; infrastructure", d: "Backend architecture, infrastructure, deployment, monitoring and end-to-end product engineering." },
-        ].map((b) => `
-          <article class="doing__card">
-            <h3>${b.t}</h3>
-            <p>${b.d}</p>
-          </article>
-        `).join("")}
       </section>
 
       <nav class="space-tabs" aria-label="My space tabs">

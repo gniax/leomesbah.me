@@ -4194,7 +4194,27 @@ svg {
 .hero__proof strong { color: var(--accent); font: 700 13px/1.1 var(--mono); letter-spacing: 0.02em; }
 .hero__proof span { color: var(--muted); font-size: 10px; }
 
-.hero__stack { display: grid; gap: 9px; margin-top: 16px; }
+.hero__stack-wrap { margin-top: 14px; }
+.hero__stack-wrap > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border: var(--border-w) solid var(--rule);
+  border-radius: 999px;
+  background: var(--panel-bg);
+  color: var(--muted);
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+.hero__stack-wrap > summary::-webkit-details-marker { display: none; }
+.hero__stack-wrap > summary::after { content: "+"; color: var(--accent); font-size: 12px; line-height: 1; }
+.hero__stack-wrap[open] > summary::after { content: "−"; }
+.hero__stack-wrap > summary:hover { border-color: var(--accent); color: var(--accent); }
+.hero__stack { display: grid; gap: 9px; margin-top: 12px; }
 .hero__stack-group { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 10px; align-items: start; }
 .hero__stack-label {
   margin: 3px 0 0;
@@ -4234,21 +4254,6 @@ svg {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 .hero__availability em { color: var(--muted); font-style: normal; font-size: 10px; }
-
-.doing {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-  margin: 22px 0 6px;
-}
-.doing__card {
-  padding: 13px 14px;
-  border: var(--border-w) solid var(--rule);
-  border-radius: var(--radius-sm);
-  background: var(--panel-bg);
-}
-.doing__card h3 { margin: 0 0 5px; font-size: 12px; letter-spacing: 0.01em; }
-.doing__card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 
 .list-row--lead > div > strong { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
 .list-row__role { color: var(--muted); font: 400 11px/1.4 var(--sans); font-style: normal; }
