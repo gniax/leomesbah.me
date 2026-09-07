@@ -941,15 +941,8 @@ const projects = {
       { label: "View source", url: "https://github.com/gniax/noyau" },
     ],
     media() {
-      return `
-        <figure class="proj-hero-shot">
-          <img src="assets/images/noyau/hero.jpg" alt="Noyau running on a laptop, agent dashboard open" loading="eager" />
-          <span class="ai-badge" tabindex="0" role="note" aria-label="AI-edited image: the agents, projects and figures were replaced with AI so no real data is shown, so this photo does not match the real interface exactly.">
-            <span class="ai-badge__dot" aria-hidden="true"></span>AI
-            <span class="ai-badge__tip">Image edited with AI: agent names, projects and figures were replaced so no real data shows — it does not match the real interface exactly.</span>
-          </span>
-        </figure>
-      ` + renderSlider("noyau-media", [
+      return renderSlider("noyau-media", [
+        "assets/images/noyau/hero.jpg",
         "assets/images/noyau/dashboard.png",
         "assets/images/noyau/todos-board.png",
         "assets/images/noyau/projects.png",
@@ -1941,9 +1934,20 @@ function renderProject(project) {
   `;
 }
 
+// Note affichee sur la premiere vue d'un carrousel: sert a signaler une image retouchee.
+const SLIDER_NOTES = {
+  "noyau-media": "Image edited with AI: agent names, projects and figures were replaced so no real data shows — it does not match the real interface exactly.",
+};
+
 function renderSlider(id, images) {
   return `
     <div class="proj-slider" data-slider-id="${id}" data-slider-current="0">
+      ${SLIDER_NOTES[id] ? `
+        <span class="ai-badge" tabindex="0" role="note" aria-label="${SLIDER_NOTES[id]}">
+          <span class="ai-badge__dot" aria-hidden="true"></span>AI
+          <span class="ai-badge__tip">${SLIDER_NOTES[id]}</span>
+        </span>
+      ` : ""}
       <div class="proj-slider__viewport">
         <div class="proj-slider__track">
           ${images.map((src, i) => `

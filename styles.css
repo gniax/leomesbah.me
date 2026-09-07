@@ -4101,22 +4101,15 @@ svg {
    Project hero shot + AI-edited badge
    ========================================================================== */
 
-.proj-hero-shot {
-  position: relative;
-  margin: 0 0 14px;
-  border: var(--border-w) solid var(--rule);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--panel-bg);
-  line-height: 0;
-}
-.proj-hero-shot img { width: 100%; height: auto; display: block; }
+.proj-slider { position: relative; }
+/* La note ne concerne que la premiere vue: elle disparait des qu'on avance. */
+.proj-slider:not([data-slider-current="0"]) .ai-badge { display: none; }
 
 .ai-badge {
   position: absolute;
   top: 10px;
-  right: 10px;
-  z-index: 2;
+  right: 52px;
+  z-index: 4;
   display: inline-flex;
   align-items: center;
   gap: 6px;
