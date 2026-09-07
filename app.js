@@ -468,7 +468,12 @@ const overviewTabs = {
               That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and later became the foundation of Coinvote LLC, which I still run today.</strong>
             </p>
             <p>
-              Over the years, I've worked across backend systems, automation tools, game engines, design, and real-time software.
+              Today I work across AI integration, simulation systems, backend infrastructure and immersive applications —
+              in C++ and C# on the systems side, and on the product side from API to deployment. I like problems that cut
+              through several layers at once: software talking to physical equipment, a service that has to stay up, a tool
+              that makes a team faster.
+            </p>
+            <p>
               I care about how things look as much as how they work — if it's going online, it should feel right too.
             </p>
           </div>
@@ -482,27 +487,32 @@ const overviewTabs = {
       return `
         <section class="space-pane">
           <div class="list-rows">
-            <article class="list-row">
+            <article class="list-row list-row--lead">
               <span>2021 → now</span>
               <div>
-                <strong>KNDS France Training</strong>
+                <strong>KNDS France Training<em class="list-row__role">Software Engineer — AI &amp; Simulation</em></strong>
                 <ul class="exp-bullets">
-                  <li>AI Lead — software tooling, AI integration, AR/VR projects</li>
-                  <li>AR/VR development with Unity and Unreal Engine</li>
-                  <li>Web platform and network infrastructure</li>
-                  <li>Systems programming in C/C++ — RS-422/232 serial communication</li>
+                  <li>Simulation and training software in C++ and C#, from prototype to integration and deployment.</li>
+                  <li>Software interacting with physical equipment and external systems through industrial and serial communication interfaces.</li>
+                  <li>Distributed components and background services for orchestration and real-time data exchange.</li>
+                  <li>Immersive training applications with Unreal Engine, Unity and XR technologies.</li>
+                  <li>Web platforms, backend services and supporting infrastructure.</li>
+                  <li>AI integration into internal tools and engineering workflows — generative AI, speech technologies, AI-assisted knowledge access.</li>
+                  <li>AI referent for the subsidiary: technology watch on LLMs and agent tooling, and liaison with the group's AI initiatives.</li>
+                  <li>Full software lifecycle in reliability-sensitive environments: specification, architecture, implementation, integration, testing, deployment.</li>
                 </ul>
               </div>
             </article>
-            <article class="list-row">
+            <article class="list-row list-row--lead">
               <span>2021 → now</span>
               <div>
-                <strong>Coinvote.cc LLC</strong>
+                <strong>Coinvote.cc — LLC<em class="list-row__metric">500k+ users</em><em class="list-row__role">Founder &amp; sole engineer</em></strong>
                 <ul class="exp-bullets">
-                  <li>Founder and sole engineer — developed and scaled to 500k+ users</li>
-                  <li>Full-stack: backend (PHP), mobile app, infrastructure (Cloudflare, Nginx)</li>
-                  <li>Design, marketing, community management and client relations</li>
-                  <li>Company operations, billing and accounting</li>
+                  <li>Built and operated a product that reached 500k+ registered users and 2.9M+ visitors, profitable, entirely solo.</li>
+                  <li>Complete stack designed and developed alone: backend, APIs, mobile applications, infrastructure.</li>
+                  <li>Production infrastructure on Linux with Nginx and Cloudflare — deployment, monitoring, day-to-day operations.</li>
+                  <li>In-house monetisation: ad placements, sponsored listings, billing and client management.</li>
+                  <li>Product design, marketing, community and business operations.</li>
                 </ul>
               </div>
             </article>
@@ -931,7 +941,15 @@ const projects = {
       { label: "View source", url: "https://github.com/gniax/noyau" },
     ],
     media() {
-      return renderSlider("noyau-media", [
+      return `
+        <figure class="proj-hero-shot">
+          <img src="assets/images/noyau/hero.jpg" alt="Noyau running on a laptop, agent dashboard open" loading="eager" />
+          <span class="ai-badge" tabindex="0" role="note" aria-label="AI-edited image: the agents, projects and figures were replaced with AI so no real data is shown, so this photo does not match the real interface exactly.">
+            <span class="ai-badge__dot" aria-hidden="true"></span>AI
+            <span class="ai-badge__tip">Image edited with AI: agent names, projects and figures were replaced so no real data shows — it does not match the real interface exactly.</span>
+          </span>
+        </figure>
+      ` + renderSlider("noyau-media", [
         "assets/images/noyau/dashboard.png",
         "assets/images/noyau/todos-board.png",
         "assets/images/noyau/projects.png",
@@ -1775,29 +1793,51 @@ function renderOverview() {
       <section class="hero">
         <div class="hero__main">
           <div class="hero__eyebrow hero__eyebrow--hello">
-            ${ICONS.wave}<span>software engineer</span>
+            ${ICONS.wave}<span>software engineer — AI, simulation &amp; systems</span>
           </div>
           <h2 class="hero__lead">
             👋 Hi, I'm Léo.
           </h2>
           <p class="hero__sub">
-            Engineer focused on C++/C/.NET, developing web/mobile products and AI/ML/LLM automation workflows with strong backend and ops work. <span class="hero__flag">🇫🇷</span>
+            I design and build complex software systems across AI integration, simulation, backend infrastructure and immersive technologies — from low-level systems integration to production platforms used at scale. <span class="hero__flag">🇫🇷</span>
           </p>
+          <ul class="hero__proof" aria-label="Key facts">
+            <li><strong>5+ yrs</strong><span>software engineering</span></li>
+            <li><strong>500k+</strong><span>users on my own product</span></li>
+            <li><strong>C++ / C#</strong><span>AI · XR · backend</span></li>
+            <li><strong>End to end</strong><span>spec to deployment</span></li>
+          </ul>
           ${(() => {
-            const primary = computeSkillStats();
-            const secondary = computeSecondarySkills();
+            const groups = [
+              { label: "Software", items: ["C++", "C#", ".NET", "PHP", "JavaScript / TypeScript"] },
+              { label: "AI", items: ["LLM integration", "AI tooling", "TTS", "Generative AI", "Prototyping"] },
+              { label: "Simulation & XR", items: ["Unreal Engine", "Unity", "VR / XR"] },
+              { label: "Systems", items: ["Networking", "Distributed systems", "Serial communication", "Systems integration"] },
+              { label: "Backend & infra", items: ["APIs", "Nginx", "Cloudflare", "Linux", "Web infrastructure"] },
+            ];
             return `
-              <div class="hero__skills" aria-label="Core skills and additional strengths">
-                ${primary.map(s => `<span>${s.name}<em>${s.pct}%</em></span>`).join("")}
-                ${secondary.length ? `
-                  <button class="hero__skills-more" type="button" data-toggle-skills>+${secondary.length} more</button>
-                  ${secondary.map(s => `<span class="hero__skill-extra">${s.name}<em>${s.pct}%</em></span>`).join("")}
-                ` : ""}
+              <div class="hero__stack" aria-label="Skills by domain">
+                ${groups.map((g) => `
+                  <div class="hero__stack-group">
+                    <p class="hero__stack-label">${g.label}</p>
+                    <div class="hero__stack-items">${g.items.map((i) => `<span>${i}</span>`).join("")}</div>
+                  </div>
+                `).join("")}
               </div>
-              <p class="hero__skills-note">* Auto-calculated as a relative score from stack usage across all listed projects.</p>
             `;
           })()}
+          <p class="hero__availability">
+            <span class="hero__availability-dot" aria-hidden="true"></span>
+            Available for selected software engineering &amp; AI consulting projects
+            <em>AI integration · Software engineering · Simulation · Backend · Systems</em>
+          </p>
           <div class="hero__actions">
+            <button class="action-button action-button--primary" type="button" data-switch-tab="experience">
+              ${ICONS.briefcase || ""}<span>View experience</span>
+            </button>
+            <a class="action-button action-button--primary" href="mailto:leomesbah@outlook.fr">
+              ${ICONS.mail}<span>Get in touch</span>
+            </a>
             <a class="action-button action-button--ghost" href="https://github.com/gniax" target="_blank" rel="noreferrer">
               ${ICONS.github}<span>GitHub</span>
             </a>
@@ -1822,6 +1862,21 @@ function renderOverview() {
             <p class="github-activity__note">Most of my active contributions are private.</p>
           </div>
         </aside>
+      </section>
+
+      <section class="doing" aria-label="What I do">
+        ${[
+          { t: "AI &amp; automation", d: "AI integration, LLM-powered tooling, workflow automation, speech technologies and rapid experimentation." },
+          { t: "Software engineering", d: "C++, C#, backend development, APIs, distributed services and production software." },
+          { t: "Simulation &amp; systems", d: "Simulation software, integration with external systems and communication with physical equipment." },
+          { t: "XR &amp; immersive", d: "VR/XR applications and interactive training environments with Unreal Engine and Unity." },
+          { t: "Product &amp; infrastructure", d: "Backend architecture, infrastructure, deployment, monitoring and end-to-end product engineering." },
+        ].map((b) => `
+          <article class="doing__card">
+            <h3>${b.t}</h3>
+            <p>${b.d}</p>
+          </article>
+        `).join("")}
       </section>
 
       <nav class="space-tabs" aria-label="My space tabs">
