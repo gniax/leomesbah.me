@@ -924,6 +924,7 @@ const projects = {
     points: [
       "Agents survive tabs, restarts and network drops — each one is a tmux session streamed to xterm.js over a WebSocket, with a touch key bar and provider switching that carries the conversation over.",
       "Task board stored as hand-editable Markdown in an Obsidian vault: custom zones, short *A1B2 references clickable inside an agent terminal, unread badges and agent-written comments.",
+      "Envelope-based budget on the side: recurring charges, tracked assets, a monthly plan and LLM-assisted categorisation, with an optional bank connection.",
       "A prompt hook feeds each agent the open tasks of its project and makes it record every change or bug, so nothing gets lost between sessions.",
     ],
     links: [
@@ -935,6 +936,7 @@ const projects = {
         "assets/images/noyau/todos-board.png",
         "assets/images/noyau/projects.png",
         "assets/images/noyau/terminal.png",
+        "assets/images/noyau/budget.png",
         "assets/images/noyau/todos-folders.png",
       ]);
     },
