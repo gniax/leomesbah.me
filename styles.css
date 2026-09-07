@@ -27,20 +27,20 @@
    ========================================================================== */
 
 :root {
-  --bg: #100d0a;
-  --bg-alt: #0a0806;
-  --surface: #1c1814;
-  --panel: #15110d;
-  --text: #ede6d6;
-  --muted: #968a75;
-  --faint: #5c5345;
-  --rule: rgba(236, 228, 210, 0.08);
-  --rule-soft: rgba(236, 228, 210, 0.04);
-  --rule-strong: rgba(236, 228, 210, 0.14);
-  --accent: #d98b58;
-  --accent-2: #8faa98;
-  --accent-soft: rgba(217, 139, 88, 0.1);
-  --selection: rgba(217, 139, 88, 0.32);
+  --bg: #0d0d0e;
+  --bg-alt: #080809;
+  --surface: #161618;
+  --panel: #121213;
+  --text: #eceae4;
+  --muted: #8d8b84;
+  --faint: #575651;
+  --rule: rgba(236, 233, 224, 0.08);
+  --rule-soft: rgba(236, 233, 224, 0.04);
+  --rule-strong: rgba(236, 233, 224, 0.14);
+  --accent: #d1b461;
+  --accent-2: #7f9d92;
+  --accent-soft: rgba(209, 180, 97, 0.1);
+  --selection: rgba(209, 180, 97, 0.3);
 
   --sans: "Hind", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
@@ -54,9 +54,9 @@
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
 
-  --body-bg: radial-gradient(circle at 12% 8%, rgba(217, 139, 88, 0.07), transparent 30%),
-    radial-gradient(circle at 92% 14%, rgba(143, 170, 152, 0.05), transparent 28%),
-    #0a0806;
+  --body-bg: radial-gradient(circle at 12% 8%, rgba(209, 180, 97, 0.07), transparent 30%),
+    radial-gradient(circle at 92% 14%, rgba(127, 157, 146, 0.04), transparent 28%),
+    #080809;
 
   --rail-bg: var(--bg);
   --panel-bg: var(--panel);
@@ -3114,19 +3114,19 @@ svg {
 
 /* 2. editorial — paper, serif-forward, light blog feel */
 [data-theme="editorial"] {
-  --bg: #f5f0e4;
-  --bg-alt: #ece5d3;
-  --surface: #fbf7ec;
-  --panel: #fbf7ec;
-  --text: #1a1612;
-  --muted: #77705f;
-  --faint: #a49b89;
-  --rule: #dcd3bf;
-  --rule-soft: #ebe3cf;
-  --accent: #a8441a;
-  --accent-2: #5c6f63;
-  --accent-soft: rgba(168, 68, 26, 0.07);
-  --selection: rgba(168, 68, 26, 0.2);
+  --bg: #f6f5f1;
+  --bg-alt: #eceae3;
+  --surface: #fcfbf8;
+  --panel: #fcfbf8;
+  --text: #17171a;
+  --muted: #6f6e68;
+  --faint: #a3a29b;
+  --rule: #dedcd4;
+  --rule-soft: #ecebe4;
+  --accent: #8a6d20;
+  --accent-2: #566b62;
+  --accent-soft: rgba(138, 109, 32, 0.08);
+  --selection: rgba(138, 109, 32, 0.2);
   --body-bg: var(--bg);
   --rail-bg: var(--bg);
   --panel-bg: var(--surface);

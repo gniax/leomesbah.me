@@ -107,7 +107,7 @@ function injectRailIcons() {
 
 const THEMES = [
   /* ---- dark ---- */
-  { id: "warmdeck", name: "Warm deck", dot: "#d88b55", mode: "dark" },
+  { id: "warmdeck", name: "Gold deck", dot: "#d1b461", mode: "dark" },
   { id: "terminal", name: "Terminal CRT", dot: "#7cff9a", mode: "dark" },
   { id: "amber", name: "Amber CRT", dot: "#ffb547", mode: "dark" },
   { id: "nord", name: "Nord", dot: "#88c0d0", mode: "dark" },
@@ -129,7 +129,7 @@ const THEMES = [
   { id: "magazine-dark", name: "Magazine dark", dot: "#d4a72a", mode: "dark" },
 
   /* ---- light ---- */
-  { id: "editorial", name: "Editorial paper", dot: "#a8441a", mode: "light" },
+  { id: "editorial", name: "Editorial paper", dot: "#8a6d20", mode: "light" },
   { id: "brutalist", name: "Brutalist", dot: "#ff3b00", mode: "light" },
   { id: "swiss", name: "Swiss red", dot: "#e40521", mode: "light" },
   { id: "solarized", name: "Solarized light", dot: "#cb4b16", mode: "light" },
@@ -861,6 +861,7 @@ const ARCHIVE_FILTERS = [
   { id: "web", label: "Web" },
   { id: "software", label: "Software" },
   { id: "tools", label: "Tools" },
+  { id: "ai", label: "AI" },
 ];
 const HERO_SKILL_LIMIT = 6;
 const HERO_SKILL_SECONDARY_LIMIT = 10;
@@ -905,6 +906,39 @@ const HERO_SECONDARY_SKILL_ORDER = [
   "AI / ML",
 ];
 const projects = {
+  noyau: {
+    featured: true,
+    logo: "assets/images/logos/noyau.svg",
+    category: "systems",
+    filters: ["ai", "tools", "software"],
+    sortYear: 2026,
+    sortMonth: 9,
+    railNote: "AI agents, tmux sessions, task tracking",
+    period: "current",
+    kind: "Local control center",
+    title: "Noyau",
+    summary:
+      "Local control center for CLI coding agents: Codex, Claude Code and Antigravity run in persistent tmux sessions, driven from a web UI that also tracks tasks, projects and budget.",
+    tech: ["Node.js", "Express", "React", "WebSocket", "tmux", "Linux"],
+    meta: ["AI agents", "Real-time terminal", "PWA", "Web Push", "Obsidian", "Self-hosted"],
+    points: [
+      "Agents survive tabs, restarts and network drops — each one is a tmux session streamed to xterm.js over a WebSocket, with a touch key bar and provider switching that carries the conversation over.",
+      "Task board stored as hand-editable Markdown in an Obsidian vault: custom zones, short *A1B2 references clickable inside an agent terminal, unread badges and agent-written comments.",
+      "A prompt hook feeds each agent the open tasks of its project and makes it record every change or bug, so nothing gets lost between sessions.",
+    ],
+    links: [
+      { label: "View source", url: "https://github.com/gniax/noyau" },
+    ],
+    media() {
+      return renderSlider("noyau-media", [
+        "assets/images/noyau/dashboard.png",
+        "assets/images/noyau/todos-board.png",
+        "assets/images/noyau/projects.png",
+        "assets/images/noyau/terminal.png",
+        "assets/images/noyau/todos-folders.png",
+      ]);
+    },
+  },
   "cellule-rouge": {
     featured: false,
     logo: "assets/images/logos/cellule-rouge.png",
@@ -980,6 +1014,7 @@ const projects = {
       "Account generation stack used Chromium offscreen automation, proxies, anti-captcha integration and email handling.",
     ],
     links: [
+      { label: "View source", url: "https://github.com/gniax/bubble-bot" },
       { label: "Browse site", url: "archives/bubblebot/index.html" },
     ],
     media() {
