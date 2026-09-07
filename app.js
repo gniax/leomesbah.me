@@ -1822,11 +1822,6 @@ function renderOverview() {
               </details>
             `;
           })()}
-          <p class="hero__availability">
-            <span class="hero__availability-dot" aria-hidden="true"></span>
-            Available for selected software engineering &amp; AI consulting projects
-            <em>AI integration · Software engineering · Simulation · Backend · Systems</em>
-          </p>
           <div class="hero__actions">
             <button class="action-button action-button--primary" type="button" data-switch-tab="experience">
               ${ICONS.briefcase || ""}<span>View experience</span>

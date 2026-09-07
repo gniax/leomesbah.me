@@ -4226,27 +4226,27 @@ svg {
   font-size: 10px;
 }
 
-.hero__availability {
-  display: flex;
-  flex-wrap: wrap;
+.identity__availability {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin: 16px 0 0;
-  padding: 9px 12px;
-  border: var(--border-w) solid color-mix(in srgb, var(--accent) 32%, var(--rule));
-  border-radius: var(--radius-sm);
+  gap: 6px;
+  margin-top: 8px !important;
+  padding: 3px 9px;
+  border: var(--border-w) solid color-mix(in srgb, var(--accent) 35%, var(--rule));
+  border-radius: 999px;
   background: var(--accent-soft);
-  color: var(--text);
-  font-size: 12px;
+  color: var(--accent) !important;
+  font-size: 10px !important;
+  font-weight: 600;
+  cursor: default;
 }
-.hero__availability-dot {
-  width: 7px;
-  height: 7px;
+.identity__availability span {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: currentColor;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
-.hero__availability em { color: var(--muted); font-style: normal; font-size: 10px; }
 
 .list-row--lead > div > strong { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
 .list-row__role { color: var(--muted); font: 400 11px/1.4 var(--sans); font-style: normal; }
