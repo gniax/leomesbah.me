@@ -867,6 +867,33 @@ function withHeader(response, headerValue) {
   });
 }
 
+// Static assets ignore Range requests; Safari/iOS refuses to play media without 206 responses.
+async function serveRange(response, rangeHeader) {
+  const body = await response.arrayBuffer();
+  const size = body.byteLength;
+  const match = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader.trim());
+  let start = match && match[1] !== "" ? Number(match[1]) : null;
+  let end = match && match[2] !== "" ? Number(match[2]) : null;
+  if (start === null && end !== null) {
+    start = Math.max(0, size - end);
+    end = size - 1;
+  } else if (start !== null) {
+    end = end === null ? size - 1 : Math.min(end, size - 1);
+  }
+
+  const headers = new Headers(response.headers);
+  headers.set("accept-ranges", "bytes");
+  if (!match || start === null || start > end || start >= size) {
+    headers.set("content-range", `bytes */${size}`);
+    headers.delete("content-length");
+    return new Response(null, { status: 416, headers });
+  }
+
+  headers.set("content-range", `bytes ${start}-${end}/${size}`);
+  headers.set("content-length", String(end - start + 1));
+  return new Response(body.slice(start, end + 1), { status: 206, headers });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -881,6 +908,11 @@ export default {
 
     const response = await env.ASSETS.fetch(request);
     const contentType = response.headers.get("content-type") || "";
+
+    const range = request.headers.get("range");
+    if (range && response.status === 200 && /^(video|audio)\//.test(contentType)) {
+      return serveRange(response, range);
+    }
 
     if (path.startsWith("/archives/") && contentType.includes("text/html")) {
       return withHeader(response, "noindex, nofollow");
