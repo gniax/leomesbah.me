@@ -1358,6 +1358,38 @@ img {
 .proj-tabs__panel { display: none; }
 .proj-tabs__panel.is-active { display: block; }
 
+/* coinvote phases */
+.cv-phase { padding: 18px 2px 8px; }
+.cv-phase--media {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.cv-phase__period {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cv-phase__intro { margin: 0 0 12px; color: var(--text); }
+.cv-phase .exp-bullets { margin: 0; }
+.cv-phase + .proj-tabs { margin-top: 12px; }
+.cv-reel__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-sm);
+  background: #000;
+  object-fit: cover;
+}
+
+@media (max-width: 760px) {
+  .cv-phase--media { grid-template-columns: 1fr; }
+  .cv-reel { max-width: 300px; margin: 0 auto; }
+}
+
 /* plugin cards */
 .plugin-card {
   display: flex;

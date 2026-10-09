@@ -19,13 +19,13 @@ const OVERVIEW_META = {
   "/experience": {
     title: "Experience — Léo Mesbah",
     description:
-      "Professional experience across KNDS France, Coinvote.cc LLC, search quality evaluation, and mobile app development.",
+      "Professional experience across KNDS France, Coinvote.cc, search quality evaluation, and mobile app development.",
     heading: "Experience",
     intro:
       "Professional experience across backend systems, AI integration, automation, mobile apps, and product operations.",
     body: [
       "KNDS France Training: AI lead, AR/VR projects, web platform and network infrastructure, systems programming in C/C++.",
-      "Coinvote.cc LLC: founder and sole engineer across backend, mobile app, infrastructure, design, marketing, billing and operations.",
+      "Coinvote.cc: founder and sole engineer across backend, mobile apps, infrastructure, design, marketing, billing and operations; V3 live since October 2026.",
       "Previous search quality evaluation work for Appen and Datavio.ai, plus a Xamarin internship at E.Leclerc.",
     ],
   },
@@ -94,12 +94,13 @@ const PROJECT_META = {
     title: "Coinvote.cc — Léo Mesbah",
     name: "Coinvote.cc",
     description:
-      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
+      "Community voting platform for crypto projects — launched in 2021, V3 live since October 2026 on web, iOS and Android in 21 languages. 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
     image: "/assets/images/logos/coinvote_logo.png",
     category: "SoftwareApplication",
     highlights: [
       "Solo full-stack product with backend, infrastructure, automation and operations.",
-      "Built around crypto discovery, voting protection, monetization and data ingestion.",
+      "V3: gamification (Nuggets, Boosts, streaks), Community Hub, hourly Arena and a Solana launchpad powered by pump.fun.",
+      "Automated back-office: Qonto invoicing, LLM-assisted admin inbox, vote-farm detection, server-rendered share images.",
       "Scaled to millions of visits with a custom PHP and infrastructure stack.",
     ],
   },

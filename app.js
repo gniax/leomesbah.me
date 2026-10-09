@@ -465,7 +465,7 @@ const overviewTabs = {
               From there, I kept exploring — web, systems, game engines, automation — mostly teaching myself and trying to understand how software works at every level.
             </p>
             <p style="font-size:1.04rem">
-              That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and later became the foundation of Coinvote LLC, which I still run today.</strong>
+              That curiosity stayed with me. <strong>At 21, I launched <button class="inline-project-link" type="button" data-open-project="coinvote">Coinvote.cc</button>, which reached 500k visitors in its first week, and which I still develop and run today — V3 went live in October 2026.</strong>
             </p>
             <p>
               Today I work across AI integration, simulation systems, backend infrastructure and immersive applications —
@@ -506,13 +506,14 @@ const overviewTabs = {
             <article class="list-row list-row--lead">
               <span>2021 → now</span>
               <div>
-                <strong>Coinvote.cc — LLC<em class="list-row__metric">500k+ users</em><em class="list-row__role">Founder &amp; sole engineer</em></strong>
+                <strong>Coinvote.cc<em class="list-row__metric">500k+ users</em><em class="list-row__role">Founder &amp; sole engineer</em></strong>
                 <ul class="exp-bullets">
                   <li>Built and operated a product that reached 500k+ registered users and 2.9M+ visitors, profitable, entirely solo.</li>
                   <li>Complete stack designed and developed alone: backend, APIs, mobile applications, infrastructure.</li>
-                  <li>Production infrastructure on Linux with Nginx and Cloudflare — deployment, monitoring, day-to-day operations.</li>
-                  <li>In-house monetisation: ad placements, sponsored listings, billing and client management.</li>
-                  <li>Product design, marketing, community and business operations.</li>
+                  <li>Shipped V3 in October 2026: gamification, Community Hub, hourly Arena and a Solana launchpad powered by pump.fun, on web, iOS and Android in 21 languages.</li>
+                  <li>Production infrastructure on Linux with Nginx and Cloudflare on Hetzner — deployment, monitoring, day-to-day operations, with AI agents handling production deploys.</li>
+                  <li>In-house monetisation and back-office: ad placements, sponsored listings, automatic Qonto invoicing with EU VAT rules, LLM-assisted admin inbox.</li>
+                  <li>Product design, marketing, social automation (X, Telegram, Canva), community and business operations — run as a sole proprietorship under the Coinvote trade name.</li>
                 </ul>
               </div>
             </article>
@@ -984,26 +985,83 @@ const projects = {
     sortYear: new Date().getFullYear(),
     railNote: "live product, backend, ops",
     period: "current",
-    kind: "Live product · LLC",
+    kind: "Live product · V3",
     title: "Coinvote.cc",
     summary:
-      "Crypto voting and discovery platform — founded as an LLC in 2021, 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
-    tech: ["PHP", "MySQL", "JavaScript", "Linux", "Nginx", "Mobile"],
-    meta: ["Linux sysadmin", "iOS & Android", "REST API", "Automation", "Ad system", "VPS"],
+      "Community voting platform for crypto projects — launched in 2021, V3 live since October 2026 on web, iOS and Android in 21 languages. 2.9M+ visitors and 500k+ registered users, profitable, developed and operated entirely solo.",
+    tech: ["PHP", "MySQL", "JavaScript", "Node.js", "Nginx", "Cloudflare", "Mobile"],
+    meta: ["iOS & Android", "21 languages", "Gamification", "Solana launchpad", "LLM tooling", "Automation", "Hetzner"],
     points: [
-      "Full-stack solo development: PHP 8.3 backend, Nginx, Cloudflare, VPS administration — no team, no agency.",
-      "Crypto data ingestion, anti-bot voting protection, automated coin listing pipeline.",
-      "Monetisation system developed in-house: ad placements, sponsored listings, billing and client management.",
+      "Full-stack solo development: PHP 8 backend, MySQL, Nginx, Cloudflare on Hetzner — no team, no agency.",
+      "V3 gamification and community layer: Nuggets, Boosts, streaks, shop, badges, Community Hub and the hourly Arena.",
+      "Solana launchpad powered by pump.fun: non-custodial token creation from the user's wallet with instant listing.",
+      "Automated back-office: Qonto invoicing with EU VAT rules, LLM-assisted admin inbox, vote-farm detection, server-rendered share images.",
     ],
     links: [{ label: "Open site", url: "https://coinvote.cc" }],
     media() {
       const mediaKit = Array.from({ length: 14 }, (_, i) => `assets/files/coinvote/media_kit/${i + 1}.png`);
       const salesDeck = [...Array.from({ length: 14 }, (_, i) => `assets/files/coinvote/sales_deck/${i + 1}.png`), "assets/files/coinvote/sales_deck/16.png"];
-      return renderTabs("coinvote-media", [
-        { label: "Video", content: `<video class="project-media__video" src="assets/files/coinvote/v2.mp4" controls playsinline preload="metadata"></video>` },
-        { label: "Analytics", content: `<img src="assets/files/coinvote/analytics-1.png" alt="Google Analytics — Coinvote.cc user acquisition, Mar 2021 – Apr 2026" style="width:100%;border-radius:6px;">` },
-        { label: "Media Kit", content: renderSlider("coinvote-mediakit", mediaKit) },
-        { label: "Sales Deck", content: renderSlider("coinvote-salesdeck", salesDeck) },
+      const phase = (period, intro, items, media = "") => `
+        <div class="cv-phase${media ? " cv-phase--media" : ""}">
+          ${media}
+          <div class="cv-phase__copy">
+            <p class="cv-phase__period">${period}</p>
+            <p class="cv-phase__intro">${intro}</p>
+            <ul class="exp-bullets">${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+          </div>
+        </div>
+      `;
+      const reel = `
+        <div class="cv-reel">
+          <video class="cv-reel__video" src="assets/files/coinvote/v3-reel.mp4" poster="assets/files/coinvote/v3-reel-poster.jpg"
+            controls muted loop playsinline preload="none" data-hover-play aria-label="Coinvote V3 feature reel"></video>
+        </div>
+      `;
+      return renderTabs("coinvote-phases", [
+        {
+          label: "V3 · 2026",
+          content: phase(
+            "Live since 7 October 2026 · web, iOS, Android · 21 languages",
+            "Community voting platform for crypto projects, with daily, trending-on-X and all-time rankings.",
+            [
+              "<strong>Gamification</strong> — Nuggets earned by voting, Boosts (1 Boost = 15 votes per day for 7 days), streaks, shop and badges.",
+              "<strong>Community Hub</strong> — posts, posting as a coin page, following members and pages, Following tab, push notifications.",
+              "<strong>Arena</strong> — hourly voting rounds with a champion each hour, automatic Hub announcements, a 12-hour recap posted to X with a generated image, hourly Telegram posts.",
+              "<strong>Launchpad</strong> — Solana token creation powered by pump.fun, non-custodial from the user's wallet, instant Coinvote listing and a free Boost, with automated billing.",
+              "<strong>Back-office</strong> — automatic Qonto invoicing (FR/EN, EU VAT/OSS rules), LLM-assisted admin inbox, vote-farm detection through device fingerprinting, server-rendered OG share images, production deployment handled by AI agents.",
+              "<strong>Stack</strong> — vanilla PHP 8, MySQL, Nginx, Cloudflare, Hetzner; Node.js for social automation (Canva, X, Telegram).",
+            ],
+            reel,
+          ),
+        },
+        {
+          label: "V2 · 2024",
+          content: `
+            ${phase(
+              "Live since March 2024 · rebuilt from 2022",
+              "A full rebuild of the platform on a new design: wallet login (MetaMask, WalletConnect) alongside Google sign-in, dedicated pages for coins, ICOs, airdrops and NFTs, and a translated interface. Advertising became self-serve, with online ordering paid through PayPal or crypto (NOWPayments) and an admin panel to validate listings and control ads.",
+              [
+                "iOS and Android apps alongside the website.",
+                "Crypto data ingestion, anti-bot voting protection and an automated coin listing pipeline.",
+                "Ad placements, sponsored listings, billing and client management built in-house.",
+              ],
+            )}
+            ${renderTabs("coinvote-v2-media", [
+              { label: "Video", content: `<video class="project-media__video" src="assets/files/coinvote/v2.mp4" controls playsinline preload="metadata"></video>` },
+              { label: "Analytics", content: `<img src="assets/files/coinvote/analytics-1.png" alt="Google Analytics — Coinvote.cc user acquisition, Mar 2021 – Apr 2026" style="width:100%;border-radius:6px;">` },
+              { label: "Media Kit", content: renderSlider("coinvote-mediakit", mediaKit) },
+              { label: "Sales Deck", content: renderSlider("coinvote-salesdeck", salesDeck) },
+            ])}
+          `,
+        },
+        {
+          label: "V1 · 2021",
+          content: phase(
+            "Launched May 2021",
+            "Launched at 21 to help crypto enthusiasts find early projects and let projects promote themselves through community votes.",
+            ["Reached 500k visitors in its first week."],
+          ),
+        },
       ]);
     },
   },
@@ -2274,6 +2332,20 @@ function handlePopstate() {
 
 window.addEventListener("popstate", handlePopstate);
 
+/* ---------- hover-to-play reels ---------- */
+
+const canHover = typeof window.matchMedia === "function" && window.matchMedia("(hover: hover)").matches;
+if (canHover) {
+  document.addEventListener("mouseover", (event) => {
+    const video = event.target.closest?.("video[data-hover-play]");
+    if (video && video.paused && video.muted)video.play().catch(() => {});
+  });
+  document.addEventListener("mouseout", (event) => {
+    const video = event.target.closest?.("video[data-hover-play]");
+    if (video && !video.contains(event.relatedTarget) && video.muted) video.pause();
+  });
+}
+
 function ensureMeta(attr, name) {
   let el = document.head.querySelector(`meta[${attr}="${name}"]`);
   if (!el) {
@@ -2444,8 +2516,12 @@ document.addEventListener("click", (event) => {
     const container = document.querySelector(`[data-tabs-id="${id}"]`);
     if (!container) return;
     const i = Number(idx);
-    container.querySelectorAll(".proj-tabs__btn").forEach((b, j) => b.classList.toggle("is-active", j === i));
-    container.querySelectorAll(".proj-tabs__panel").forEach((p, j) => p.classList.toggle("is-active", j === i));
+    // :scope keeps nested tab groups (Coinvote phases) independent of their parent
+    container.querySelectorAll(":scope > .proj-tabs__nav > .proj-tabs__btn").forEach((b, j) => b.classList.toggle("is-active", j === i));
+    container.querySelectorAll(":scope > .proj-tabs__body > .proj-tabs__panel").forEach((p, j) => {
+      p.classList.toggle("is-active", j === i);
+      if (j !== i) p.querySelectorAll("video").forEach((v) => v.pause());
+    });
     container.dataset.tabsCurrent = i;
     return;
   }
