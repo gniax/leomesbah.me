@@ -1056,11 +1056,25 @@ const projects = {
         },
         {
           label: "V1 · 2021",
-          content: phase(
-            "Launched May 2021",
-            "Launched at 21 to help crypto enthusiasts find early projects and let projects promote themselves through community votes.",
-            ["Reached 500k visitors in its first week."],
-          ),
+          content: `
+            ${phase(
+              "Launched May 2021 · web, iOS, Android · English and French",
+              "Launched at 21 to help crypto enthusiasts find early projects and let projects promote themselves through community votes. Any project could submit its coin for free; each listing was reviewed, got its own page, and was ranked by votes that reset every day.",
+              [
+                "<strong>Voting</strong> — one vote per coin per hour, protected by hCaptcha; Today, All time, New and Liked rankings, a daily winner and a trending section, embeddable vote badges for project sites.",
+                "<strong>Listing</strong> — free submission with manual review against scams; coin pages editable by their owner (socials, news), prices refreshed by cron, comments, reports and favourites; dedicated airdrops section and community contests.",
+                "<strong>Monetisation</strong> — self-serve ads booked on /promote: promoted slot $179/day, banner $199/day, vote ad shown on each vote $149/day, permanent certified slot and badge $1,168 (+10% after each sale), plus audits and promo codes; paid by PayPal or crypto transfer (November 2021 rate card).",
+                "<strong>Growth</strong> — 500k visitors in the first week; 899 coins listed on 14 June 2021, 12,661 by 23 December 2021; Q4 2021: 4.86M monthly page views and 27.3K daily active users; 55.5K followers on X, 22.5K on Instagram, 12.5K Telegram members (February 2022 press kit).",
+                "<strong>Stack</strong> — vanilla PHP and MySQL, Bootstrap, cron jobs for rankings, daily resets, prices and ad expiry, PayPal IPN, SendGrid e-mails, admin back-office for listings, payments, ads and reports; iOS and Android apps.",
+              ],
+              `<img src="assets/files/coinvote/v1/app-2021.png" alt="Coinvote mobile app in 2021 — Today's Best, promoted and certified coins" loading="lazy" style="width:100%;max-width:300px;display:block;margin:0 auto;">`,
+            )}
+            ${renderTabs("coinvote-v1-media", [
+              { label: "Website 2021", content: renderSlider("coinvote-v1-site", ["assets/files/coinvote/v1/site-2021-06.jpg", "assets/files/coinvote/v1/site-2021-11.jpg"]) },
+              { label: "Press Kit 2022", content: renderSlider("coinvote-v1-presskit", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16].map((n) => `assets/files/coinvote/v1/press_kit/${n}.jpg`)) },
+            ])}
+            <p class="cv-phase__period" style="margin-top:10px;">Sources: coinvote.cc snapshots on web.archive.org (June and November 2021), Coinvote press kit (February 2022) and rate card (November 2021), V1 source code.</p>
+          `,
         },
       ]);
     },
