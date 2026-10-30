@@ -154,6 +154,7 @@ const MODE_MEMORY_KEY = "leomesbah.theme.mode-memory.v1";
 const LIGHT_DEFAULT_THEME = "magazine";
 const DARK_DEFAULT_THEME = "warmdeck";
 const GITLAB_CERT_URL = encodeURI("assets/files/certificat_MESBAH Léo_18_04_2025.pdf");
+const CPP_CI_CERT_URL = encodeURI("assets/files/certificat_MESBAH Léo_16_10_2026.pdf");
 let themeManagerToggle = null;
 
 function getStoredTheme() {
@@ -581,6 +582,7 @@ const overviewTabs = {
           <div class="space-section">
             <p class="eyebrow">Training</p>
             <div class="list-rows">
+              ${row("2026", `Automated testing &amp; continuous integration in C++ — ORSYS`, `Unit testing, test automation and CI pipelines for C++ codebases · 13/10/2026 → 16/10/2026 (4 days) · <a class="inline-project-link" href="${CPP_CI_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.`)}
               ${row("2025", `GitLab CI/CD — ORSYS`, `GitLab CI/CD training: mastering the development lifecycle of software projects · 16/04/2025 → 18/04/2025 · <a class="inline-project-link" href="${GITLAB_CERT_URL}" target="_blank" rel="noreferrer">certificate PDF</a>.`)}
             </div>
           </div>
