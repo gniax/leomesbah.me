@@ -925,20 +925,20 @@ const projects = {
     category: "systems",
     filters: ["ai", "tools", "software"],
     sortYear: 2026,
-    sortMonth: 9,
-    railNote: "AI agents, tmux sessions, task tracking",
+    sortMonth: 10,
+    railNote: "multi-agent memory, agent-to-agent, any engine",
     period: "current",
     kind: "Local control center",
     title: "Noyau",
     summary:
-      "Local control center for CLI coding agents: Codex, Claude Code and Antigravity run in persistent tmux sessions, driven from a web UI that also tracks tasks, projects and budget.",
-    tech: ["Node.js", "Express", "React", "WebSocket", "tmux", "Linux"],
-    meta: ["AI agents", "Real-time terminal", "PWA", "Web Push", "Obsidian", "Self-hosted"],
+      "Local control center for CLI coding agents: Claude Code, Codex and Antigravity run side by side in persistent tmux sessions, share a memory that survives engine switches, hand work to each other and drop deliverables in shared project files.",
+    tech: ["Node.js", "Express", "React", "WebSocket", "tmux", "pdf.js", "Capacitor", "Linux"],
+    meta: ["Multi-agent", "Persistent memory", "Agent-to-agent", "Project map", "PWA & native app", "EN / FR", "Self-hosted"],
     points: [
-      "Agents survive tabs, restarts and network drops — each one is a tmux session streamed to xterm.js over a WebSocket, with a touch key bar and provider switching that carries the conversation over.",
-      "Task board stored as hand-editable Markdown in an Obsidian vault: custom zones, short *A1B2 references clickable inside an agent terminal, unread badges and agent-written comments.",
-      "Envelope-based budget on the side: recurring charges, tracked assets, a monthly plan and LLM-assisted categorisation, with an optional bank connection.",
-      "A prompt hook feeds each agent the open tasks of its project and makes it record every change or bug, so nothing gets lost between sessions.",
+      "One agent, any engine: switch an agent from Claude Code to Codex or Antigravity and back in the same tmux pane — identity, project and context carry over through an automatic handover.",
+      "Persistent multi-agent memory: durable notes, decisions and checkpoints per agent, injected at start-up and after every switch, written by the agents themselves before their context changes.",
+      "Agents talk to each other from their own terminal (list, read context, send, create), with messages queued while you type; a live project map shows who runs what and who talks to whom, plus the APIs detected in the code.",
+      "Shared files per project with one-click previews in the chat (images, PDF via pdf.js, media, CSV), a Trello-style task board in Markdown fed by a prompt hook, optional modules and an English/French UI.",
     ],
     links: [
       { label: "View source", url: "https://github.com/gniax/noyau" },
@@ -946,12 +946,14 @@ const projects = {
     media() {
       return renderSlider("noyau-media", [
         "assets/images/noyau/hero.jpg",
+        "assets/images/noyau/terminal.png",
+        "assets/images/noyau/provider-switch.png",
+        "assets/images/noyau/agent-memory.png",
+        "assets/images/noyau/project-map.png",
+        "assets/images/noyau/shared-files.png",
         "assets/images/noyau/dashboard.png",
         "assets/images/noyau/todos-board.png",
         "assets/images/noyau/projects.png",
-        "assets/images/noyau/terminal.png",
-        "assets/images/noyau/budget.png",
-        "assets/images/noyau/todos-folders.png",
       ]);
     },
   },
@@ -2005,7 +2007,7 @@ function renderProject(project) {
 
 // Note affichee sur la premiere vue d'un carrousel: sert a signaler une image retouchee.
 const SLIDER_NOTES = {
-  "noyau-media": "Image edited with AI: agent names, projects and figures were replaced so no real data shows — it does not match the real interface exactly.",
+  "noyau-media": "Screenshots of a demo instance with fictional projects, agents and tasks — no real data.",
 };
 
 function renderSlider(id, images) {
